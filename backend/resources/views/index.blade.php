@@ -94,13 +94,13 @@
     <section class="relative pt-44 pb-20 px-6 overflow-hidden">
         <div class="hero-glow"></div>
         <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
-            <div class="reveal inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-medium text-indigo-300 mb-8 border border-indigo-500/20">
+            {{-- <div class="reveal inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-medium text-indigo-300 mb-8 border border-indigo-500/20">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
                 </span>
                 New: AI-Powered Custom Slugs
-            </div>
+            </div> --}}
             <h1 class="reveal text-5xl md:text-8xl font-extrabold font-heading tracking-tight mb-6 leading-[1.1]">
                 Short Links. <br><span class="gradient-text">Powerful Insights.</span>
             </h1>
@@ -157,7 +157,7 @@
     </section>
 
     <!-- Trusted By -->
-    <section class="py-20 border-y border-white/5">
+    {{-- <section class="py-20 border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <p class="text-center text-zinc-500 text-sm font-medium mb-10">TRUSTED BY TEAMS AT INNOVATIVE STARTUPS</p>
             <div class="flex flex-wrap justify-center gap-12 md:gap-24 opacity-40 grayscale">
@@ -168,7 +168,7 @@
                 <span class="text-2xl font-bold tracking-tighter italic">APEX</span>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Features Section -->
     <section id="features" class="py-32 px-6 max-w-7xl mx-auto">
@@ -206,31 +206,31 @@
             </div>
 
             <!-- Feature Card 4 -->
-            <div class="reveal group glass p-8 rounded-[2rem] hover:border-emerald-500/40 transition-all duration-500">
+            {{-- <div class="reveal group glass p-8 rounded-[2rem] hover:border-emerald-500/40 transition-all duration-500">
                 <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 text-emerald-400 group-hover:scale-110 transition-transform">
                     <i data-lucide="globe"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Custom Domains</h3>
                 <p class="text-zinc-500 leading-relaxed">Connect your own custom domain to replace linkforge.app with your own branded short links.</p>
-            </div>
+            </div> --}}
 
             <!-- Feature Card 5 -->
-            <div class="reveal group glass p-8 rounded-[2rem] hover:border-orange-500/40 transition-all duration-500">
+            {{-- <div class="reveal group glass p-8 rounded-[2rem] hover:border-orange-500/40 transition-all duration-500">
                 <div class="w-12 h-12 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6 text-orange-400 group-hover:scale-110 transition-transform">
                     <i data-lucide="users"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Team Spaces</h3>
                 <p class="text-zinc-500 leading-relaxed">Organize links into projects and collaborate with team members with granular permissions.</p>
-            </div>
+            </div> --}}
 
             <!-- Feature Card 6 -->
-            <div class="reveal group glass p-8 rounded-[2rem] hover:border-pink-500/40 transition-all duration-500">
+            {{-- <div class="reveal group glass p-8 rounded-[2rem] hover:border-pink-500/40 transition-all duration-500">
                 <div class="w-12 h-12 bg-pink-500/10 rounded-2xl flex items-center justify-center mb-6 text-pink-400 group-hover:scale-110 transition-transform">
                     <i data-lucide="code-2"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Developer API</h3>
                 <p class="text-zinc-500 leading-relaxed">Robust REST API for programmatic link generation and analytics retrieval. Built for scale.</p>
-            </div>
+            </div> --}}
         </div>
     </section>
 
@@ -245,7 +245,7 @@
                 <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight">Data that tells <br>a story.</h2>
                 <p class="text-zinc-400 text-lg mb-8">Stop guessing. LinkForge provides industry-leading attribution data so you know exactly where your traffic is coming from.</p>
                 
-                <div class="space-y-6">
+                {{-- <div class="space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center mt-1">
                             <div class="w-2 h-2 rounded-full bg-indigo-500"></div>
@@ -264,7 +264,7 @@
                             <p class="text-zinc-500 text-sm">Send users to different URLs based on their device or location.</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="lg:w-1/2 w-full">
                 <div class="glass p-8 rounded-3xl relative">
@@ -306,7 +306,7 @@
     </section>
 
     <!-- QR Showcase -->
-    <section class="py-32 px-6">
+    {{-- <section class="py-32 px-6">
         <div class="max-w-7xl mx-auto glass rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative">
             <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 blur-[100px]"></div>
             <div class="md:w-1/2 order-2 md:order-1">
@@ -333,10 +333,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-32 px-6 max-w-7xl mx-auto">
+    {{-- <section id="pricing" class="py-32 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-20">
             <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Transparent Pricing</h2>
             <p class="text-zinc-500">Scale from your first link to millions of clicks.</p>
@@ -399,10 +399,10 @@
                 <button class="w-full py-4 rounded-2xl glass font-bold hover:bg-white/5 transition-all">Contact Sales</button>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Testimonials -->
-    <section class="py-32 px-6">
+    {{-- <section class="py-32 px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
             <div class="reveal glass p-8 rounded-3xl">
                 <div class="flex gap-1 text-yellow-500 mb-4">
@@ -456,7 +456,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- FAQ Section -->
     <section class="py-32 px-6 max-w-3xl mx-auto">
@@ -540,13 +540,13 @@
                     <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
                 </ul>
             </div>
-            <div class="col-span-2 md:col-span-1">
+            {{-- <div class="col-span-2 md:col-span-1">
                 <h4 class="font-bold mb-6">Newsletter</h4>
                 <div class="relative">
                     <input type="email" placeholder="Email address" class="w-full bg-zinc-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
                     <button class="absolute right-2 top-2 bottom-2 bg-zinc-800 hover:bg-zinc-700 px-3 rounded-lg text-xs transition-colors">Join</button>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-500 text-xs uppercase tracking-widest font-medium">
             <p>© 2026 LINKFORGE PLATFORM INC.</p>
