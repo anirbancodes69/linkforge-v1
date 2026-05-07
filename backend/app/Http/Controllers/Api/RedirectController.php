@@ -10,7 +10,7 @@ use Jenssegers\Agent\Agent;
 
 class RedirectController extends Controller
 {
-   public function __invoke(Request $request, string $code)
+    public function __invoke(Request $request, string $code)
     {
         /*
         |--------------------------------------------------------------------------
@@ -20,10 +20,9 @@ class RedirectController extends Controller
 
         $link = Link::where(function ($query) use ($code) {
 
-                $query->where('short_code', $code)
-                    ->orWhere('custom_alias', $code);
-
-            })
+            $query->where('short_code', $code)
+                ->orWhere('custom_alias', $code);
+        })
             ->where('is_active', true)
             ->first();
 
@@ -74,7 +73,7 @@ class RedirectController extends Controller
 
             'browser' => $agent->browser(),
 
-            'device' => $agent->device(),
+            'device' => $this->detectDeviceType($agent),
 
             'platform' => $agent->platform(),
 
@@ -100,5 +99,25 @@ class RedirectController extends Controller
         */
 
         return redirect()->away($link->original_url);
+    }
+
+    private function detectDeviceType(Agent $agent): string
+    {
+        if ($agent->isTablet()) {
+
+            return 'Tablet';
+        }
+
+        if ($agent->isMobile()) {
+
+            return 'Mobile';
+        }
+
+        if ($agent->isDesktop()) {
+
+            return 'Desktop';
+        }
+
+        return 'Other';
     }
 }
