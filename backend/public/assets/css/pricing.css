@@ -1,0 +1,13 @@
+.pricing-card-highlight {
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.2);
+        }
+        
+        .billing-toggle:checked + .toggle-bg { background-color: #6366f1; }
+        .billing-toggle:checked + .toggle-bg .toggle-dot { transform: translateX(1.5rem); }
+
+        .feature-row:hover { background: rgba(255, 255, 255, 0.02); }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }

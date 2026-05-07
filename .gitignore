@@ -1,0 +1,25 @@
+# Laravel
+backend/vendor/
+backend/node_modules/
+backend/storage/*.key
+
+# Env files
+backend/.env
+backend/.env.*
+
+# Logs
+backend/storage/logs/*
+backend/storage/framework/*
+
+# Docker
+docker-compose.override.yml
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.log

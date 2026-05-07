@@ -1,0 +1,17 @@
+   pre[class*="language-"] {
+            background: #0f1117 !important;
+            margin: 0 !important;
+            border-radius: 0 0 0.75rem 0.75rem !important;
+            font-size: 0.85rem !important;
+            padding: 1.25rem !important;
+        }
+        code[class*="language-"] { font-family: 'Fira Code', monospace !important; }
+        
+        .method-get { color: #34d399; }
+        .method-post { color: #6366f1; }
+        .method-put { color: #fbbf24; }
+        .method-delete { color: #f87171; }
+
+        .endpoint-card:hover { border-color: rgba(99, 102, 241, 0.3); }
+        
+        .tab-active { color: #818cf8; border-bottom: 2px solid #6366f1; }

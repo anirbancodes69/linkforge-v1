@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\Link;
+use Illuminate\Http\Request;
+
+class RedirectController extends Controller
+{
+    /**
+     * Handle redirect.
+     */
+    public function __invoke(Request $request, string $code)
+    {
+        /*
+        |--------------------------------------------------------------------------
+        | Find Active Link
+        |--------------------------------------------------------------------------
+        */
+
+        $link = Link::where(function ($query) use ($code) {
+
+                $query->where('short_code', $code)
+                    ->orWhere('custom_alias', $code);
+
+            })
+            ->where('is_active', true)
+            ->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Not Found
+        |--------------------------------------------------------------------------
+        */
+
+        if (!$link) {
+
+            abort(404);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Expired
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $link->expires_at &&
+            now()->greaterThan($link->expires_at)
+        ) {
+
+            abort(410, 'Link expired');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Increment Clicks
+        |--------------------------------------------------------------------------
+        */
+
+        $link->increment('clicks_count');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect
+        |--------------------------------------------------------------------------
+        */
+
+        return redirect()->away($link->original_url);
+    }
+}

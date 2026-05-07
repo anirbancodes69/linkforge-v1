@@ -1,0 +1,22 @@
+  body { 
+            background-color: #09090b; 
+            color: #fafafa; 
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+        }
+        .sidebar-item-active {
+            background: rgba(99, 102, 241, 0.1);
+            color: #818cf8;
+            border-right: 2px solid #6366f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
+        
+        /* Premium Chart Tooltip Styles */
+        .chart-container { position: relative; height: 100%; width: 100%; }

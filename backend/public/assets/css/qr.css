@@ -1,0 +1,20 @@
+.qr-preview-container img {
+            margin: 0 auto;
+            border-radius: 0.5rem;
+        }
+        
+        /* Smooth transitions for inputs */
+        input:focus, select:focus {
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+
+        .phone-mockup {
+            width: 260px;
+            height: 520px;
+            border: 8px solid #18181b;
+            border-radius: 3rem;
+            position: relative;
+            background: #09090b;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
