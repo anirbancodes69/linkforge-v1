@@ -5,17 +5,16 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Link;
 use Illuminate\Http\Request;
+use App\Models\LinkVisit;
+use Jenssegers\Agent\Agent;
 
 class RedirectController extends Controller
 {
-    /**
-     * Handle redirect.
-     */
-    public function __invoke(Request $request, string $code)
+   public function __invoke(Request $request, string $code)
     {
         /*
         |--------------------------------------------------------------------------
-        | Find Active Link
+        | Find Link
         |--------------------------------------------------------------------------
         */
 
@@ -55,7 +54,40 @@ class RedirectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Increment Clicks
+        | Agent Detection
+        |--------------------------------------------------------------------------
+        */
+
+        $agent = new Agent();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Store Visit
+        |--------------------------------------------------------------------------
+        */
+
+        LinkVisit::create([
+
+            'link_id' => $link->id,
+
+            'ip_address' => $request->ip(),
+
+            'browser' => $agent->browser(),
+
+            'device' => $agent->device(),
+
+            'platform' => $agent->platform(),
+
+            'user_agent' => $request->userAgent(),
+
+            'referrer' => $request->headers->get('referer'),
+
+            'visited_at' => now(),
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Increment Counter
         |--------------------------------------------------------------------------
         */
 
