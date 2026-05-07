@@ -15,7 +15,7 @@
                     </div> --}}
                 </div>
 
-                {{-- <!-- Stats Grid -->
+                <!-- Stats Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
                     <div class="glass p-6 rounded-2xl group hover:border-accent/40 transition-all">
                         <div class="flex items-center justify-between mb-4">
@@ -315,7 +315,7 @@
                 </div>
 
                 <!-- Footer Spacer -->
-                <div class="h-20"></div> --}}
+                <div class="h-20"></div>
 
 @endsection
 

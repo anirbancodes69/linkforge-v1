@@ -1,4 +1,4 @@
-<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-surface border-r border-border transition-transform -translate-x-full md:translate-x-0 md:static md:inset-0">
+<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-surface border-r border-border transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0 md:static md:inset-0">
             <div class="flex flex-col h-full">
                 <!-- Logo -->
                 <div class="h-16 flex items-center px-6 border-b border-border">

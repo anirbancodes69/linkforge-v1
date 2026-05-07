@@ -14,39 +14,41 @@ document.addEventListener('DOMContentLoaded', () => {
     |--------------------------------------------------------------------------
     */
 
-    const mobileToggle =
-        document.getElementById('mobile-toggle');
+    function initSidebarToggle() {
+        const mobileToggle = document.querySelector('#mobile-toggle');
+        const sidebar = document.querySelector('#sidebar');
+        const overlay = document.querySelector('#sidebar-overlay');
 
-    const sidebar =
-        document.getElementById('sidebar');
+        if (!mobileToggle || !sidebar || !overlay) {
+            return;
+        }
 
-    const overlay =
-        document.getElementById('sidebar-overlay');
+        let sidebarOpen = false;
 
-    function toggleSidebar() {
+        function toggleSidebar(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            sidebarOpen = !sidebarOpen;
+            
+            if (sidebarOpen) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                overlay.classList.add('hidden');
+            }
+        }
 
-        if (!sidebar || !overlay) return;
-
-        sidebar.classList.toggle('-translate-x-full');
-
-        overlay.classList.toggle('hidden');
+        mobileToggle.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
     }
 
-    if (mobileToggle) {
-
-        mobileToggle.addEventListener(
-            'click',
-            toggleSidebar
-        );
-    }
-
-    if (overlay) {
-
-        overlay.addEventListener(
-            'click',
-            toggleSidebar
-        );
-    }
+    initSidebarToggle();
 
     /*
     |--------------------------------------------------------------------------
