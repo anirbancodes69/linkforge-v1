@@ -3,13 +3,13 @@
 
 @include('partials.head')
 
-<body class="overflow-hidden">
+<body class="bg-background text-white">
 
     <div id="sidebar-overlay"
          class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm">
     </div>
 
-    <div class="flex h-screen overflow-hidden">
+    <div class="flex min-h-screen">
 
         @include('partials.sidebar')
 
@@ -17,7 +17,7 @@
 
             @include('partials.navbar')
 
-            <main class="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar">
+            <main class="flex-1 p-4 md:p-8">
 
                 @yield('content')
 

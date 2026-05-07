@@ -33,7 +33,11 @@ class LinkController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'original_url' => ['required', 'url'],
+            'original_url' => [
+                'required',
+                'max:2048',
+                'regex:/^(https?:\/\/)[^\s$.?#].[^\s]*$/i'
+            ],
 
             'custom_alias' => [
                 'nullable',
@@ -121,7 +125,11 @@ class LinkController extends Controller
         */
 
         $validated = $request->validate([
-            'original_url' => ['required', 'url'],
+            'original_url' => [
+                'required',
+                'max:2048',
+                'regex:/^(https?:\/\/)[^\s$.?#].[^\s]*$/i'
+            ],
 
             'custom_alias' => [
                 'nullable',
@@ -209,7 +217,6 @@ class LinkController extends Controller
         do {
 
             $code = Str::random(6);
-
         } while (
             Link::where('short_code', $code)->exists()
         );
