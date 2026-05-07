@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\LinkController;
 use App\Http\Controllers\Api\RedirectController;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::view('/dashboard', 'dashboard.index')
         ->name('dashboard');
+    Route::prefix('api')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index']);
+    });
+    
 
     /*
     |--------------------------------------------------------------------------
