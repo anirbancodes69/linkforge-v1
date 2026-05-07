@@ -1,13 +1,13 @@
  <header class="h-16 border-b border-border bg-background/60 backdrop-blur-xl sticky top-0 z-30 flex items-center justify-between px-4 md:px-8">
                 <div class="flex items-center gap-4">
-                    <button type="button" id="mobile-toggle" class="md:hidden p-2 text-zinc-400 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+                    {{-- <button type="button" id="mobile-toggle" class="md:hidden p-2 text-zinc-400 hover:text-white hover:bg-white/10 rounded-lg transition-all">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                     <div class="hidden sm:flex items-center gap-3 bg-white/5 border border-border px-3 py-1.5 rounded-xl w-64 md:w-96 group focus-within:border-accent transition-all">
                         <i data-lucide="search" class="w-4 h-4 text-zinc-500"></i>
                         <input type="text" placeholder="Search links or campaigns..." class="bg-transparent border-none outline-none text-sm w-full text-zinc-200">
                         <kbd class="hidden md:block px-1.5 py-0.5 rounded border border-border text-[10px] text-zinc-500 font-sans">⌘K</kbd>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="flex items-center gap-3 md:gap-5">

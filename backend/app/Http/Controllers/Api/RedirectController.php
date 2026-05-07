@@ -5,26 +5,24 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Link;
 use Illuminate\Http\Request;
+use App\Models\LinkVisit;
+use Jenssegers\Agent\Agent;
 
 class RedirectController extends Controller
 {
-    /**
-     * Handle redirect.
-     */
     public function __invoke(Request $request, string $code)
     {
         /*
         |--------------------------------------------------------------------------
-        | Find Active Link
+        | Find Link
         |--------------------------------------------------------------------------
         */
 
         $link = Link::where(function ($query) use ($code) {
 
-                $query->where('short_code', $code)
-                    ->orWhere('custom_alias', $code);
-
-            })
+            $query->where('short_code', $code)
+                ->orWhere('custom_alias', $code);
+        })
             ->where('is_active', true)
             ->first();
 
@@ -55,7 +53,40 @@ class RedirectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Increment Clicks
+        | Agent Detection
+        |--------------------------------------------------------------------------
+        */
+
+        $agent = new Agent();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Store Visit
+        |--------------------------------------------------------------------------
+        */
+
+        LinkVisit::create([
+
+            'link_id' => $link->id,
+
+            'ip_address' => $request->ip(),
+
+            'browser' => $agent->browser(),
+
+            'device' => $this->detectDeviceType($agent),
+
+            'platform' => $agent->platform(),
+
+            'user_agent' => $request->userAgent(),
+
+            'referrer' => $request->headers->get('referer'),
+
+            'visited_at' => now(),
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Increment Counter
         |--------------------------------------------------------------------------
         */
 
@@ -68,5 +99,25 @@ class RedirectController extends Controller
         */
 
         return redirect()->away($link->original_url);
+    }
+
+    private function detectDeviceType(Agent $agent): string
+    {
+        if ($agent->isTablet()) {
+
+            return 'Tablet';
+        }
+
+        if ($agent->isMobile()) {
+
+            return 'Mobile';
+        }
+
+        if ($agent->isDesktop()) {
+
+            return 'Desktop';
+        }
+
+        return 'Other';
     }
 }
