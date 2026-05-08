@@ -51,6 +51,20 @@
                     <span class="text-2xl font-bold font-heading tracking-tight">DBA</span>
                 </div>
 
+<a
+    href="{{ route('index') }}"
+    class="inline-flex items-center gap-2 mb-8 text-sm text-zinc-400 hover:text-white transition-colors group">
+
+    <i
+        data-lucide="arrow-left"
+        class="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+    </i>
+
+    <span>
+        Back to homepage
+    </span>
+
+</a>
                 <h1 class="text-3xl font-bold mb-2">Welcome back</h1>
                 <p class="text-zinc-500 mb-8 text-sm">Enter your credentials to access your dashboard.</p>
 
