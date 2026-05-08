@@ -123,16 +123,30 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-4">
-                <a href="{{ route('login') }}"
-                    class="hidden sm:block text-sm font-medium hover:text-white transition-colors px-4">Log in</a>
-                <a href="{{ route('register') }}"
+            @auth
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('dashboard') }}"
+                        class="hidden sm:block text-sm font-medium hover:text-white transition-colors px-4">Dashboard</a>
+                    {{-- <a href="{{ route('register') }}"
                     class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">Get
-                    Started</a>
-                <button class="md:hidden text-zinc-400" id="mobile-menu-btn">
-                    <i data-lucide="menu"></i>
-                </button>
-            </div>
+                    Started</a> --}}
+                    <button class="md:hidden text-zinc-400" id="mobile-menu-btn">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            @else
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('login') }}"
+                        class="hidden sm:block text-sm font-medium hover:text-white transition-colors px-4">Log In</a>
+                    {{-- <a href="{{ route('register') }}"
+                    class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">Get
+                    Started</a> --}}
+                    <button class="md:hidden text-zinc-400" id="mobile-menu-btn">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            @endauth
+
         </div>
     </nav>
 
@@ -143,7 +157,11 @@
             <a href="#faq-section" onclick="toggleMenu()">FAQs</a>
             {{-- <a href="#" onclick="toggleMenu()">Docs</a> --}}
             <hr class="border-white/10">
+            @auth
+            <a href="{{ route('dashboard') }}" class="text-indigo-400">Dashboard</a>
+            @else
             <a href="{{ route('login') }}" class="text-indigo-400">Log In</a>
+            @endauth
         </div>
     </div>
 
@@ -267,70 +285,72 @@
 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-    <div class="glass rounded-2xl p-5">
-        <div class="flex items-center gap-3 mb-3">
-            <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-indigo-400"></i>
-            <span class="font-semibold">Click Tracking</span>
-        </div>
+                                    <div class="glass rounded-2xl p-5">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-indigo-400"></i>
+                                            <span class="font-semibold">Click Tracking</span>
+                                        </div>
 
-        <p class="text-sm text-zinc-500">
-            Monitor every visit instantly.
-        </p>
-    </div>
+                                        <p class="text-sm text-zinc-500">
+                                            Monitor every visit instantly.
+                                        </p>
+                                    </div>
 
-    <div class="glass rounded-2xl p-5">
-        <div class="flex items-center gap-3 mb-3">
-            <i data-lucide="smartphone" class="w-4 h-4 text-indigo-400"></i>
-            <span class="font-semibold">Device Insights</span>
-        </div>
+                                    <div class="glass rounded-2xl p-5">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <i data-lucide="smartphone" class="w-4 h-4 text-indigo-400"></i>
+                                            <span class="font-semibold">Device Insights</span>
+                                        </div>
 
-        <p class="text-sm text-zinc-500">
-            Track mobile vs desktop traffic.
-        </p>
-    </div>
+                                        <p class="text-sm text-zinc-500">
+                                            Track mobile vs desktop traffic.
+                                        </p>
+                                    </div>
 
-    <div class="glass rounded-2xl p-5">
-        <div class="flex items-center gap-3 mb-3">
-            <i data-lucide="globe" class="w-4 h-4 text-indigo-400"></i>
-            <span class="font-semibold">Location Analytics</span>
-        </div>
+                                    <div class="glass rounded-2xl p-5">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <i data-lucide="globe" class="w-4 h-4 text-indigo-400"></i>
+                                            <span class="font-semibold">Location Analytics</span>
+                                        </div>
 
-        <p class="text-sm text-zinc-500">
-            Discover where visitors come from.
-        </p>
-    </div>
+                                        <p class="text-sm text-zinc-500">
+                                            Discover where visitors come from.
+                                        </p>
+                                    </div>
 
-    <div class="glass rounded-2xl p-5">
-        <div class="flex items-center gap-3 mb-3">
-            <i data-lucide="monitor" class="w-4 h-4 text-indigo-400"></i>
-            <span class="font-semibold">Browser Data</span>
-        </div>
+                                    <div class="glass rounded-2xl p-5">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <i data-lucide="monitor" class="w-4 h-4 text-indigo-400"></i>
+                                            <span class="font-semibold">Browser Data</span>
+                                        </div>
 
-        <p class="text-sm text-zinc-500">
-            Understand user technology usage.
-        </p>
-    </div>
+                                        <p class="text-sm text-zinc-500">
+                                            Understand user technology usage.
+                                        </p>
+                                    </div>
 
-    <!-- Center Button -->
-    <div class="sm:col-span-2 flex flex-col items-center justify-center text-center pt-4">
-        {{-- <button
+                                    <!-- Center Button -->
+                                    <div
+                                        class="sm:col-span-2 flex flex-col items-center justify-center text-center pt-4">
+                                        {{-- <button
             class="h-14 px-10 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold shadow-[0_0_40px_rgba(99,102,241,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all">
         </button> --}}
 
-        <a href="{{ route('register') }}"
-                    class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-            Create Free Account
-                </a>
+                                        <a href="{{ route('register') }}"
+                                            class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                                            Create Free Account
+                                        </a>
 
-        <p class="text-sm text-zinc-500 mt-5">
-            Already have an account?
-            <a href="{{ route('login') }}" class="text-indigo-400 hover:text-indigo-300 transition-colors">
-                Sign in
-            </a>
-        </p>
-    </div>
+                                        <p class="text-sm text-zinc-500 mt-5">
+                                            Already have an account?
+                                            <a href="{{ route('login') }}"
+                                                class="text-indigo-400 hover:text-indigo-300 transition-colors">
+                                                Sign in
+                                            </a>
+                                        </p>
+                                    </div>
 
-</div>
+                                </div>
 
                             </div>
 
@@ -673,195 +693,172 @@
         </div>
     </section> --}}
 
-   <!-- FAQ Section -->
-<section class="pb-32 px-6" id="faq-section">
+    <!-- FAQ Section -->
+    <section class="pb-32 px-6" id="faq-section">
 
-    <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto">
 
-        <!-- SECTION HEADER -->
+            <!-- SECTION HEADER -->
 
-        <div class="text-center mb-16">
-
-            <div
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-indigo-500/20 text-indigo-300 text-xs font-semibold mb-6">
-
-                <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
-
-                Frequently asked questions
-
-            </div>
-
-            <h2
-                class="text-4xl md:text-5xl font-black font-heading tracking-tight leading-tight mb-5">
-
-                Questions about
-                <br>
-                DBA.
-
-            </h2>
-
-            <p
-                class="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
-
-                Everything you need to know about shortening links,
-                analytics, QR codes, and getting started.
-
-            </p>
-
-        </div>
-
-        <!-- FAQ ITEMS -->
-
-        <div class="space-y-5">
-
-            <!-- FAQ -->
-
-            <div
-                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
-
-                <button
-                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
-
-                    <div>
-
-                        <h3
-                            class="text-lg md:text-xl font-bold text-white mb-1">
-
-                            Do I need an account to shorten links?
-
-                        </h3>
-
-                        <p
-                            class="text-sm text-zinc-500">
-
-                            Start shortening instantly without signup
-
-                        </p>
-
-                    </div>
-
-                    <div
-                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-
-                        <i
-                            data-lucide="plus"
-                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
-                        </i>
-
-                    </div>
-
-                </button>
+            <div class="text-center mb-16">
 
                 <div
-                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-indigo-500/20 text-indigo-300 text-xs font-semibold mb-6">
 
-                    No. You can create and share short links instantly.
-                    Create a free account later to save links and unlock
-                    detailed analytics.
+                    <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+
+                    Frequently asked questions
 
                 </div>
 
+                <h2 class="text-4xl md:text-5xl font-black font-heading tracking-tight leading-tight mb-5">
+
+                    Questions about
+                    <br>
+                    DBA.
+
+                </h2>
+
+                <p class="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
+
+                    Everything you need to know about shortening links,
+                    analytics, QR codes, and getting started.
+
+                </p>
+
             </div>
 
-            <!-- FAQ -->
+            <!-- FAQ ITEMS -->
 
-            <div
-                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
+            <div class="space-y-5">
 
-                <button
-                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
-
-                    <div>
-
-                        <h3
-                            class="text-lg md:text-xl font-bold text-white mb-1">
-
-                            What analytics do you track?
-
-                        </h3>
-
-                        <p
-                            class="text-sm text-zinc-500">
-
-                            Real-time insights for every click
-
-                        </p>
-
-                    </div>
-
-                    <div
-                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-
-                        <i
-                            data-lucide="plus"
-                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
-                        </i>
-
-                    </div>
-
-                </button>
+                <!-- FAQ -->
 
                 <div
-                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+                    class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
 
-                    Track clicks, devices, browsers, referrers, and visitor
-                    locations in real time from your analytics dashboard.
+                    <button class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                        <div>
+
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1">
+
+                                Do I need an account to shorten links?
+
+                            </h3>
+
+                            <p class="text-sm text-zinc-500">
+
+                                Start shortening instantly without signup
+
+                            </p>
+
+                        </div>
+
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                            <i data-lucide="plus" class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                            </i>
+
+                        </div>
+
+                    </button>
+
+                    <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                        No. You can create and share short links instantly.
+                        Create a free account later to save links and unlock
+                        detailed analytics.
+
+                    </div>
 
                 </div>
 
-            </div>
-
-            <!-- FAQ -->
-
-            <div
-                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
-
-                <button
-                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
-
-                    <div>
-
-                        <h3
-                            class="text-lg md:text-xl font-bold text-white mb-1">
-
-                            Can I create custom aliases?
-
-                        </h3>
-
-                        <p
-                            class="text-sm text-zinc-500">
-
-                            Create clean branded short links
-
-                        </p>
-
-                    </div>
-
-                    <div
-                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-
-                        <i
-                            data-lucide="plus"
-                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
-                        </i>
-
-                    </div>
-
-                </button>
+                <!-- FAQ -->
 
                 <div
-                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+                    class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
 
-                    Yes. You can create your own memorable aliases like
-                    devbyanirban.com/summer-sale instead of random characters.
+                    <button class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                        <div>
+
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1">
+
+                                What analytics do you track?
+
+                            </h3>
+
+                            <p class="text-sm text-zinc-500">
+
+                                Real-time insights for every click
+
+                            </p>
+
+                        </div>
+
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                            <i data-lucide="plus" class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                            </i>
+
+                        </div>
+
+                    </button>
+
+                    <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                        Track clicks, devices, browsers, referrers, and visitor
+                        locations in real time from your analytics dashboard.
+
+                    </div>
 
                 </div>
 
-            </div>
+                <!-- FAQ -->
 
-            <!-- FAQ -->
+                <div
+                    class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
 
-            {{-- <div
+                    <button class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                        <div>
+
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1">
+
+                                Can I create custom aliases?
+
+                            </h3>
+
+                            <p class="text-sm text-zinc-500">
+
+                                Create clean branded short links
+
+                            </p>
+
+                        </div>
+
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                            <i data-lucide="plus" class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                            </i>
+
+                        </div>
+
+                    </button>
+
+                    <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                        Yes. You can create your own memorable aliases like
+                        devbyanirban.com/summer-sale instead of random characters.
+
+                    </div>
+
+                </div>
+
+                <!-- FAQ -->
+
+                {{-- <div
                 class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
 
                 <button
@@ -908,9 +905,9 @@
 
             </div> --}}
 
-            <!-- FAQ -->
+                <!-- FAQ -->
 
-            {{-- <div
+                {{-- <div
                 class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
 
                 <button
@@ -957,11 +954,11 @@
 
             </div> --}}
 
+            </div>
+
         </div>
 
-    </div>
-
-</section>
+    </section>
 
     <div id="toast"
         class="fixed bottom-6 left-1/2 -translate-x-1/2 px-5 py-3 rounded-2xl glass border border-white/10 text-white text-sm font-medium opacity-0 pointer-events-none transition-all duration-500 z-50">
@@ -971,216 +968,189 @@
     </div>
 
     <!-- Final CTA -->
-<section class="pb-32 px-6">
-
-    <div
-        class="max-w-5xl mx-auto relative overflow-hidden rounded-[3rem] border border-white/10 bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 p-12 md:p-20 text-center shadow-[0_0_80px_rgba(99,102,241,0.25)]">
-
-        <!-- BACKGROUND GLOW -->
+    <section class="pb-32 px-6">
 
         <div
-            class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_60%)]">
-        </div>
+            class="max-w-5xl mx-auto relative overflow-hidden rounded-[3rem] border border-white/10 bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 p-12 md:p-20 text-center shadow-[0_0_80px_rgba(99,102,241,0.25)]">
 
-        <div
-            class="absolute -top-20 -left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl">
-        </div>
+            <!-- BACKGROUND GLOW -->
 
-        <div
-            class="absolute -bottom-24 -right-24 w-72 h-72 bg-violet-400/20 rounded-full blur-3xl">
-        </div>
-
-        <!-- CONTENT -->
-
-        <div class="relative z-10">
-
-            <!-- BADGE -->
-
-            <div
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-white/90 text-xs font-semibold mb-8">
-
-                <span class="w-2 h-2 rounded-full bg-white"></span>
-
-                Start shortening in seconds
-
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_60%)]">
             </div>
 
-            <!-- TITLE -->
-
-            <h2
-                class="text-4xl md:text-6xl font-black font-heading text-white leading-[0.95] tracking-tight mb-6">
-
-                Your next link
-                <br>
-                deserves better analytics.
-
-            </h2>
-
-            <!-- SUBTEXT -->
-
-            <p
-                class="text-indigo-100/90 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
-
-                Create short links, track clicks in real time,
-                and share beautifully across every platform.
-
-            </p>
-
-            <!-- CTA -->
-
-            <div
-                class="flex flex-col sm:flex-row items-center justify-center gap-4">
-
-                <a href="#"
-                    class="h-14 px-10 inline-flex items-center justify-center rounded-2xl bg-white text-indigo-600 font-bold text-lg hover:scale-[1.03] active:scale-[0.98] transition-all shadow-[0_10px_40px_rgba(255,255,255,0.2)]">
-
-                    Create Free Link
-
-                </a>
-
-                <a href="{{ route('register') }}"
-                    class="h-14 px-10 inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/10 backdrop-blur text-white font-semibold text-lg hover:bg-white/15 transition-all">
-
-                    Create Account
-
-                </a>
-
+            <div class="absolute -top-20 -left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl">
             </div>
 
-            <!-- SMALL TRUST TEXT -->
+            <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-violet-400/20 rounded-full blur-3xl">
+            </div>
 
-            <p
-                class="text-sm text-indigo-100/70 mt-6">
+            <!-- CONTENT -->
 
-                No credit card required · Instant setup · Mobile friendly
+            <div class="relative z-10">
 
-            </p>
+                <!-- BADGE -->
 
-        </div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-white/90 text-xs font-semibold mb-8">
 
-    </div>
+                    <span class="w-2 h-2 rounded-full bg-white"></span>
 
-</section>
+                    Start shortening in seconds
 
-   <!-- Footer -->
-<footer class="relative border-t border-white/5 py-16 px-6 overflow-hidden">
+                </div>
 
-    <!-- BACKGROUND GLOW -->
+                <!-- TITLE -->
 
-    <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)]">
-    </div>
+                <h2 class="text-4xl md:text-6xl font-black font-heading text-white leading-[0.95] tracking-tight mb-6">
 
-    <div class="relative z-10 max-w-7xl mx-auto">
+                    Your next link
+                    <br>
+                    deserves better analytics.
 
-        <!-- TOP -->
+                </h2>
 
-        <div
-            class="grid grid-cols-1 md:grid-cols-4 gap-14 pb-14 border-b border-white/5">
+                <!-- SUBTEXT -->
 
-            <!-- BRAND -->
+                <p class="text-indigo-100/90 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
 
-            <div class="md:col-span-2">
-
-                <a
-                    href="#"
-                    class="inline-flex items-center gap-3 mb-6 group">
-
-                    <div
-                        class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.3)] group-hover:rotate-6 transition-transform duration-300">
-
-                        <i
-                            data-lucide="link-2"
-                            class="w-5 h-5 text-white">
-                        </i>
-
-                    </div>
-
-                    <span
-                        class="text-2xl font-black font-heading tracking-tight text-white">
-
-                        DBA
-
-                    </span>
-
-                </a>
-
-                <p
-                    class="text-zinc-400 text-sm md:text-base leading-relaxed max-w-md mb-8">
-
-                    Create short links, generate QR codes,
-                    and track every click with beautiful
-                    real-time analytics.
+                    Create short links, track clicks in real time,
+                    and share beautifully across every platform.
 
                 </p>
 
-                <!-- SOCIALS -->
+                <!-- CTA -->
 
-                <div class="flex items-center gap-3">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
 
-                    <a
-                        href="#"
-                        class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+                    <a href="#"
+                        class="h-14 px-10 inline-flex items-center justify-center rounded-2xl bg-white text-indigo-600 font-bold text-lg hover:scale-[1.03] active:scale-[0.98] transition-all shadow-[0_10px_40px_rgba(255,255,255,0.2)]">
 
-                        <i
-                            data-lucide="twitter"
-                            class="w-5 h-5">
-                        </i>
+                        Create Free Link
 
                     </a>
 
-                    <a
-                        href="#"
-                        class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+                    <a href="{{ route('register') }}"
+                        class="h-14 px-10 inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/10 backdrop-blur text-white font-semibold text-lg hover:bg-white/15 transition-all">
 
-                        <i
-                            data-lucide="github"
-                            class="w-5 h-5">
-                        </i>
-
-                    </a>
-
-                    <a
-                        href="#"
-                        class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
-
-                        <i
-                            data-lucide="linkedin"
-                            class="w-5 h-5">
-                        </i>
+                        Create Account
 
                     </a>
 
                 </div>
 
+                <!-- SMALL TRUST TEXT -->
+
+                <p class="text-sm text-indigo-100/70 mt-6">
+
+                    No credit card required · Instant setup · Mobile friendly
+
+                </p>
+
             </div>
 
-            <!-- PRODUCT -->
+        </div>
 
-            <div>
+    </section>
 
-                <h4
-                    class="text-white font-bold text-sm uppercase tracking-widest mb-6">
+    <!-- Footer -->
+    <footer class="relative border-t border-white/5 py-16 px-6 overflow-hidden">
 
-                    Product
+        <!-- BACKGROUND GLOW -->
 
-                </h4>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)]">
+        </div>
 
-                <ul class="space-y-4">
+        <div class="relative z-10 max-w-7xl mx-auto">
 
-                    <li>
+            <!-- TOP -->
 
-                        <a
-                            href="#hero-section"
-                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-14 pb-14 border-b border-white/5">
 
-                            Link Shortening
+                <!-- BRAND -->
+
+                <div class="md:col-span-2">
+
+                    <a href="#" class="inline-flex items-center gap-3 mb-6 group">
+
+                        <div
+                            class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.3)] group-hover:rotate-6 transition-transform duration-300">
+
+                            <i data-lucide="link-2" class="w-5 h-5 text-white">
+                            </i>
+
+                        </div>
+
+                        <span class="text-2xl font-black font-heading tracking-tight text-white">
+
+                            DBA
+
+                        </span>
+
+                    </a>
+
+                    <p class="text-zinc-400 text-sm md:text-base leading-relaxed max-w-md mb-8">
+
+                        Create short links, generate QR codes,
+                        and track every click with beautiful
+                        real-time analytics.
+
+                    </p>
+
+                    <!-- SOCIALS -->
+
+                    <div class="flex items-center gap-3">
+
+                        <a href="#"
+                            class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+
+                            <i data-lucide="twitter" class="w-5 h-5">
+                            </i>
 
                         </a>
 
-                    </li>
+                        <a href="#"
+                            class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
 
-                    {{-- <li>
+                            <i data-lucide="github" class="w-5 h-5">
+                            </i>
+
+                        </a>
+
+                        <a href="#"
+                            class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+
+                            <i data-lucide="linkedin" class="w-5 h-5">
+                            </i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- PRODUCT -->
+
+                <div>
+
+                    <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">
+
+                        Product
+
+                    </h4>
+
+                    <ul class="space-y-4">
+
+                        <li>
+
+                            <a href="#hero-section" class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                                Link Shortening
+
+                            </a>
+
+                        </li>
+
+                        {{-- <li>
 
                         <a
                             href="#features"
@@ -1192,48 +1162,44 @@
 
                     </li> --}}
 
-                    <li>
+                        <li>
 
-                        <a
-                            href="#features"
-                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+                            <a href="#features" class="text-zinc-500 hover:text-white transition-colors text-sm">
 
-                            Real-time Analytics
+                                Real-time Analytics
 
-                        </a>
+                            </a>
 
-                    </li>
+                        </li>
 
-                    <li>
+                        <li>
 
-                        <a
-                            href="{{ route('register') }}"
-                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+                            <a href="{{ route('register') }}"
+                                class="text-zinc-500 hover:text-white transition-colors text-sm">
 
-                            Create Account
+                                Create Account
 
-                        </a>
+                            </a>
 
-                    </li>
+                        </li>
 
-                </ul>
+                    </ul>
 
-            </div>
+                </div>
 
-            <!-- COMPANY -->
+                <!-- COMPANY -->
 
-            <div>
+                <div>
 
-                <h4
-                    class="text-white font-bold text-sm uppercase tracking-widest mb-6">
+                    <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">
 
-                    Company
+                        Company
 
-                </h4>
+                    </h4>
 
-                <ul class="space-y-4">
+                    <ul class="space-y-4">
 
-                    {{-- <li>
+                        {{-- <li>
 
                         <a
                             href="{{ route('docs.index') }}"
@@ -1245,86 +1211,80 @@
 
                     </li> --}}
 
-                    <li>
+                        <li>
 
-                        <a
-                            href="{{ route('privacy') }}"
-                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+                            <a href="{{ route('privacy') }}"
+                                class="text-zinc-500 hover:text-white transition-colors text-sm">
 
-                            Privacy Policy
+                                Privacy Policy
 
-                        </a>
+                            </a>
 
-                    </li>
+                        </li>
 
-                    <li>
+                        <li>
 
-                        <a
-                            href="{{ route('terms') }}"
-                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+                            <a href="{{ route('terms') }}"
+                                class="text-zinc-500 hover:text-white transition-colors text-sm">
 
-                            Terms of Service
+                                Terms of Service
 
-                        </a>
+                            </a>
 
-                    </li>
+                        </li>
 
-                    <li>
+                        <li>
 
-                        <a
-                            href="{{ route('login') }}"
-                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+                            <a href="{{ route('login') }}"
+                                class="text-zinc-500 hover:text-white transition-colors text-sm">
 
-                            Log In
+                                Log In
 
-                        </a>
+                            </a>
 
-                    </li>
+                        </li>
 
-                </ul>
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <!-- BOTTOM -->
+
+            <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+
+                <p class="text-zinc-500 text-sm">
+
+                    © 2026 DevByAnirban. All rights reserved.
+
+                </p>
+
+                <div class="flex items-center gap-3 text-xs text-zinc-600 uppercase tracking-[0.2em]">
+
+                    <span>
+                        Fast redirects
+                    </span>
+
+                    <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+
+                    <span>
+                        Real-time analytics
+                    </span>
+
+                    <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+
+                    <span>
+                        Mobile optimized
+                    </span>
+
+                </div>
 
             </div>
 
         </div>
 
-        <!-- BOTTOM -->
-
-        <div
-            class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-
-            <p
-                class="text-zinc-500 text-sm">
-
-                © 2026 DevByAnirban. All rights reserved.
-
-            </p>
-
-            <div
-                class="flex items-center gap-3 text-xs text-zinc-600 uppercase tracking-[0.2em]">
-
-                <span>
-                    Fast redirects
-                </span>
-
-                <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
-
-                <span>
-                    Real-time analytics
-                </span>
-
-                <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
-
-                <span>
-                    Mobile optimized
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</footer>
+    </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
