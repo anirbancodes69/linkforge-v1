@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkForge | Short Links. Powerful Insights.</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>DBA | Short Links. Powerful Insights.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -108,17 +109,17 @@
     <nav class="fixed top-0 w-full z-50 nav-blur border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-10">
-                <a href="#" class="flex items-center gap-2 group">
+                <a href="{{ route('index') }}" class="flex items-center gap-2 group">
                     <div
                         class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12">
                         <i data-lucide="link-2" class="text-white w-5 h-5"></i>
                     </div>
-                    <span class="text-xl font-bold font-heading tracking-tight">LinkForge</span>
+                    <span class="text-xl font-bold font-heading tracking-tight">DBA</span>
                 </a>
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
                     <a href="#features" class="hover:text-white transition-colors">Features</a>
-                    <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
-                    <a href="{{ route('docs.index') }}" class="hover:text-white transition-colors">Docs</a>
+                    <a href="#faq-section" class="hover:text-white transition-colors">FAQs</a>
+                    {{-- <a href="{{ route('docs.index') }}" class="hover:text-white transition-colors">Docs</a> --}}
                 </div>
             </div>
 
@@ -139,15 +140,16 @@
     <div id="mobile-menu" class="fixed inset-0 z-40 bg-background hidden pt-24 px-6">
         <div class="flex flex-col gap-6 text-2xl font-bold">
             <a href="#features" onclick="toggleMenu()">Features</a>
-            <a href="#pricing" onclick="toggleMenu()">Pricing</a>
-            <a href="#" onclick="toggleMenu()">Docs</a>
+            <a href="#faq-section" onclick="toggleMenu()">FAQs</a>
+            {{-- <a href="#" onclick="toggleMenu()">Docs</a> --}}
             <hr class="border-white/10">
             <a href="{{ route('login') }}" class="text-indigo-400">Log In</a>
         </div>
     </div>
 
     <!-- ===================================================== --><!-- HERO SECTION (REPLACE YOUR CURRENT HERO SECTION) --><!-- ===================================================== -->
-    <section class="relative min-h-screen pt-32 md:pt-40 pb-20 flex items-start md:items-center justify-center px-6 overflow-hidden">
+    <section id="hero-section"
+        class="relative min-h-screen pt-32 md:pt-40 pb-20 flex items-start md:items-center justify-center px-6 overflow-hidden">
         <!-- Background Glow -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div
@@ -164,10 +166,12 @@
                     <span class="relative flex h-2 w-2"> <span
                             class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span> </span> Real-time
-                    link analytics </div> <!-- Heading -->
+                    link analytics
+                </div> <!-- Heading -->
                 <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[0.95] mb-6 max-w-5xl"> Shorten and
                     <span class="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent"> track
-                    </span> every link instantly. </h1> <!-- Subtext -->
+                    </span> every link instantly.
+                </h1> <!-- Subtext -->
                 <p class="text-zinc-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-14"> Built for creators,
                     marketers, and businesses sharing links on WhatsApp, Instagram, and beyond. </p>
                 <!-- ===================================================== --> <!-- MAIN INTERACTIVE CONTAINER -->
@@ -211,18 +215,22 @@
                         <div class="flex justify-center mb-6">
                             <div
                                 class="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.25)]">
-                                <i data-lucide="check" class="w-10 h-10 text-emerald-400"> </i> </div>
+                                <i data-lucide="check" class="w-10 h-10 text-emerald-400"> </i>
+                            </div>
                         </div> <!-- TITLE -->
-                        <h2 class="text-2xl md:text-3xl font-bold mb-4 leading-tight"> Your short link is ready </h2> <!-- GENERATED URL -->
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4 leading-tight"> Your short link is ready </h2>
+                        <!-- GENERATED URL -->
                         <div class="relative max-w-xl mx-auto mb-6">
                             <div class="absolute inset-0 bg-indigo-500/20 blur-2xl"></div>
                             <div
                                 class="relative h-20 bg-gradient-to-r from-indigo-500/10 to-violet-500/10 border border-indigo-500/20 rounded-3xl flex items-center justify-center text-2xl md:text-3xl font-black tracking-tight">
                                 <span id="generatedLink"
                                     class="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent break-all text-center leading-tight">
-                                    linkpe.io/summer24 </span> </div>
+                                    linkpe.io/summer24 </span>
+                            </div>
                         </div> <!-- ACTIONS -->
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-lg mx-auto"> <button id="copyBtn"
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-lg mx-auto"> <button
+                                id="copyBtn"
                                 class="h-14 w-full sm:w-auto px-8 rounded-2xl bg-white text-black font-bold hover:bg-zinc-200 transition-all hover:scale-[1.02] active:scale-[0.98]">
                                 Copy Link </button> <button
                                 class="h-14 w-full sm:w-auto px-8 rounded-2xl glass border border-white/10 font-semibold hover:bg-white/5 transition-all">
@@ -230,38 +238,107 @@
                         <!-- ===================================================== --> <!-- ANALYTICS PREVIEW -->
                         <!-- ===================================================== -->
                         <div id="analyticsPreview"
-                            class="hidden opacity-0 translate-y-6 transition-all duration-700 mt-12">
-                            <div class="flex items-center justify-center gap-2 mb-8"> <i data-lucide="bar-chart-3"
-                                    class="w-5 h-5 text-indigo-400"> </i>
-                                <h3 class="text-xl font-bold"> Track every interaction </h3>
-                            </div> <!-- MINI CARDS -->
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div
-                                    class="glass rounded-2xl p-5 border border-white/5 hover:border-indigo-500/20 transition-all hover:-translate-y-1">
-                                    <p class="text-zinc-500 text-sm mb-3">Clicks</p>
-                                    <h4 class="text-3xl font-black">0</h4>
+                            class="hidden opacity-0 translate-y-6 transition-all duration-700 mt-10">
+
+                            <div class="glass rounded-[2rem] p-6 border border-white/10">
+
+                                <div class="flex items-start gap-4 mb-8">
+
+                                    <div
+                                        class="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center flex-shrink-0">
+
+                                        <i data-lucide="bar-chart-3" class="w-6 h-6 text-indigo-400">
+                                        </i>
+
+                                    </div>
+
+                                    <div class="text-left">
+
+                                        <h3 class="text-xl font-bold mb-4"> Your analytics are already being collected
+                                        </h3>
+
+                                        <p class="text-zinc-400 leading-relaxed">
+                                            Create a free account to unlock your analytics dashboard.
+                                        </p>
+
+                                    </div>
+
                                 </div>
-                                <div
-                                    class="glass rounded-2xl p-5 border border-white/5 hover:border-indigo-500/20 transition-all hover:-translate-y-1">
-                                    <p class="text-zinc-500 text-sm mb-3">Devices</p>
-                                    <h4 class="text-sm font-medium text-zinc-300"> Waiting for traffic... </h4>
-                                </div>
-                                <div
-                                    class="glass rounded-2xl p-5 border border-white/5 hover:border-indigo-500/20 transition-all hover:-translate-y-1">
-                                    <p class="text-zinc-500 text-sm mb-3">Locations</p>
-                                    <h4 class="text-sm font-medium text-zinc-300"> No visits yet </h4>
-                                </div>
-                                <div
-                                    class="glass rounded-2xl p-5 border border-white/5 hover:border-indigo-500/20 transition-all hover:-translate-y-1">
-                                    <p class="text-zinc-500 text-sm mb-3">Browsers</p>
-                                    <h4 class="text-sm font-medium text-zinc-300"> Ready to track </h4>
-                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+    <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3 mb-3">
+            <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-indigo-400"></i>
+            <span class="font-semibold">Click Tracking</span>
+        </div>
+
+        <p class="text-sm text-zinc-500">
+            Monitor every visit instantly.
+        </p>
+    </div>
+
+    <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3 mb-3">
+            <i data-lucide="smartphone" class="w-4 h-4 text-indigo-400"></i>
+            <span class="font-semibold">Device Insights</span>
+        </div>
+
+        <p class="text-sm text-zinc-500">
+            Track mobile vs desktop traffic.
+        </p>
+    </div>
+
+    <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3 mb-3">
+            <i data-lucide="globe" class="w-4 h-4 text-indigo-400"></i>
+            <span class="font-semibold">Location Analytics</span>
+        </div>
+
+        <p class="text-sm text-zinc-500">
+            Discover where visitors come from.
+        </p>
+    </div>
+
+    <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3 mb-3">
+            <i data-lucide="monitor" class="w-4 h-4 text-indigo-400"></i>
+            <span class="font-semibold">Browser Data</span>
+        </div>
+
+        <p class="text-sm text-zinc-500">
+            Understand user technology usage.
+        </p>
+    </div>
+
+    <!-- Center Button -->
+    <div class="sm:col-span-2 flex flex-col items-center justify-center text-center pt-4">
+        {{-- <button
+            class="h-14 px-10 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold shadow-[0_0_40px_rgba(99,102,241,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all">
+        </button> --}}
+
+        <a href="{{ route('register') }}"
+                    class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            Create Free Account
+                </a>
+
+        <p class="text-sm text-zinc-500 mt-5">
+            Already have an account?
+            <a href="{{ route('login') }}" class="text-indigo-400 hover:text-indigo-300 transition-colors">
+                Sign in
+            </a>
+        </p>
+    </div>
+
+</div>
+
                             </div>
+
                         </div> <!-- ===================================================== --> <!-- ACCOUNT CTA -->
                         <!-- ===================================================== -->
-                        <div id="signupCTA" class="hidden opacity-0 translate-y-6 transition-all duration-700 mt-10">
+                        {{-- <div id="signupCTA" class="hidden opacity-0 translate-y-6 transition-all duration-700 mt-10">
                             <div class="glass rounded-[2rem] border border-white/10 p-8 bg-white/[0.03]">
-                                <h3 class="text-2xl font-bold mb-4"> Save this link and unlock analytics </h3>
+                                <h3 class="text-2xl font-bold mb-4"> Your analytics are already being collected </h3>
                                 <div class="grid grid-cols-2 gap-4 text-left max-w-xl mx-auto mb-8">
                                     <div class="flex items-center gap-3 text-zinc-300"> <i data-lucide="check"
                                             class="w-4 h-4 text-emerald-400"> </i> Link history </div>
@@ -278,7 +355,7 @@
                                         class="text-indigo-400 hover:text-indigo-300 transition-colors"> Sign in </a>
                                 </p>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -347,7 +424,7 @@
                     <i data-lucide="globe"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Custom Domains</h3>
-                <p class="text-zinc-500 leading-relaxed">Connect your own custom domain to replace linkforge.app with your own branded short links.</p>
+                <p class="text-zinc-500 leading-relaxed">Connect your own custom domain to replace dba.app with your own branded short links.</p>
             </div> --}}
 
             <!-- Feature Card 5 -->
@@ -380,7 +457,7 @@
                 </div>
                 <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight">Data that tells <br>a story.
                 </h2>
-                <p class="text-zinc-400 text-lg mb-8">Stop guessing. LinkForge provides industry-leading attribution
+                <p class="text-zinc-400 text-lg mb-8">Stop guessing. DBA provides industry-leading attribution
                     data so you know exactly where your traffic is coming from.</p>
 
                 {{-- <div class="space-y-6">
@@ -449,7 +526,7 @@
             <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 blur-[100px]"></div>
             <div class="md:w-1/2 order-2 md:order-1">
                 <div class="bg-white p-8 rounded-3xl shadow-[0_0_50px_rgba(255,255,255,0.1)] w-fit mx-auto md:mx-0">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://linkforge.app&color=4f46e5" alt="QR Preview" class="w-48 h-48">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://devbyanirban.com&color=4f46e5" alt="QR Preview" class="w-48 h-48">
                 </div>
                 <div class="mt-8 flex gap-4 justify-center md:justify-start">
                     <div class="w-10 h-10 rounded-full bg-indigo-600 border-4 border-zinc-900 ring-1 ring-white/10 cursor-pointer"></div>
@@ -550,7 +627,7 @@
                     <i data-lucide="star" class="fill-current w-4 h-4"></i>
                     <i data-lucide="star" class="fill-current w-4 h-4"></i>
                 </div>
-                <p class="text-zinc-300 mb-6 italic">"LinkForge's API is incredibly robust. We integrated it into our marketing stack in under an hour and haven't looked back."</p>
+                <p class="text-zinc-300 mb-6 italic">"DBA's API is incredibly robust. We integrated it into our marketing stack in under an hour and haven't looked back."</p>
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-full bg-zinc-800"></div>
                     <div>
@@ -596,42 +673,295 @@
         </div>
     </section> --}}
 
-    <!-- FAQ Section -->
-    <section class="pb-32 px-6 max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold font-heading mb-12 text-center">Frequently Asked Questions</h2>
-        <div class="space-y-4">
-            <div class="glass rounded-2xl overflow-hidden">
-                <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center group">
-                    <span class="font-bold">Can I use my own custom domain?</span>
-                    <i data-lucide="chevron-down" class="transition-transform group-active:rotate-180"></i>
-                </button>
-                <div class="faq-content hidden px-6 pb-5 text-zinc-400 text-sm">
-                    Yes, our Professional and Enterprise plans allow you to connect your own domains (e.g.,
-                    links.yourbrand.com) to maintain brand consistency.
-                </div>
+   <!-- FAQ Section -->
+<section class="pb-32 px-6" id="faq-section">
+
+    <div class="max-w-4xl mx-auto">
+
+        <!-- SECTION HEADER -->
+
+        <div class="text-center mb-16">
+
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-indigo-500/20 text-indigo-300 text-xs font-semibold mb-6">
+
+                <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+
+                Frequently asked questions
+
             </div>
-            <div class="glass rounded-2xl overflow-hidden">
-                <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center group">
-                    <span class="font-bold">Is there a limit on clicks?</span>
-                    <i data-lucide="chevron-down" class="transition-transform"></i>
-                </button>
-                <div class="faq-content hidden px-6 pb-5 text-zinc-400 text-sm">
-                    We offer unlimited clicks on all paid plans. Our Hobby plan is limited to 1,000 tracked clicks per
-                    month.
-                </div>
-            </div>
-            <div class="glass rounded-2xl overflow-hidden">
-                <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center group">
-                    <span class="font-bold">Do you support API access?</span>
-                    <i data-lucide="chevron-down" class="transition-transform"></i>
-                </button>
-                <div class="faq-content hidden px-6 pb-5 text-zinc-400 text-sm">
-                    Absolutely. We have a robust REST API that allows you to shorten links, create QR codes, and fetch
-                    analytics data programmatically.
-                </div>
-            </div>
+
+            <h2
+                class="text-4xl md:text-5xl font-black font-heading tracking-tight leading-tight mb-5">
+
+                Questions about
+                <br>
+                DBA.
+
+            </h2>
+
+            <p
+                class="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
+
+                Everything you need to know about shortening links,
+                analytics, QR codes, and getting started.
+
+            </p>
+
         </div>
-    </section>
+
+        <!-- FAQ ITEMS -->
+
+        <div class="space-y-5">
+
+            <!-- FAQ -->
+
+            <div
+                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
+
+                <button
+                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                    <div>
+
+                        <h3
+                            class="text-lg md:text-xl font-bold text-white mb-1">
+
+                            Do I need an account to shorten links?
+
+                        </h3>
+
+                        <p
+                            class="text-sm text-zinc-500">
+
+                            Start shortening instantly without signup
+
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                        <i
+                            data-lucide="plus"
+                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                        </i>
+
+                    </div>
+
+                </button>
+
+                <div
+                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                    No. You can create and share short links instantly.
+                    Create a free account later to save links and unlock
+                    detailed analytics.
+
+                </div>
+
+            </div>
+
+            <!-- FAQ -->
+
+            <div
+                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
+
+                <button
+                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                    <div>
+
+                        <h3
+                            class="text-lg md:text-xl font-bold text-white mb-1">
+
+                            What analytics do you track?
+
+                        </h3>
+
+                        <p
+                            class="text-sm text-zinc-500">
+
+                            Real-time insights for every click
+
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                        <i
+                            data-lucide="plus"
+                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                        </i>
+
+                    </div>
+
+                </button>
+
+                <div
+                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                    Track clicks, devices, browsers, referrers, and visitor
+                    locations in real time from your analytics dashboard.
+
+                </div>
+
+            </div>
+
+            <!-- FAQ -->
+
+            <div
+                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
+
+                <button
+                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                    <div>
+
+                        <h3
+                            class="text-lg md:text-xl font-bold text-white mb-1">
+
+                            Can I create custom aliases?
+
+                        </h3>
+
+                        <p
+                            class="text-sm text-zinc-500">
+
+                            Create clean branded short links
+
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                        <i
+                            data-lucide="plus"
+                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                        </i>
+
+                    </div>
+
+                </button>
+
+                <div
+                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                    Yes. You can create your own memorable aliases like
+                    devbyanirban.com/summer-sale instead of random characters.
+
+                </div>
+
+            </div>
+
+            <!-- FAQ -->
+
+            {{-- <div
+                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
+
+                <button
+                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                    <div>
+
+                        <h3
+                            class="text-lg md:text-xl font-bold text-white mb-1">
+
+                            Are QR codes included?
+
+                        </h3>
+
+                        <p
+                            class="text-sm text-zinc-500">
+
+                            Generate shareable QR codes instantly
+
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                        <i
+                            data-lucide="plus"
+                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                        </i>
+
+                    </div>
+
+                </button>
+
+                <div
+                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                    Yes. Every short link can also generate a QR code
+                    for social media, print materials, restaurants,
+                    packaging, and more.
+
+                </div>
+
+            </div> --}}
+
+            <!-- FAQ -->
+
+            {{-- <div
+                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
+
+                <button
+                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                    <div>
+
+                        <h3
+                            class="text-lg md:text-xl font-bold text-white mb-1">
+
+                            Is DBA mobile friendly?
+
+                        </h3>
+
+                        <p
+                            class="text-sm text-zinc-500">
+
+                            Built for sharing across modern platforms
+
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                        <i
+                            data-lucide="plus"
+                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                        </i>
+
+                    </div>
+
+                </button>
+
+                <div
+                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                    Absolutely. DBA is optimized for WhatsApp,
+                    Instagram, mobile browsers, and fast redirects
+                    across all devices.
+
+                </div>
+
+            </div> --}}
+
+        </div>
+
+    </div>
+
+</section>
 
     <div id="toast"
         class="fixed bottom-6 left-1/2 -translate-x-1/2 px-5 py-3 rounded-2xl glass border border-white/10 text-white text-sm font-medium opacity-0 pointer-events-none transition-all duration-500 z-50">
@@ -641,256 +971,621 @@
     </div>
 
     <!-- Final CTA -->
-    <section class="pb-32 px-6">
-        <div class="max-w-5xl mx-auto p-12 md:p-24 rounded-[3rem] bg-indigo-600 relative overflow-hidden text-center">
-            <div
-                class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10">
-            </div>
-            <h2 class="text-4xl md:text-6xl font-extrabold font-heading text-white mb-6 relative z-10">Take control of
-                your <br>links today.</h2>
-            <p class="text-indigo-100 text-lg mb-12 max-w-xl mx-auto relative z-10">Join over 10,000+ teams using
-                LinkForge to power their digital growth.</p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                <button
-                    class="bg-white text-indigo-600 px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform">Get
-                    Started for Free</button>
-                <button
-                    class="bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-indigo-800 transition-colors">Talk
-                    to Sales</button>
-            </div>
-        </div>
-    </section>
+<section class="pb-32 px-6">
 
-    <!-- Footer -->
-    <footer class="py-10 px-6 border-t border-white/5">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-12 mb-20">
-            <div class="col-span-2">
-                <a href="#" class="flex items-center gap-2 mb-6">
-                    <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                        <i data-lucide="link-2" class="text-white w-4 h-4"></i>
-                    </div>
-                    <span class="text-xl font-bold font-heading tracking-tight">LinkForge</span>
-                </a>
-                <p class="text-zinc-500 text-sm max-w-xs mb-8 leading-relaxed">Making the web more accessible,
-                    trackable, and brand-focused, one link at a time.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i
-                            data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i
-                            data-lucide="github" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i
-                            data-lucide="linkedin" class="w-5 h-5"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4 class="font-bold mb-6">Product</h4>
-                <ul class="space-y-4 text-sm text-zinc-500">
-                    <li><a href="#" class="hover:text-white transition-colors">Link Shortening</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">QR Codes</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Analytics</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Integrations</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold mb-6">Company</h4>
-                <ul class="space-y-4 text-sm text-zinc-500">
-                    <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
-                </ul>
-            </div>
-            {{-- <div class="col-span-2 md:col-span-1">
-                <h4 class="font-bold mb-6">Newsletter</h4>
-                <div class="relative">
-                    <input type="email" placeholder="Email address" class="w-full bg-zinc-900 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
-                    <button class="absolute right-2 top-2 bottom-2 bg-zinc-800 hover:bg-zinc-700 px-3 rounded-lg text-xs transition-colors">Join</button>
-                </div>
-            </div> --}}
-        </div>
+    <div
+        class="max-w-5xl mx-auto relative overflow-hidden rounded-[3rem] border border-white/10 bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 p-12 md:p-20 text-center shadow-[0_0_80px_rgba(99,102,241,0.25)]">
+
+        <!-- BACKGROUND GLOW -->
+
         <div
-            class="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-500 text-xs uppercase tracking-widest font-medium">
-            <p>© 2026 LINKFORGE PLATFORM INC.</p>
-            <p>DESIGNED IN SAN FRANCISCO.</p>
+            class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_60%)]">
         </div>
-    </footer>
-<script>
 
-document.addEventListener('DOMContentLoaded', () => {
+        <div
+            class="absolute -top-20 -left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl">
+        </div>
 
-    /*
-    |--------------------------------------------------------------------------
-    | Lucide Icons
-    |--------------------------------------------------------------------------
-    */
+        <div
+            class="absolute -bottom-24 -right-24 w-72 h-72 bg-violet-400/20 rounded-full blur-3xl">
+        </div>
 
-    lucide.createIcons();
+        <!-- CONTENT -->
 
-    /*
-    |--------------------------------------------------------------------------
-    | Mobile Menu
-    |--------------------------------------------------------------------------
-    */
+        <div class="relative z-10">
 
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
+            <!-- BADGE -->
 
-    function toggleMenu() {
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-white/90 text-xs font-semibold mb-8">
 
-        mobileMenu.classList.toggle('hidden');
+                <span class="w-2 h-2 rounded-full bg-white"></span>
 
-        document.body.classList.toggle('overflow-hidden');
-    }
+                Start shortening in seconds
 
-    window.toggleMenu = toggleMenu;
+            </div>
 
-    if (mobileMenuBtn) {
+            <!-- TITLE -->
 
-        mobileMenuBtn.addEventListener('click', toggleMenu);
-    }
+            <h2
+                class="text-4xl md:text-6xl font-black font-heading text-white leading-[0.95] tracking-tight mb-6">
 
-    /*
-    |--------------------------------------------------------------------------
-    | FAQ
-    |--------------------------------------------------------------------------
-    */
+                Your next link
+                <br>
+                deserves better analytics.
 
-    document.querySelectorAll('.faq-btn').forEach(btn => {
+            </h2>
 
-        btn.addEventListener('click', () => {
+            <!-- SUBTEXT -->
 
-            const content = btn.nextElementSibling;
-            const icon = btn.querySelector('svg');
+            <p
+                class="text-indigo-100/90 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
 
-            content.classList.toggle('hidden');
+                Create short links, track clicks in real time,
+                and share beautifully across every platform.
 
-            icon.classList.toggle('rotate-180');
-        });
-    });
+            </p>
 
-    /*
-    |--------------------------------------------------------------------------
-    | Scroll Reveal
-    |--------------------------------------------------------------------------
-    */
+            <!-- CTA -->
 
-    const observer = new IntersectionObserver((entries) => {
+            <div
+                class="flex flex-col sm:flex-row items-center justify-center gap-4">
 
-        entries.forEach(entry => {
+                <a href="#"
+                    class="h-14 px-10 inline-flex items-center justify-center rounded-2xl bg-white text-indigo-600 font-bold text-lg hover:scale-[1.03] active:scale-[0.98] transition-all shadow-[0_10px_40px_rgba(255,255,255,0.2)]">
 
-            if (entry.isIntersecting) {
+                    Create Free Link
 
-                entry.target.classList.add('active');
-            }
-        });
+                </a>
 
-    }, {
-        threshold: 0.1
-    });
+                <a href="{{ route('register') }}"
+                    class="h-14 px-10 inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/10 backdrop-blur text-white font-semibold text-lg hover:bg-white/15 transition-all">
 
-    document.querySelectorAll('.reveal').forEach(el => {
-        observer.observe(el);
-    });
+                    Create Account
 
-    /*
-    |--------------------------------------------------------------------------
-    | Device Chart
-    |--------------------------------------------------------------------------
-    */
+                </a>
 
-    const deviceChartCanvas = document.getElementById('deviceChart');
+            </div>
 
-    if (deviceChartCanvas) {
+            <!-- SMALL TRUST TEXT -->
 
-        const deviceCtx = deviceChartCanvas.getContext('2d');
+            <p
+                class="text-sm text-indigo-100/70 mt-6">
 
-        new Chart(deviceCtx, {
+                No credit card required · Instant setup · Mobile friendly
 
-            type: 'doughnut',
+            </p>
 
-            data: {
-                datasets: [{
-                    data: [62, 31, 7],
-                    backgroundColor: [
-                        '#6366f1',
-                        '#a855f7',
-                        '#3f3f46'
-                    ],
-                    borderWidth: 0,
-                    hoverOffset: 8
-                }]
-            },
+        </div>
 
-            options: {
+    </div>
 
-                cutout: '80%',
+</section>
 
-                responsive: true,
+   <!-- Footer -->
+<footer class="relative border-t border-white/5 py-16 px-6 overflow-hidden">
 
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-    }
+    <!-- BACKGROUND GLOW -->
 
-    /*
-    |--------------------------------------------------------------------------
-    | Hero Flow
-    |--------------------------------------------------------------------------
-    */
+    <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(99,102,241,0.08),transparent_50%)]">
+    </div>
 
-    const createBtn = document.getElementById('createBtn');
+    <div class="relative z-10 max-w-7xl mx-auto">
 
-    const btnText = document.getElementById('btnText');
+        <!-- TOP -->
 
-    const formState = document.getElementById('formState');
+        <div
+            class="grid grid-cols-1 md:grid-cols-4 gap-14 pb-14 border-b border-white/5">
 
-    const successState = document.getElementById('successState');
+            <!-- BRAND -->
 
-    const analyticsPreview = document.getElementById('analyticsPreview');
+            <div class="md:col-span-2">
 
-    const signupCTA = document.getElementById('signupCTA');
+                <a
+                    href="#"
+                    class="inline-flex items-center gap-3 mb-6 group">
 
-    const generatedLink = document.getElementById('generatedLink');
+                    <div
+                        class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.3)] group-hover:rotate-6 transition-transform duration-300">
 
-    const toast = document.getElementById('toast');
+                        <i
+                            data-lucide="link-2"
+                            class="w-5 h-5 text-white">
+                        </i>
 
-    const aliasInput = document.getElementById('aliasInput');
+                    </div>
 
-    /*
-    |--------------------------------------------------------------------------
-    | Initial State Improvements
-    |--------------------------------------------------------------------------
-    */
+                    <span
+                        class="text-2xl font-black font-heading tracking-tight text-white">
 
-    successState.style.display = 'none';
+                        DBA
 
-    analyticsPreview.style.display = 'none';
+                    </span>
 
-    signupCTA.style.display = 'none';
+                </a>
 
-    /*
-    |--------------------------------------------------------------------------
-    | Create Link
-    |--------------------------------------------------------------------------
-    */
+                <p
+                    class="text-zinc-400 text-sm md:text-base leading-relaxed max-w-md mb-8">
 
-    if (createBtn) {
+                    Create short links, generate QR codes,
+                    and track every click with beautiful
+                    real-time analytics.
 
-        createBtn.addEventListener('click', () => {
+                </p>
 
-            createBtn.disabled = true;
+                <!-- SOCIALS -->
+
+                <div class="flex items-center gap-3">
+
+                    <a
+                        href="#"
+                        class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+
+                        <i
+                            data-lucide="twitter"
+                            class="w-5 h-5">
+                        </i>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+
+                        <i
+                            data-lucide="github"
+                            class="w-5 h-5">
+                        </i>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+
+                        <i
+                            data-lucide="linkedin"
+                            class="w-5 h-5">
+                        </i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- PRODUCT -->
+
+            <div>
+
+                <h4
+                    class="text-white font-bold text-sm uppercase tracking-widest mb-6">
+
+                    Product
+
+                </h4>
+
+                <ul class="space-y-4">
+
+                    <li>
+
+                        <a
+                            href="#hero-section"
+                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                            Link Shortening
+
+                        </a>
+
+                    </li>
+
+                    {{-- <li>
+
+                        <a
+                            href="#features"
+                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                            QR Codes
+
+                        </a>
+
+                    </li> --}}
+
+                    <li>
+
+                        <a
+                            href="#features"
+                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                            Real-time Analytics
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a
+                            href="{{ route('register') }}"
+                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                            Create Account
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- COMPANY -->
+
+            <div>
+
+                <h4
+                    class="text-white font-bold text-sm uppercase tracking-widest mb-6">
+
+                    Company
+
+                </h4>
+
+                <ul class="space-y-4">
+
+                    <li>
+
+                        <a
+                            href="{{ route('docs.index') }}"
+                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                            Documentation
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a
+                            href="#"
+                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                            Privacy Policy
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a
+                            href="#"
+                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                            Terms of Service
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a
+                            href="{{ route('login') }}"
+                            class="text-zinc-500 hover:text-white transition-colors text-sm">
+
+                            Log In
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+
+        <div
+            class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+
+            <p
+                class="text-zinc-500 text-sm">
+
+                © 2026 DevByAnirban. All rights reserved.
+
+            </p>
+
+            <div
+                class="flex items-center gap-3 text-xs text-zinc-600 uppercase tracking-[0.2em]">
+
+                <span>
+                    Fast redirects
+                </span>
+
+                <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+
+                <span>
+                    Real-time analytics
+                </span>
+
+                <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+
+                <span>
+                    Mobile optimized
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
             /*
             |--------------------------------------------------------------------------
-            | Loading Button
+            | Lucide Icons
             |--------------------------------------------------------------------------
             */
 
-            btnText.innerHTML = `
+            lucide.createIcons();
+
+            /*
+            |--------------------------------------------------------------------------
+            | CSRF Token
+            |--------------------------------------------------------------------------
+            */
+
+            const csrfToken = document
+                .querySelector('meta[name="csrf-token"]')
+                ?.getAttribute('content');
+
+            /*
+            |--------------------------------------------------------------------------
+            | Mobile Menu
+            |--------------------------------------------------------------------------
+            */
+
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            function toggleMenu() {
+
+                mobileMenu.classList.toggle('hidden');
+
+                document.body.classList.toggle('overflow-hidden');
+            }
+
+            window.toggleMenu = toggleMenu;
+
+            if (mobileMenuBtn) {
+
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | FAQ Toggle
+            |--------------------------------------------------------------------------
+            */
+
+            document.querySelectorAll('.faq-btn').forEach(btn => {
+
+                btn.addEventListener('click', () => {
+
+                    const content = btn.nextElementSibling;
+
+                    const icon = btn.querySelector('svg');
+
+                    content.classList.toggle('hidden');
+
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+
+            /*
+            |--------------------------------------------------------------------------
+            | Scroll Reveal
+            |--------------------------------------------------------------------------
+            */
+
+            const observer = new IntersectionObserver((entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add('active');
+                    }
+                });
+
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            /*
+            |--------------------------------------------------------------------------
+            | Device Chart
+            |--------------------------------------------------------------------------
+            */
+
+            const deviceChartCanvas = document.getElementById('deviceChart');
+
+            if (deviceChartCanvas) {
+
+                const deviceCtx = deviceChartCanvas.getContext('2d');
+
+                new Chart(deviceCtx, {
+
+                    type: 'doughnut',
+
+                    data: {
+                        datasets: [{
+                            data: [62, 31, 7],
+                            backgroundColor: [
+                                '#6366f1',
+                                '#a855f7',
+                                '#3f3f46'
+                            ],
+                            borderWidth: 0,
+                            hoverOffset: 8
+                        }]
+                    },
+
+                    options: {
+
+                        cutout: '80%',
+
+                        responsive: true,
+
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Hero Elements
+            |--------------------------------------------------------------------------
+            */
+
+            const urlInput = document.getElementById('urlInput');
+
+            const aliasInput = document.getElementById('aliasInput');
+
+            const createBtn = document.getElementById('createBtn');
+
+            const btnText = document.getElementById('btnText');
+
+            const formState = document.getElementById('formState');
+
+            const successState = document.getElementById('successState');
+
+            const analyticsPreview = document.getElementById('analyticsPreview');
+
+            // const signupCTA = document.getElementById('signupCTA');
+
+            const generatedLink = document.getElementById('generatedLink');
+
+            const copyBtn = document.getElementById('copyBtn');
+
+            const toast = document.getElementById('toast');
+
+            /*
+            |--------------------------------------------------------------------------
+            | Initial Hidden State
+            |--------------------------------------------------------------------------
+            */
+
+            successState.style.display = 'none';
+
+            analyticsPreview.style.display = 'none';
+
+            // signupCTA.style.display = 'none';
+
+            /*
+            |--------------------------------------------------------------------------
+            | Toast Helper
+            |--------------------------------------------------------------------------
+            */
+
+            function showToast(message = 'Done') {
+
+                toast.innerText = message;
+
+                toast.classList.remove(
+                    'opacity-0',
+                    'translate-y-4'
+                );
+
+                toast.classList.add(
+                    'opacity-100'
+                );
+
+                setTimeout(() => {
+
+                    toast.classList.add('opacity-0');
+
+                }, 2500);
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | URL Validation
+            |--------------------------------------------------------------------------
+            */
+
+            function isValidUrl(url) {
+
+                try {
+
+                    new URL(url);
+
+                    return true;
+
+                } catch (_) {
+
+                    return false;
+                }
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Create Link
+            |--------------------------------------------------------------------------
+            */
+
+            if (createBtn) {
+
+                createBtn.addEventListener('click', async () => {
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Validate
+                    |--------------------------------------------------------------------------
+                    */
+
+                    const originalUrl = urlInput.value.trim();
+
+                    const alias = aliasInput.value.trim();
+
+                    if (!originalUrl) {
+
+                        showToast('Please enter a URL');
+
+                        return;
+                    }
+
+                    if (!isValidUrl(originalUrl)) {
+
+                        showToast('Please enter a valid URL');
+
+                        return;
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Disable Button
+                    |--------------------------------------------------------------------------
+                    */
+
+                    createBtn.disabled = true;
+
+                    btnText.innerHTML = `
                 <svg class="animate-spin h-5 w-5"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -916,173 +1611,225 @@ document.addEventListener('DOMContentLoaded', () => {
                 Creating...
             `;
 
+                    try {
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | API Call
+                        |--------------------------------------------------------------------------
+                        */
+
+                        const response = await fetch('/api/links', {
+
+                            method: 'POST',
+
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': csrfToken,
+                                'Accept': 'application/json',
+                            },
+
+                            body: JSON.stringify({
+
+                                original_url: originalUrl,
+
+                                custom_alias: alias || null,
+                            })
+                        });
+
+                        const data = await response.json();
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Error Handling
+                        |--------------------------------------------------------------------------
+                        */
+
+                        if (!response.ok) {
+
+                            if (data?.message) {
+
+                                showToast(data.message);
+
+                            } else {
+
+                                showToast('Something went wrong');
+                            }
+
+                            createBtn.disabled = false;
+
+                            btnText.innerHTML = `
+                        <i data-lucide="zap"
+                           class="w-5 h-5">
+                        </i>
+
+                        Create Short Link
+                    `;
+
+                            lucide.createIcons();
+
+                            return;
+                        }
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Generate URL
+                        |--------------------------------------------------------------------------
+                        */
+
+                        generatedLink.innerText = data.short_url;
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Transition
+                        |--------------------------------------------------------------------------
+                        */
+
+                        formState.style.transition = 'all 0.35s ease';
+
+                        formState.style.opacity = '0';
+
+                        formState.style.transform = 'translateY(-8px) scale(0.98)';
+
+                        setTimeout(() => {
+
+                            formState.style.display = 'none';
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | Success State
+                            |--------------------------------------------------------------------------
+                            */
+
+                            successState.style.display = 'block';
+
+                            requestAnimationFrame(() => {
+
+                                successState.classList.remove(
+                                    'hidden',
+                                    'opacity-0',
+                                    'translate-y-6'
+                                );
+
+                                successState.style.opacity = '1';
+
+                                successState.style.transform = 'translateY(0)';
+                            });
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | Auto Select Link
+                            |--------------------------------------------------------------------------
+                            */
+
+                            window.getSelection()
+                                .selectAllChildren(generatedLink);
+
+                            lucide.createIcons();
+
+                        }, 250);
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Analytics Reveal
+                        |--------------------------------------------------------------------------
+                        */
+
+                        setTimeout(() => {
+
+                            analyticsPreview.style.display = 'block';
+
+                            requestAnimationFrame(() => {
+
+                                analyticsPreview.classList.remove(
+                                    'hidden',
+                                    'opacity-0',
+                                    'translate-y-6'
+                                );
+
+                                analyticsPreview.style.opacity = '1';
+
+                                analyticsPreview.style.transform = 'translateY(0)';
+                            });
+
+                            lucide.createIcons();
+
+                        }, 600);
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | CTA Reveal
+                        |--------------------------------------------------------------------------
+                        */
+
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        showToast('Network error');
+
+                        createBtn.disabled = false;
+
+                        btnText.innerHTML = `
+                    <i data-lucide="zap"
+                       class="w-5 h-5">
+                    </i>
+
+                    Create Short Link
+                `;
+
+                        lucide.createIcons();
+                    }
+                });
+            }
+
             /*
             |--------------------------------------------------------------------------
-            | Fake Delay
+            | Copy Button
             |--------------------------------------------------------------------------
             */
 
-            setTimeout(() => {
+            if (copyBtn) {
 
-                /*
-                |--------------------------------------------------------------------------
-                | Generate Alias
-                |--------------------------------------------------------------------------
-                */
+                copyBtn.addEventListener('click', async () => {
 
-                let alias = aliasInput.value.trim();
+                    try {
 
-                if (!alias) {
-
-                    alias = Math.random()
-                        .toString(36)
-                        .substring(2, 8);
-                }
-
-                generatedLink.innerText = `linkpe.io/${alias}`;
-
-                /*
-                |--------------------------------------------------------------------------
-                | Smooth Morph Transition
-                |--------------------------------------------------------------------------
-                */
-
-                formState.style.transition = 'all 0.35s ease';
-
-                formState.style.opacity = '0';
-
-                formState.style.transform = 'translateY(-8px) scale(0.98)';
-
-                setTimeout(() => {
-
-                    formState.style.display = 'none';
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Show Success State
-                    |--------------------------------------------------------------------------
-                    */
-
-                    successState.style.display = 'block';
-
-                    requestAnimationFrame(() => {
-
-                        successState.classList.remove(
-                            'hidden',
-                            'opacity-0',
-                            'translate-y-6'
+                        await navigator.clipboard.writeText(
+                            generatedLink.innerText
                         );
 
-                        successState.style.opacity = '1';
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Button Feedback
+                        |--------------------------------------------------------------------------
+                        */
 
-                        successState.style.transform = 'translateY(0)';
-                    });
+                        const originalText = copyBtn.innerHTML;
 
-                    lucide.createIcons();
+                        copyBtn.innerHTML = 'Copied ✓';
 
-                }, 250);
+                        showToast('Link copied');
 
-                /*
-                |--------------------------------------------------------------------------
-                | Analytics Reveal
-                |--------------------------------------------------------------------------
-                */
+                        setTimeout(() => {
 
-                setTimeout(() => {
+                            copyBtn.innerHTML = originalText;
 
-                    analyticsPreview.style.display = 'block';
+                        }, 2000);
 
-                    requestAnimationFrame(() => {
+                    } catch (error) {
 
-                        analyticsPreview.classList.remove(
-                            'hidden',
-                            'opacity-0',
-                            'translate-y-6'
-                        );
+                        console.error(error);
 
-                        analyticsPreview.style.opacity = '1';
-
-                        analyticsPreview.style.transform = 'translateY(0)';
-                    });
-
-                    lucide.createIcons();
-
-                }, 700);
-
-                /*
-                |--------------------------------------------------------------------------
-                | CTA Reveal
-                |--------------------------------------------------------------------------
-                */
-
-                setTimeout(() => {
-
-                    signupCTA.style.display = 'block';
-
-                    requestAnimationFrame(() => {
-
-                        signupCTA.classList.remove(
-                            'hidden',
-                            'opacity-0',
-                            'translate-y-6'
-                        );
-
-                        signupCTA.style.opacity = '1';
-
-                        signupCTA.style.transform = 'translateY(0)';
-                    });
-
-                    lucide.createIcons();
-
-                }, 1200);
-
-            }, 1100);
-        });
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Copy Button
-    |--------------------------------------------------------------------------
-    */
-
-    const copyBtn = document.getElementById('copyBtn');
-
-    if (copyBtn) {
-
-        copyBtn.addEventListener('click', async () => {
-
-            try {
-
-                await navigator.clipboard.writeText(
-                    generatedLink.innerText
-                );
-
-                toast.classList.remove(
-                    'opacity-0',
-                    'translate-y-4'
-                );
-
-                toast.classList.add(
-                    'opacity-100'
-                );
-
-                setTimeout(() => {
-
-                    toast.classList.add('opacity-0');
-
-                }, 2200);
-
-            } catch (e) {
-
-                console.error(e);
+                        showToast('Unable to copy');
+                    }
+                });
             }
+
         });
-    }
-
-});
-
-</script>
+    </script>
 </body>
 
 </html>
