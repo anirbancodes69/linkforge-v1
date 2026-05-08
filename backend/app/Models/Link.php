@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Link extends Model
 {
     protected $fillable = [
-        'user_id',
-        'original_url',
-        'short_code',
-        'custom_alias',
-        'clicks_count',
-        'expires_at',
-        'is_active',
-    ];
+    'user_id',
+    'guest_token',
+    'original_url',
+    'short_code',
+    'custom_alias',
+    'clicks_count',
+    'expires_at',
+    'is_active',
+];
 
     protected $casts = [
         'expires_at' => 'datetime',

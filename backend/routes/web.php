@@ -40,9 +40,13 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 
     Route::post('/login', [AuthController::class, 'login']);
+
+   
 });
 
-
+ Route::prefix('api')->group(function () {
+        Route::post('/links', [LinkController::class, 'store']);
+    });
 /*
 |--------------------------------------------------------------------------
 | Protected SaaS Dashboard
@@ -88,8 +92,6 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('api')->group(function () {
 
         Route::get('/links', [LinkController::class, 'index']);
-
-        Route::post('/links', [LinkController::class, 'store']);
 
         Route::put('/links/{link}', [LinkController::class, 'update']);
 

@@ -5,7 +5,7 @@
 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
     <div>
         <h1 class="text-2xl md:text-3xl font-bold font-heading">
-            Welcome back, {{ Auth::user()->name }} 👋
+            Welcome, {{ Auth::user()->name }} 👋
         </h1>
     </div>
 </div>
@@ -90,7 +90,7 @@
     <div class="lg:col-span-8 space-y-8">
 
         <!-- Quick Shorten -->
-        <div class="glass p-6 rounded-2xl border-accent/20 bg-gradient-to-br from-accent/5 to-transparent">
+        {{-- <div class="glass p-6 rounded-2xl border-accent/20 bg-gradient-to-br from-accent/5 to-transparent">
 
             <div class="flex items-center gap-2 mb-4">
                 <i data-lucide="zap" class="w-4 h-4 text-accent fill-accent/20"></i>
@@ -126,7 +126,7 @@
 
             </div>
 
-        </div>
+        </div> --}}
 
         <!-- Performance Chart -->
         <div class="glass p-6 rounded-2xl">
@@ -251,7 +251,7 @@
         </div>
 
         <!-- Top Locations -->
-        <div class="glass p-6 rounded-2xl">
+        {{-- <div class="glass p-6 rounded-2xl">
 
             <h3 class="font-bold mb-6">
                 Top Locations
@@ -260,7 +260,7 @@
             <div id="topCountries" class="space-y-5">
             </div>
 
-        </div>
+        </div> --}}
 
     </div>
 
