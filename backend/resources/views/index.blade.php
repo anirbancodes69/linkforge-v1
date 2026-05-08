@@ -377,7 +377,7 @@
     </section> --}}
 
     <!-- Features Section -->
-    <section id="features" class="pb-32 px-6 max-w-7xl mx-auto">
+    <section id="features" class="py-32 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-20">
             <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Enterprise links for everyone</h2>
             <p class="text-zinc-500 max-w-xl mx-auto">Powerful features to help you grow your brand and understand your
@@ -1233,7 +1233,7 @@
 
                 <ul class="space-y-4">
 
-                    <li>
+                    {{-- <li>
 
                         <a
                             href="{{ route('docs.index') }}"
@@ -1243,12 +1243,12 @@
 
                         </a>
 
-                    </li>
+                    </li> --}}
 
                     <li>
 
                         <a
-                            href="#"
+                            href="{{ route('privacy') }}"
                             class="text-zinc-500 hover:text-white transition-colors text-sm">
 
                             Privacy Policy
@@ -1260,7 +1260,7 @@
                     <li>
 
                         <a
-                            href="#"
+                            href="{{ route('terms') }}"
                             class="text-zinc-500 hover:text-white transition-colors text-sm">
 
                             Terms of Service
