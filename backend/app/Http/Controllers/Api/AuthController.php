@@ -33,6 +33,23 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        /*
+|--------------------------------------------------------------------------
+| Migrate Guest Links
+|--------------------------------------------------------------------------
+*/
+
+        $guestToken = $request->cookie('guest_token');
+
+        if ($guestToken) {
+
+            \App\Models\Link::where('guest_token', $guestToken)
+                ->update([
+                    'user_id' => $user->id,
+                    'guest_token' => null,
+                ]);
+        }
+
         // IMPORTANT
         $request->session()->regenerate();
 
@@ -64,6 +81,23 @@ class AuthController extends Controller
         }
 
         $request->session()->regenerate();
+
+        /*
+|--------------------------------------------------------------------------
+| Migrate Guest Links
+|--------------------------------------------------------------------------
+*/
+
+        $guestToken = $request->cookie('guest_token');
+
+        if ($guestToken) {
+
+            \App\Models\Link::where('guest_token', $guestToken)
+                ->update([
+                    'user_id' => Auth::id(),
+                    'guest_token' => null,
+                ]);
+        }
 
         return response()->json([
             'success' => true,

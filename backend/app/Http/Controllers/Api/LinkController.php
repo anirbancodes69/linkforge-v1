@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Link;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class LinkController extends Controller
@@ -33,6 +34,7 @@ class LinkController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+
             'original_url' => [
                 'required',
                 'max:2048',
@@ -49,10 +51,10 @@ class LinkController extends Controller
         ]);
 
         /*
-        |--------------------------------------------------------------------------
-        | Reserved Alias Protection
-        |--------------------------------------------------------------------------
-        */
+    |--------------------------------------------------------------------------
+    | Reserved Alias Protection
+    |--------------------------------------------------------------------------
+    */
 
         if (
             isset($validated['custom_alias']) &&
@@ -69,34 +71,58 @@ class LinkController extends Controller
         }
 
         /*
-        |--------------------------------------------------------------------------
-        | Always Generate Internal Short Code
-        |--------------------------------------------------------------------------
-        */
+    |--------------------------------------------------------------------------
+    | Generate Guest Token
+    |--------------------------------------------------------------------------
+    */
 
-        $shortCode = $this->generateUniqueCode();
+        $guestToken = $request->cookie('guest_token');
+
+        if (!$guestToken) {
+
+            $guestToken = Str::uuid()->toString();
+        }
 
         /*
-        |--------------------------------------------------------------------------
-        | Create Link
-        |--------------------------------------------------------------------------
-        */
+    |--------------------------------------------------------------------------
+    | Create Link
+    |--------------------------------------------------------------------------
+    */
 
         $link = Link::create([
-            'user_id' => $request->user()->id,
+
+            // 'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
+
+            'guest_token' => Auth::check()
+                ? null
+                : $guestToken,
 
             'original_url' => $validated['original_url'],
 
-            'short_code' => $shortCode,
+            'short_code' => $this->generateUniqueCode(),
 
             'custom_alias' => $validated['custom_alias'] ?? null,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Link created successfully',
-            'link' => $link,
-        ]);
+        /*
+    |--------------------------------------------------------------------------
+    | Response
+    |--------------------------------------------------------------------------
+    */
+
+        return response()
+            ->json([
+                'success' => true,
+                'message' => 'Link created successfully',
+                'link' => $link,
+                'short_url' => url($link->custom_alias ?? $link->short_code),
+            ])
+            ->cookie(
+                'guest_token',
+                $guestToken,
+                60 * 24 * 30
+            );
     }
 
     /*
@@ -176,6 +202,7 @@ class LinkController extends Controller
             'success' => true,
             'message' => 'Link updated successfully',
             'link' => $link,
+            'short_url' => url($link->custom_alias ?? $link->short_code),
         ]);
     }
 
