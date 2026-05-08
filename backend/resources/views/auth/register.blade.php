@@ -76,6 +76,22 @@
                     <span class="text-xl font-bold font-heading">DBA</span>
                 </div>
 
+
+<a
+    href="/"
+    class="inline-flex items-center gap-2 mb-8 text-sm text-zinc-400 hover:text-white transition-colors group">
+
+    <i
+        data-lucide="arrow-left"
+        class="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+    </i>
+
+    <span>
+        Back to homepage
+    </span>
+
+</a>
+
                 <h1 class="text-2xl font-bold mb-1">Create your account</h1>
                 <p class="text-zinc-500 mb-8 text-sm">Start your 14-day free trial. No credit card required.</p>
 

@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('index');
 
+Route::view('/privacy-policy', 'privacy')->name('privacy');
+Route::view('/terms-of-service', 'terms')->name('terms');
+
 Route::view('/pricing', 'pricing.index')->name('pricing');
 
 /*
