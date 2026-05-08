@@ -193,7 +193,7 @@
 
             if (response.success) {
 
-                window.location.href = '/dashboard';
+                window.location.href = response.redirect || '/dashboard';
 
             } else {
 
