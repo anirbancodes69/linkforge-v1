@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminDashboardController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\LinkController;
@@ -43,13 +44,11 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 
     Route::post('/login', [AuthController::class, 'login']);
-
-   
 });
 
- Route::prefix('api')->group(function () {
-        Route::post('/links', [LinkController::class, 'store']);
-    });
+Route::prefix('api')->group(function () {
+    Route::post('/links', [LinkController::class, 'store']);
+});
 /*
 |--------------------------------------------------------------------------
 | Protected SaaS Dashboard
@@ -75,10 +74,25 @@ Route::middleware(['auth'])->group(function () {
 
     Route::view('/dashboard', 'dashboard.index')
         ->name('dashboard');
+
     Route::prefix('api')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
-    
+
+    Route::prefix('api/admin')->group(function () {
+
+        Route::get(
+            '/dashboard',
+            [AdminDashboardController::class, 'index']
+        )->middleware('admin');
+    });
+
+    Route::middleware(['admin'])->prefix('admin')->group(function () {
+
+        Route::view('/dashboard', 'admin.dashboard')
+            ->name('admin.dashboard');
+    });
+
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +113,6 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/links/{link}', [LinkController::class, 'update']);
 
         Route::delete('/links/{link}', [LinkController::class, 'destroy']);
-
     });
 
     /*
