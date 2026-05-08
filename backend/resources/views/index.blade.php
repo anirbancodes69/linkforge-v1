@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+        rel="stylesheet">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -33,23 +36,72 @@
     </script>
 
     <style>
-        body { background-color: #030303; color: #fafafa; -webkit-font-smoothing: antialiased; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .gradient-text { background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 1000px; height: 600px; background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(3,3,3,0) 70%); z-index: -1; }
-        .nav-blur { backdrop-filter: saturate(180%) blur(20px); background-color: rgba(3, 3, 3, 0.7); }
-        
+        body {
+            background-color: #030303;
+            color: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(3, 3, 3, 0) 70%);
+            z-index: -1;
+        }
+
+        .nav-blur {
+            backdrop-filter: saturate(180%) blur(20px);
+            background-color: rgba(3, 3, 3, 0.7);
+        }
+
         /* Smooth Scroll Reveal */
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #030303; }
-        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #030303;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
     </style>
 </head>
+
 <body class="selection:bg-indigo-500/30">
 
     <!-- Sticky Navbar -->
@@ -57,7 +109,8 @@
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-10">
                 <a href="#" class="flex items-center gap-2 group">
-                    <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12">
+                    <div
+                        class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12">
                         <i data-lucide="link-2" class="text-white w-5 h-5"></i>
                     </div>
                     <span class="text-xl font-bold font-heading tracking-tight">LinkForge</span>
@@ -68,10 +121,13 @@
                     <a href="{{ route('docs.index') }}" class="hover:text-white transition-colors">Docs</a>
                 </div>
             </div>
-            
+
             <div class="flex items-center gap-4">
-                <a href="{{ route('login') }}" class="hidden sm:block text-sm font-medium hover:text-white transition-colors px-4">Log in</a>
-                <a href="{{ route('register') }}" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">Get Started</a>
+                <a href="{{ route('login') }}"
+                    class="hidden sm:block text-sm font-medium hover:text-white transition-colors px-4">Log in</a>
+                <a href="{{ route('register') }}"
+                    class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">Get
+                    Started</a>
                 <button class="md:hidden text-zinc-400" id="mobile-menu-btn">
                     <i data-lucide="menu"></i>
                 </button>
@@ -90,66 +146,139 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative pt-44 pb-20 px-6 overflow-hidden">
-        <div class="hero-glow"></div>
-        <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
-            {{-- <div class="reveal inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-medium text-indigo-300 mb-8 border border-indigo-500/20">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-                </span>
-                New: AI-Powered Custom Slugs
-            </div> --}}
-            <h1 class="reveal text-5xl md:text-8xl font-extrabold font-heading tracking-tight mb-6 leading-[1.1]">
-                Short Links. <br><span class="gradient-text">Powerful Insights.</span>
-            </h1>
-            <p class="reveal text-zinc-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
-                The infrastructure for your links. Generate branded URLs, dynamic QR codes, and track every click in real-time. Built for modern teams.
-            </p>
-            
-            <div class="reveal flex flex-col sm:flex-row items-center gap-4 mb-20 w-full max-w-lg">
-                <div class="relative w-full group">
-                    <input type="text" placeholder="Paste your long URL..." 
-                           class="w-full bg-zinc-900/50 border border-white/10 rounded-2xl px-6 py-5 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all font-medium text-white placeholder:text-zinc-600">
-                    <button class="absolute right-2 top-2 bottom-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 rounded-xl font-bold transition-all flex items-center gap-2">
-                        Shorten
-                    </button>
-                </div>
+    <!-- ===================================================== --><!-- HERO SECTION (REPLACE YOUR CURRENT HERO SECTION) --><!-- ===================================================== -->
+    <section class="relative min-h-screen pt-32 md:pt-40 pb-20 flex items-start md:items-center justify-center px-6 overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div
+                class="absolute top-[-200px] left-[-100px] w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[120px] animate-pulse">
             </div>
-
-            <!-- Floating Dashboard Mockup -->
-            <div class="reveal relative w-full max-w-5xl">
-                <div class="absolute -top-10 -left-10 w-40 h-40 bg-indigo-600/20 blur-[80px] rounded-full"></div>
-                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-600/20 blur-[80px] rounded-full"></div>
-                <div class="glass rounded-3xl p-4 md:p-8 shadow-2xl relative">
-                    <div class="flex items-center justify-between mb-8">
-                        <div class="flex gap-2">
-                            <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+            <div
+                class="absolute bottom-[-200px] right-[-100px] w-[500px] h-[500px] bg-violet-600/20 rounded-full blur-[120px] animate-pulse">
+            </div>
+        </div>
+        <div class="relative z-10 w-full max-w-6xl mx-auto"> <!-- HERO CONTENT -->
+            <div class="flex flex-col items-center text-center"> <!-- Badge -->
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-indigo-500/20 text-indigo-300 text-xs font-semibold mb-8">
+                    <span class="relative flex h-2 w-2"> <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span> </span> Real-time
+                    link analytics </div> <!-- Heading -->
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[0.95] mb-6 max-w-5xl"> Shorten and
+                    <span class="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent"> track
+                    </span> every link instantly. </h1> <!-- Subtext -->
+                <p class="text-zinc-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-14"> Built for creators,
+                    marketers, and businesses sharing links on WhatsApp, Instagram, and beyond. </p>
+                <!-- ===================================================== --> <!-- MAIN INTERACTIVE CONTAINER -->
+                <!-- ===================================================== -->
+                <div id="mainCard"
+                    class="w-full max-w-3xl glass rounded-[2rem] border border-white/10 p-6 md:p-8 shadow-[0_0_80px_rgba(99,102,241,0.15)] transition-all duration-700">
+                    <!-- ===================================================== --> <!-- INITIAL FORM -->
+                    <!-- ===================================================== -->
+                    <div id="formState" class="transition-all duration-500">
+                        <div class="flex flex-col gap-4"> <!-- URL INPUT -->
+                            <div class="relative"> <i data-lucide="link-2"
+                                    class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500"> </i> <input
+                                    id="urlInput" type="text" placeholder="Paste your long URL here..."
+                                    class="w-full h-16 bg-white/5 border border-white/10 rounded-2xl pl-14 pr-5 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all text-lg">
+                            </div> <!-- ALIAS -->
+                            <div class="relative"> <i data-lucide="sparkles"
+                                    class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500"> </i> <input
+                                    id="aliasInput" type="text" placeholder="custom-alias (optional)"
+                                    class="w-full h-14 bg-white/5 border border-white/10 rounded-2xl pl-14 pr-5 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all">
+                            </div> <!-- CTA --> <button id="createBtn"
+                                class="group relative overflow-hidden h-16 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold text-lg shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
+                                <span id="btnText" class="relative z-10 flex items-center justify-center gap-2"> <i
+                                        data-lucide="zap" class="w-5 h-5"> </i> Create Short Link </span>
+                                <div
+                                    class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                            </button>
+                        </div> <!-- TRUST INDICATORS -->
+                        <div class="flex flex-wrap items-center justify-center gap-6 mt-8 text-xs text-zinc-500">
+                            <div class="flex items-center gap-2"> <i data-lucide="zap" class="w-4 h-4 text-indigo-400">
+                                </i> Lightning fast redirects </div>
+                            <div class="flex items-center gap-2"> <i data-lucide="bar-chart-3"
+                                    class="w-4 h-4 text-indigo-400"> </i> Real-time analytics </div>
+                            <div class="flex items-center gap-2"> <i data-lucide="smartphone"
+                                    class="w-4 h-4 text-indigo-400"> </i> Mobile friendly </div>
                         </div>
-                        <div class="text-xs text-zinc-500 font-mono">analytics.linkforge.app/v1</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
-                            <p class="text-zinc-500 text-xs font-semibold mb-1 uppercase tracking-wider">Total Clicks</p>
-                            <h3 class="text-3xl font-bold">128,402</h3>
-                            <div class="text-emerald-400 text-xs mt-2 flex items-center gap-1">
-                                <i data-lucide="trending-up" class="w-3 h-3"></i> +14.2%
+                    </div> <!-- ===================================================== --> <!-- SUCCESS STATE -->
+                    <!-- ===================================================== -->
+                    <div id="successState" class="hidden opacity-0 translate-y-6 transition-all duration-700">
+                        <!-- SUCCESS ICON -->
+                        <div class="flex justify-center mb-6">
+                            <div
+                                class="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.25)]">
+                                <i data-lucide="check" class="w-10 h-10 text-emerald-400"> </i> </div>
+                        </div> <!-- TITLE -->
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4 leading-tight"> Your short link is ready </h2> <!-- GENERATED URL -->
+                        <div class="relative max-w-xl mx-auto mb-6">
+                            <div class="absolute inset-0 bg-indigo-500/20 blur-2xl"></div>
+                            <div
+                                class="relative h-20 bg-gradient-to-r from-indigo-500/10 to-violet-500/10 border border-indigo-500/20 rounded-3xl flex items-center justify-center text-2xl md:text-3xl font-black tracking-tight">
+                                <span id="generatedLink"
+                                    class="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent break-all text-center leading-tight">
+                                    linkpe.io/summer24 </span> </div>
+                        </div> <!-- ACTIONS -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-lg mx-auto"> <button id="copyBtn"
+                                class="h-14 w-full sm:w-auto px-8 rounded-2xl bg-white text-black font-bold hover:bg-zinc-200 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                                Copy Link </button> <button
+                                class="h-14 w-full sm:w-auto px-8 rounded-2xl glass border border-white/10 font-semibold hover:bg-white/5 transition-all">
+                                Open Link </button> </div>
+                        <!-- ===================================================== --> <!-- ANALYTICS PREVIEW -->
+                        <!-- ===================================================== -->
+                        <div id="analyticsPreview"
+                            class="hidden opacity-0 translate-y-6 transition-all duration-700 mt-12">
+                            <div class="flex items-center justify-center gap-2 mb-8"> <i data-lucide="bar-chart-3"
+                                    class="w-5 h-5 text-indigo-400"> </i>
+                                <h3 class="text-xl font-bold"> Track every interaction </h3>
+                            </div> <!-- MINI CARDS -->
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div
+                                    class="glass rounded-2xl p-5 border border-white/5 hover:border-indigo-500/20 transition-all hover:-translate-y-1">
+                                    <p class="text-zinc-500 text-sm mb-3">Clicks</p>
+                                    <h4 class="text-3xl font-black">0</h4>
+                                </div>
+                                <div
+                                    class="glass rounded-2xl p-5 border border-white/5 hover:border-indigo-500/20 transition-all hover:-translate-y-1">
+                                    <p class="text-zinc-500 text-sm mb-3">Devices</p>
+                                    <h4 class="text-sm font-medium text-zinc-300"> Waiting for traffic... </h4>
+                                </div>
+                                <div
+                                    class="glass rounded-2xl p-5 border border-white/5 hover:border-indigo-500/20 transition-all hover:-translate-y-1">
+                                    <p class="text-zinc-500 text-sm mb-3">Locations</p>
+                                    <h4 class="text-sm font-medium text-zinc-300"> No visits yet </h4>
+                                </div>
+                                <div
+                                    class="glass rounded-2xl p-5 border border-white/5 hover:border-indigo-500/20 transition-all hover:-translate-y-1">
+                                    <p class="text-zinc-500 text-sm mb-3">Browsers</p>
+                                    <h4 class="text-sm font-medium text-zinc-300"> Ready to track </h4>
+                                </div>
+                            </div>
+                        </div> <!-- ===================================================== --> <!-- ACCOUNT CTA -->
+                        <!-- ===================================================== -->
+                        <div id="signupCTA" class="hidden opacity-0 translate-y-6 transition-all duration-700 mt-10">
+                            <div class="glass rounded-[2rem] border border-white/10 p-8 bg-white/[0.03]">
+                                <h3 class="text-2xl font-bold mb-4"> Save this link and unlock analytics </h3>
+                                <div class="grid grid-cols-2 gap-4 text-left max-w-xl mx-auto mb-8">
+                                    <div class="flex items-center gap-3 text-zinc-300"> <i data-lucide="check"
+                                            class="w-4 h-4 text-emerald-400"> </i> Link history </div>
+                                    <div class="flex items-center gap-3 text-zinc-300"> <i data-lucide="check"
+                                            class="w-4 h-4 text-emerald-400"> </i> Device insights </div>
+                                    <div class="flex items-center gap-3 text-zinc-300"> <i data-lucide="check"
+                                            class="w-4 h-4 text-emerald-400"> </i> Browser analytics </div>
+                                    <div class="flex items-center gap-3 text-zinc-300"> <i data-lucide="check"
+                                            class="w-4 h-4 text-emerald-400"> </i> Country tracking </div>
+                                </div> <button
+                                    class="h-14 px-10 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold shadow-[0_0_40px_rgba(99,102,241,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all">
+                                    Create Free Account </button>
+                                <p class="text-sm text-zinc-500 mt-5"> Already have an account? <a href="#"
+                                        class="text-indigo-400 hover:text-indigo-300 transition-colors"> Sign in </a>
+                                </p>
                             </div>
                         </div>
-                        <div class="p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
-                            <p class="text-zinc-500 text-xs font-semibold mb-1 uppercase tracking-wider">Active Links</p>
-                            <h3 class="text-3xl font-bold">1,842</h3>
-                        </div>
-                        <div class="p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
-                            <p class="text-zinc-500 text-xs font-semibold mb-1 uppercase tracking-wider">Conversion</p>
-                            <h3 class="text-3xl font-bold">4.2%</h3>
-                        </div>
-                    </div>
-                    <div class="mt-8 h-48 md:h-64">
-                        <canvas id="heroChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -157,7 +286,7 @@
     </section>
 
     <!-- Trusted By -->
-    {{-- <section class="py-20 border-y border-white/5">
+    {{-- <section class="py-10 border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <p class="text-center text-zinc-500 text-sm font-medium mb-10">TRUSTED BY TEAMS AT INNOVATIVE STARTUPS</p>
             <div class="flex flex-wrap justify-center gap-12 md:gap-24 opacity-40 grayscale">
@@ -171,38 +300,45 @@
     </section> --}}
 
     <!-- Features Section -->
-    <section id="features" class="py-32 px-6 max-w-7xl mx-auto">
+    <section id="features" class="pb-32 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-20">
             <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Enterprise links for everyone</h2>
-            <p class="text-zinc-500 max-w-xl mx-auto">Powerful features to help you grow your brand and understand your audience.</p>
+            <p class="text-zinc-500 max-w-xl mx-auto">Powerful features to help you grow your brand and understand your
+                audience.</p>
         </div>
-        
+
         <div class="grid md:grid-cols-3 gap-6">
             <!-- Feature Card 1 -->
             <div class="reveal group glass p-8 rounded-[2rem] hover:border-indigo-500/40 transition-all duration-500">
-                <div class="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 text-indigo-400 group-hover:scale-110 transition-transform">
+                <div
+                    class="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 text-indigo-400 group-hover:scale-110 transition-transform">
                     <i data-lucide="zap"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Smart Shortening</h3>
-                <p class="text-zinc-500 leading-relaxed">Instantly shorten links and add custom back-halves to boost click-through rates by up to 34%.</p>
+                <p class="text-zinc-500 leading-relaxed">Instantly shorten links and add custom back-halves to boost
+                    click-through rates by up to 34%.</p>
             </div>
-            
+
             <!-- Feature Card 2 -->
             <div class="reveal group glass p-8 rounded-[2rem] hover:border-purple-500/40 transition-all duration-500">
-                <div class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition-transform">
+                <div
+                    class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition-transform">
                     <i data-lucide="qr-code"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">QR Code Studio</h3>
-                <p class="text-zinc-500 leading-relaxed">Generate beautiful, trackable QR codes for print and digital with custom colors and branding.</p>
+                <p class="text-zinc-500 leading-relaxed">Generate beautiful, trackable QR codes for print and digital
+                    with custom colors and branding.</p>
             </div>
 
             <!-- Feature Card 3 -->
             <div class="reveal group glass p-8 rounded-[2rem] hover:border-blue-500/40 transition-all duration-500">
-                <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform">
+                <div
+                    class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform">
                     <i data-lucide="bar-chart-3"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Real-time Analytics</h3>
-                <p class="text-zinc-500 leading-relaxed">Dive deep into click data. Track geography, devices, and referral sources in milliseconds.</p>
+                <p class="text-zinc-500 leading-relaxed">Dive deep into click data. Track geography, devices, and
+                    referral sources in milliseconds.</p>
             </div>
 
             <!-- Feature Card 4 -->
@@ -235,16 +371,18 @@
     </section>
 
     <!-- Analytics Showcase -->
-    <section class="py-32 bg-zinc-950/30">
+    <section class="pb-32 bg-zinc-950/30">
         <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-16 items-center">
             <div class="lg:w-1/2">
                 <div class="inline-flex items-center gap-2 text-indigo-400 font-bold mb-4">
                     <i data-lucide="pie-chart" class="w-5 h-5"></i>
                     <span>ANALYTICS ENGINE</span>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight">Data that tells <br>a story.</h2>
-                <p class="text-zinc-400 text-lg mb-8">Stop guessing. LinkForge provides industry-leading attribution data so you know exactly where your traffic is coming from.</p>
-                
+                <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight">Data that tells <br>a story.
+                </h2>
+                <p class="text-zinc-400 text-lg mb-8">Stop guessing. LinkForge provides industry-leading attribution
+                    data so you know exactly where your traffic is coming from.</p>
+
                 {{-- <div class="space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center mt-1">
@@ -306,7 +444,7 @@
     </section>
 
     <!-- QR Showcase -->
-    {{-- <section class="py-32 px-6">
+    {{-- <section class="pb-32 px-6">
         <div class="max-w-7xl mx-auto glass rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative">
             <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 blur-[100px]"></div>
             <div class="md:w-1/2 order-2 md:order-1">
@@ -336,7 +474,7 @@
     </section> --}}
 
     <!-- Pricing Section -->
-    {{-- <section id="pricing" class="py-32 px-6 max-w-7xl mx-auto">
+    {{-- <section id="pricing" class="pb-32 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-20">
             <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Transparent Pricing</h2>
             <p class="text-zinc-500">Scale from your first link to millions of clicks.</p>
@@ -402,7 +540,7 @@
     </section> --}}
 
     <!-- Testimonials -->
-    {{-- <section class="py-32 px-6">
+    {{-- <section class="pb-32 px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
             <div class="reveal glass p-8 rounded-3xl">
                 <div class="flex gap-1 text-yellow-500 mb-4">
@@ -459,7 +597,7 @@
     </section> --}}
 
     <!-- FAQ Section -->
-    <section class="py-32 px-6 max-w-3xl mx-auto">
+    <section class="pb-32 px-6 max-w-3xl mx-auto">
         <h2 class="text-3xl font-bold font-heading mb-12 text-center">Frequently Asked Questions</h2>
         <div class="space-y-4">
             <div class="glass rounded-2xl overflow-hidden">
@@ -468,7 +606,8 @@
                     <i data-lucide="chevron-down" class="transition-transform group-active:rotate-180"></i>
                 </button>
                 <div class="faq-content hidden px-6 pb-5 text-zinc-400 text-sm">
-                    Yes, our Professional and Enterprise plans allow you to connect your own domains (e.g., links.yourbrand.com) to maintain brand consistency.
+                    Yes, our Professional and Enterprise plans allow you to connect your own domains (e.g.,
+                    links.yourbrand.com) to maintain brand consistency.
                 </div>
             </div>
             <div class="glass rounded-2xl overflow-hidden">
@@ -477,7 +616,8 @@
                     <i data-lucide="chevron-down" class="transition-transform"></i>
                 </button>
                 <div class="faq-content hidden px-6 pb-5 text-zinc-400 text-sm">
-                    We offer unlimited clicks on all paid plans. Our Hobby plan is limited to 1,000 tracked clicks per month.
+                    We offer unlimited clicks on all paid plans. Our Hobby plan is limited to 1,000 tracked clicks per
+                    month.
                 </div>
             </div>
             <div class="glass rounded-2xl overflow-hidden">
@@ -486,27 +626,43 @@
                     <i data-lucide="chevron-down" class="transition-transform"></i>
                 </button>
                 <div class="faq-content hidden px-6 pb-5 text-zinc-400 text-sm">
-                    Absolutely. We have a robust REST API that allows you to shorten links, create QR codes, and fetch analytics data programmatically.
+                    Absolutely. We have a robust REST API that allows you to shorten links, create QR codes, and fetch
+                    analytics data programmatically.
                 </div>
             </div>
         </div>
     </section>
 
+    <div id="toast"
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 px-5 py-3 rounded-2xl glass border border-white/10 text-white text-sm font-medium opacity-0 pointer-events-none transition-all duration-500 z-50">
+
+        Copied! Ready to share.
+
+    </div>
+
     <!-- Final CTA -->
-    <section class="py-32 px-6">
+    <section class="pb-32 px-6">
         <div class="max-w-5xl mx-auto p-12 md:p-24 rounded-[3rem] bg-indigo-600 relative overflow-hidden text-center">
-            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-            <h2 class="text-4xl md:text-6xl font-extrabold font-heading text-white mb-6 relative z-10">Take control of your <br>links today.</h2>
-            <p class="text-indigo-100 text-lg mb-12 max-w-xl mx-auto relative z-10">Join over 10,000+ teams using LinkForge to power their digital growth.</p>
+            <div
+                class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10">
+            </div>
+            <h2 class="text-4xl md:text-6xl font-extrabold font-heading text-white mb-6 relative z-10">Take control of
+                your <br>links today.</h2>
+            <p class="text-indigo-100 text-lg mb-12 max-w-xl mx-auto relative z-10">Join over 10,000+ teams using
+                LinkForge to power their digital growth.</p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                <button class="bg-white text-indigo-600 px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform">Get Started for Free</button>
-                <button class="bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-indigo-800 transition-colors">Talk to Sales</button>
+                <button
+                    class="bg-white text-indigo-600 px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform">Get
+                    Started for Free</button>
+                <button
+                    class="bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-indigo-800 transition-colors">Talk
+                    to Sales</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-20 px-6 border-t border-white/5">
+    <footer class="py-10 px-6 border-t border-white/5">
         <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-12 mb-20">
             <div class="col-span-2">
                 <a href="#" class="flex items-center gap-2 mb-6">
@@ -515,11 +671,15 @@
                     </div>
                     <span class="text-xl font-bold font-heading tracking-tight">LinkForge</span>
                 </a>
-                <p class="text-zinc-500 text-sm max-w-xs mb-8 leading-relaxed">Making the web more accessible, trackable, and brand-focused, one link at a time.</p>
+                <p class="text-zinc-500 text-sm max-w-xs mb-8 leading-relaxed">Making the web more accessible,
+                    trackable, and brand-focused, one link at a time.</p>
                 <div class="flex gap-4">
-                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i
+                            data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i
+                            data-lucide="github" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-zinc-500 hover:text-white transition-colors"><i
+                            data-lucide="linkedin" class="w-5 h-5"></i></a>
                 </div>
             </div>
             <div>
@@ -548,102 +708,381 @@
                 </div>
             </div> --}}
         </div>
-        <div class="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-500 text-xs uppercase tracking-widest font-medium">
+        <div
+            class="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-500 text-xs uppercase tracking-widest font-medium">
             <p>© 2026 LINKFORGE PLATFORM INC.</p>
             <p>DESIGNED IN SAN FRANCISCO.</p>
         </div>
     </footer>
+<script>
 
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
+document.addEventListener('DOMContentLoaded', () => {
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        function toggleMenu() {
-            mobileMenu.classList.toggle('hidden');
-            document.body.classList.toggle('overflow-hidden');
-        }
+    /*
+    |--------------------------------------------------------------------------
+    | Lucide Icons
+    |--------------------------------------------------------------------------
+    */
+
+    lucide.createIcons();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mobile Menu
+    |--------------------------------------------------------------------------
+    */
+
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function toggleMenu() {
+
+        mobileMenu.classList.toggle('hidden');
+
+        document.body.classList.toggle('overflow-hidden');
+    }
+
+    window.toggleMenu = toggleMenu;
+
+    if (mobileMenuBtn) {
+
         mobileMenuBtn.addEventListener('click', toggleMenu);
+    }
 
-        // FAQ Toggle
-        document.querySelectorAll('.faq-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const content = btn.nextElementSibling;
-                const icon = btn.querySelector('i');
-                content.classList.toggle('hidden');
-                icon.classList.toggle('rotate-180');
-            });
+    /*
+    |--------------------------------------------------------------------------
+    | FAQ
+    |--------------------------------------------------------------------------
+    */
+
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+
+        btn.addEventListener('click', () => {
+
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('svg');
+
+            content.classList.toggle('hidden');
+
+            icon.classList.toggle('rotate-180');
+        });
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scroll Reveal
+    |--------------------------------------------------------------------------
+    */
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.classList.add('active');
+            }
         });
 
-        // Scroll Reveal Animation
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
+    }, {
+        threshold: 0.1
+    });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+    });
 
-        // Hero Chart
-        const heroCtx = document.getElementById('heroChart').getContext('2d');
-        new Chart(heroCtx, {
-            type: 'line',
+    /*
+    |--------------------------------------------------------------------------
+    | Device Chart
+    |--------------------------------------------------------------------------
+    */
+
+    const deviceChartCanvas = document.getElementById('deviceChart');
+
+    if (deviceChartCanvas) {
+
+        const deviceCtx = deviceChartCanvas.getContext('2d');
+
+        new Chart(deviceCtx, {
+
+            type: 'doughnut',
+
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
                 datasets: [{
-                    label: 'Clicks',
-                    data: [30, 45, 32, 70, 85, 110, 140],
-                    borderColor: '#6366f1',
-                    borderWidth: 3,
-                    tension: 0.4,
-                    pointRadius: 0,
-                    fill: true,
-                    backgroundColor: (context) => {
-                        const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 300);
-                        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.2)');
-                        gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
-                        return gradient;
-                    },
+                    data: [62, 31, 7],
+                    backgroundColor: [
+                        '#6366f1',
+                        '#a855f7',
+                        '#3f3f46'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 8
                 }]
             },
+
             options: {
+
+                cutout: '80%',
+
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { display: false },
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: '#52525b', font: { size: 10 } }
+
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
             }
         });
+    }
 
-        // Device Chart
-        const deviceCtx = document.getElementById('deviceChart').getContext('2d');
-        new Chart(deviceCtx, {
-            type: 'doughnut',
-            data: {
-                datasets: [{
-                    data: [62, 31, 7],
-                    backgroundColor: ['#6366f1', '#a855f7', '#3f3f46'],
-                    borderWidth: 0,
-                    hoverOffset: 10
-                }]
-            },
-            options: {
-                cutout: '80%',
-                responsive: true,
-                plugins: { legend: { display: false } }
+    /*
+    |--------------------------------------------------------------------------
+    | Hero Flow
+    |--------------------------------------------------------------------------
+    */
+
+    const createBtn = document.getElementById('createBtn');
+
+    const btnText = document.getElementById('btnText');
+
+    const formState = document.getElementById('formState');
+
+    const successState = document.getElementById('successState');
+
+    const analyticsPreview = document.getElementById('analyticsPreview');
+
+    const signupCTA = document.getElementById('signupCTA');
+
+    const generatedLink = document.getElementById('generatedLink');
+
+    const toast = document.getElementById('toast');
+
+    const aliasInput = document.getElementById('aliasInput');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Initial State Improvements
+    |--------------------------------------------------------------------------
+    */
+
+    successState.style.display = 'none';
+
+    analyticsPreview.style.display = 'none';
+
+    signupCTA.style.display = 'none';
+
+    /*
+    |--------------------------------------------------------------------------
+    | Create Link
+    |--------------------------------------------------------------------------
+    */
+
+    if (createBtn) {
+
+        createBtn.addEventListener('click', () => {
+
+            createBtn.disabled = true;
+
+            /*
+            |--------------------------------------------------------------------------
+            | Loading Button
+            |--------------------------------------------------------------------------
+            */
+
+            btnText.innerHTML = `
+                <svg class="animate-spin h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24">
+
+                    <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4">
+                    </circle>
+
+                    <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z">
+                    </path>
+
+                </svg>
+
+                Creating...
+            `;
+
+            /*
+            |--------------------------------------------------------------------------
+            | Fake Delay
+            |--------------------------------------------------------------------------
+            */
+
+            setTimeout(() => {
+
+                /*
+                |--------------------------------------------------------------------------
+                | Generate Alias
+                |--------------------------------------------------------------------------
+                */
+
+                let alias = aliasInput.value.trim();
+
+                if (!alias) {
+
+                    alias = Math.random()
+                        .toString(36)
+                        .substring(2, 8);
+                }
+
+                generatedLink.innerText = `linkpe.io/${alias}`;
+
+                /*
+                |--------------------------------------------------------------------------
+                | Smooth Morph Transition
+                |--------------------------------------------------------------------------
+                */
+
+                formState.style.transition = 'all 0.35s ease';
+
+                formState.style.opacity = '0';
+
+                formState.style.transform = 'translateY(-8px) scale(0.98)';
+
+                setTimeout(() => {
+
+                    formState.style.display = 'none';
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Show Success State
+                    |--------------------------------------------------------------------------
+                    */
+
+                    successState.style.display = 'block';
+
+                    requestAnimationFrame(() => {
+
+                        successState.classList.remove(
+                            'hidden',
+                            'opacity-0',
+                            'translate-y-6'
+                        );
+
+                        successState.style.opacity = '1';
+
+                        successState.style.transform = 'translateY(0)';
+                    });
+
+                    lucide.createIcons();
+
+                }, 250);
+
+                /*
+                |--------------------------------------------------------------------------
+                | Analytics Reveal
+                |--------------------------------------------------------------------------
+                */
+
+                setTimeout(() => {
+
+                    analyticsPreview.style.display = 'block';
+
+                    requestAnimationFrame(() => {
+
+                        analyticsPreview.classList.remove(
+                            'hidden',
+                            'opacity-0',
+                            'translate-y-6'
+                        );
+
+                        analyticsPreview.style.opacity = '1';
+
+                        analyticsPreview.style.transform = 'translateY(0)';
+                    });
+
+                    lucide.createIcons();
+
+                }, 700);
+
+                /*
+                |--------------------------------------------------------------------------
+                | CTA Reveal
+                |--------------------------------------------------------------------------
+                */
+
+                setTimeout(() => {
+
+                    signupCTA.style.display = 'block';
+
+                    requestAnimationFrame(() => {
+
+                        signupCTA.classList.remove(
+                            'hidden',
+                            'opacity-0',
+                            'translate-y-6'
+                        );
+
+                        signupCTA.style.opacity = '1';
+
+                        signupCTA.style.transform = 'translateY(0)';
+                    });
+
+                    lucide.createIcons();
+
+                }, 1200);
+
+            }, 1100);
+        });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Copy Button
+    |--------------------------------------------------------------------------
+    */
+
+    const copyBtn = document.getElementById('copyBtn');
+
+    if (copyBtn) {
+
+        copyBtn.addEventListener('click', async () => {
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    generatedLink.innerText
+                );
+
+                toast.classList.remove(
+                    'opacity-0',
+                    'translate-y-4'
+                );
+
+                toast.classList.add(
+                    'opacity-100'
+                );
+
+                setTimeout(() => {
+
+                    toast.classList.add('opacity-0');
+
+                }, 2200);
+
+            } catch (e) {
+
+                console.error(e);
             }
         });
-    </script>
+    }
+
+});
+
+</script>
 </body>
+
 </html>
