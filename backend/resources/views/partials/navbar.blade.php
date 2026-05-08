@@ -36,7 +36,7 @@
     <div class="flex items-center gap-3 md:gap-5">
 
         <!-- CREATE BUTTON -->
-        <button
+        {{-- <button
             onclick="openCreateModal()"
             class="hidden sm:flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-accent/20"
         >
@@ -48,7 +48,7 @@
 
             <span>Create New</span>
 
-        </button>
+        </button> --}}
 
         <!-- DIVIDER -->
         <div class="h-8 w-px bg-border"></div>
