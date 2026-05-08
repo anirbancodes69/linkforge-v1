@@ -44,8 +44,9 @@ class AuthController extends Controller
         if ($guestToken) {
 
             \App\Models\Link::where('guest_token', $guestToken)
+                ->whereNull('user_id')
                 ->update([
-                    'user_id' => $user->id,
+                    'user_id' => Auth::id(),
                     'guest_token' => null,
                 ]);
         }
@@ -54,9 +55,16 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return response()->json([
+
             'success' => true,
+
             'message' => 'Account created successfully',
+
             'user' => $user,
+
+            'redirect' => $user->is_admin
+                ? route('admin.dashboard')
+                : route('dashboard'),
         ]);
     }
 
@@ -93,6 +101,7 @@ class AuthController extends Controller
         if ($guestToken) {
 
             \App\Models\Link::where('guest_token', $guestToken)
+                ->whereNull('user_id')
                 ->update([
                     'user_id' => Auth::id(),
                     'guest_token' => null,
@@ -100,9 +109,16 @@ class AuthController extends Controller
         }
 
         return response()->json([
+
             'success' => true,
+
             'message' => 'Login successful',
+
             'user' => Auth::user(),
+
+            'redirect' => Auth::user()->is_admin
+                ? route('admin.dashboard')
+                : route('dashboard'),
         ]);
     }
 
