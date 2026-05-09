@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>DBA | Short Links. Powerful Insights.</title>
+    <title>WEBN | Short Links. Powerful Insights.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -114,7 +114,7 @@
                         class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12">
                         <i data-lucide="link-2" class="text-white w-5 h-5"></i>
                     </div>
-                    <span class="text-xl font-bold font-heading tracking-tight">DBA</span>
+                    <span class="text-xl font-bold font-heading tracking-tight">WEBN</span>
                 </a>
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
                     <a href="#features" class="hover:text-white transition-colors">Features</a>
@@ -477,7 +477,7 @@
                 </div>
                 <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight">Data that tells <br>a story.
                 </h2>
-                <p class="text-zinc-400 text-lg mb-8">Stop guessing. DBA provides industry-leading attribution
+                <p class="text-zinc-400 text-lg mb-8">Stop guessing. WEBN provides industry-leading attribution
                     data so you know exactly where your traffic is coming from.</p>
 
                 {{-- <div class="space-y-6">
@@ -546,7 +546,7 @@
             <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 blur-[100px]"></div>
             <div class="md:w-1/2 order-2 md:order-1">
                 <div class="bg-white p-8 rounded-3xl shadow-[0_0_50px_rgba(255,255,255,0.1)] w-fit mx-auto md:mx-0">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://devbyanirban.com&color=4f46e5" alt="QR Preview" class="w-48 h-48">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://webn.in&color=4f46e5" alt="QR Preview" class="w-48 h-48">
                 </div>
                 <div class="mt-8 flex gap-4 justify-center md:justify-start">
                     <div class="w-10 h-10 rounded-full bg-indigo-600 border-4 border-zinc-900 ring-1 ring-white/10 cursor-pointer"></div>
@@ -647,7 +647,7 @@
                     <i data-lucide="star" class="fill-current w-4 h-4"></i>
                     <i data-lucide="star" class="fill-current w-4 h-4"></i>
                 </div>
-                <p class="text-zinc-300 mb-6 italic">"DBA's API is incredibly robust. We integrated it into our marketing stack in under an hour and haven't looked back."</p>
+                <p class="text-zinc-300 mb-6 italic">"WEBN's API is incredibly robust. We integrated it into our marketing stack in under an hour and haven't looked back."</p>
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-full bg-zinc-800"></div>
                     <div>
@@ -715,7 +715,7 @@
 
                     Questions about
                     <br>
-                    DBA.
+                    WEBN.
 
                 </h2>
 
@@ -850,7 +850,7 @@
                     <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
 
                         Yes. You can create your own memorable aliases like
-                        devbyanirban.com/summer-sale instead of random characters.
+                        webn.in/summer-sale instead of random characters.
 
                     </div>
 
@@ -918,7 +918,7 @@
                         <h3
                             class="text-lg md:text-xl font-bold text-white mb-1">
 
-                            Is DBA mobile friendly?
+                            Is WEBN mobile friendly?
 
                         </h3>
 
@@ -946,7 +946,7 @@
                 <div
                     class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
 
-                    Absolutely. DBA is optimized for WhatsApp,
+                    Absolutely. WEBN is optimized for WhatsApp,
                     Instagram, mobile browsers, and fast redirects
                     across all devices.
 
@@ -1082,7 +1082,7 @@
 
                         <span class="text-2xl font-black font-heading tracking-tight text-white">
 
-                            DBA
+                            WEBN
 
                         </span>
 

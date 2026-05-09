@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Register | DBA</title>
+    <title>Register | WEBN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link
@@ -109,7 +109,7 @@
                                     data-lucide="link" class="w-4 h-4"></i></div>
                             <span class="text-xs font-bold">New Custom Alias</span>
                         </div>
-                        <div class="text-xs text-zinc-400 truncate">devbyanirban.com/summer-sale</div>
+                        <div class="text-xs text-zinc-400 truncate">webn.in/summer-sale</div>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                     <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
                         <i data-lucide="link-2" class="text-white w-5 h-5"></i>
                     </div>
-                    <span class="text-xl font-bold font-heading">DBA</span>
+                    <span class="text-xl font-bold font-heading">WEBN</span>
                 </div>
 
 
