@@ -6,7 +6,7 @@
                         <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center transition-transform group-hover:rotate-12">
                             <i data-lucide="link-2" class="text-white w-5 h-5"></i>
                         </div>
-                        <span class="text-xl font-bold font-heading tracking-tight">DBA</span>
+                        <span class="text-xl font-bold font-heading tracking-tight">WEBN</span>
                     </div>
                 </div>
 

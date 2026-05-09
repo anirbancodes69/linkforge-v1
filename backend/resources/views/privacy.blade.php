@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | DevByAnirban (DBA)</title>
+    <title>Privacy Policy | DevByAnirban (WEBN)</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
                 </div>
 
                 <span class="font-bold text-xl">
-                    DevByAnirban (DBA)
+                    DevByAnirban (WEBN)
                 </span>
             </a>
 
@@ -61,7 +61,7 @@
             </h1>
 
             <p class="text-zinc-400 text-lg max-w-2xl leading-relaxed">
-                Your privacy matters to us. This policy explains how DevByAnirban (DBA) collects,
+                Your privacy matters to us. This policy explains how DevByAnirban (WEBN) collects,
                 uses, and protects your information when using our platform.
             </p>
 
@@ -108,7 +108,7 @@
                 </h2>
 
                 <p class="text-zinc-400 leading-relaxed">
-                    DevByAnirban (DBA) tracks link visits to provide analytics insights.
+                    DevByAnirban (WEBN) tracks link visits to provide analytics insights.
                     This may include browser type, operating system, device category,
                     referral source, and timestamps.
                 </p>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms & Conditions | DevByAnirban (DBA)</title>
+    <title>Terms & Conditions | DevByAnirban (WEBN)</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
                 </div>
 
                 <span class="font-bold text-xl">
-                    DevByAnirban (DBA)
+                    DevByAnirban (WEBN)
                 </span>
             </a>
 
@@ -61,7 +61,7 @@
             </h1>
 
             <p class="text-zinc-400 text-lg max-w-2xl leading-relaxed">
-                These Terms govern your access to and use of the DevByAnirban (DBA) platform.
+                These Terms govern your access to and use of the DevByAnirban (WEBN) platform.
             </p>
 
             <p class="text-sm text-zinc-500 mt-6">
@@ -81,7 +81,7 @@
                 </h2>
 
                 <p class="text-zinc-400 leading-relaxed">
-                    By using DevByAnirban (DBA), you agree to comply with these Terms
+                    By using DevByAnirban (WEBN), you agree to comply with these Terms
                     and all applicable laws and regulations.
                 </p>
             </div>
@@ -92,7 +92,7 @@
                 </h2>
 
                 <p class="text-zinc-400 leading-relaxed">
-                    You may use DevByAnirban (DBA) to create shortened links,
+                    You may use DevByAnirban (WEBN) to create shortened links,
                     manage redirects, and access analytics features.
                 </p>
             </div>
@@ -103,7 +103,7 @@
                 </h2>
 
                 <p class="text-zinc-400 leading-relaxed">
-                    Users may not use DevByAnirban (DBA) for phishing, malware distribution,
+                    Users may not use DevByAnirban (WEBN) for phishing, malware distribution,
                     spam campaigns, illegal activities, deceptive practices,
                     or harmful content distribution.
                 </p>
@@ -138,7 +138,7 @@
                 </h2>
 
                 <p class="text-zinc-400 leading-relaxed">
-                    DevByAnirban (DBA) shall not be liable for any indirect,
+                    DevByAnirban (WEBN) shall not be liable for any indirect,
                     incidental, or consequential damages arising from
                     platform usage.
                 </p>
