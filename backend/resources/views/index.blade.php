@@ -226,8 +226,7 @@
                             </button>
                         </div> <!-- TRUST INDICATORS -->
                         <div class="flex flex-wrap items-center justify-center gap-6 mt-8 text-xs text-zinc-500">
-                            <div class="flex items-center gap-2"> <i data-lucide="zap"
-                                    class="w-4 h-4 text-indigo-400">
+                            <div class="flex items-center gap-2"> <i data-lucide="zap" class="w-4 h-4 text-indigo-400">
                                 </i> Lightning fast redirects </div>
                             <div class="flex items-center gap-2"> <i data-lucide="bar-chart-3"
                                     class="w-4 h-4 text-indigo-400"> </i> Real-time analytics </div>
@@ -258,9 +257,10 @@
                         <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-lg mx-auto"> <button
                                 id="copyBtn"
                                 class="h-14 w-full sm:w-auto px-8 rounded-2xl bg-white text-black font-bold hover:bg-zinc-200 transition-all hover:scale-[1.02] active:scale-[0.98]">
-                                Copy Link </button> <button
+                                Copy Link </button> <button id="openBtn"
                                 class="h-14 w-full sm:w-auto px-8 rounded-2xl glass border border-white/10 font-semibold hover:bg-white/5 transition-all">
-                                Open Link </button> </div>
+                                Open Link
+                            </button></div>
                         <!-- ===================================================== --> <!-- ANALYTICS PREVIEW -->
                         <!-- ===================================================== -->
                         <div id="analyticsPreview"
@@ -1320,6 +1320,59 @@
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
 
+            /*
+    |--------------------------------------------------------------------------
+    | Force Close Mobile Menu
+    |--------------------------------------------------------------------------
+    */
+
+            function closeMenu() {
+
+                if (!mobileMenu) {
+                    return;
+                }
+
+                mobileMenu.classList.add('hidden');
+
+                document.body.classList.remove('overflow-hidden');
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Close On Navigation
+            |--------------------------------------------------------------------------
+            */
+
+            // document.querySelectorAll('a').forEach(link => {
+
+            //     link.addEventListener('click', () => {
+
+            //         closeMenu();
+            //     });
+            // });
+
+            /*
+            |--------------------------------------------------------------------------
+            | Fix Mobile Browser Back Cache
+            |--------------------------------------------------------------------------
+            */
+
+            window.addEventListener('pageshow', () => {
+
+                closeMenu();
+            });
+
+            /*
+            |--------------------------------------------------------------------------
+            | Fix Browser Back
+            |--------------------------------------------------------------------------
+            */
+
+            window.addEventListener('popstate', () => {
+
+                closeMenu();
+            });
+
             function toggleMenu() {
 
                 mobileMenu.classList.toggle('hidden');
@@ -1447,8 +1500,33 @@
             const generatedLink = document.getElementById('generatedLink');
 
             const copyBtn = document.getElementById('copyBtn');
+            const openBtn = document.getElementById('openBtn');
 
             const toast = document.getElementById('toast');
+
+
+            /*
+        |--------------------------------------------------------------------------
+        | Open Button
+        |--------------------------------------------------------------------------
+        */
+
+            if (openBtn) {
+
+                openBtn.addEventListener('click', () => {
+
+                    const url = generatedLink.innerText?.trim();
+
+                    if (!url) {
+
+                        showToast('No link available');
+
+                        return;
+                    }
+
+                    window.open(url, '_blank');
+                });
+            }
 
             /*
             |--------------------------------------------------------------------------
@@ -1472,8 +1550,23 @@
 
                 toast.innerText = message;
 
+                /*
+                |--------------------------------------------------------------------------
+                | Reset Previous Timeout
+                |--------------------------------------------------------------------------
+                */
+
+                clearTimeout(window.toastTimeout);
+
+                /*
+                |--------------------------------------------------------------------------
+                | Show
+                |--------------------------------------------------------------------------
+                */
+
                 toast.classList.remove(
                     'opacity-0',
+                    'pointer-events-none',
                     'translate-y-4'
                 );
 
@@ -1481,9 +1574,20 @@
                     'opacity-100'
                 );
 
-                setTimeout(() => {
+                /*
+                |--------------------------------------------------------------------------
+                | Hide Again
+                |--------------------------------------------------------------------------
+                */
 
-                    toast.classList.add('opacity-0');
+                window.toastTimeout = setTimeout(() => {
+
+                    toast.classList.remove('opacity-100');
+
+                    toast.classList.add(
+                        'opacity-0',
+                        'pointer-events-none'
+                    );
 
                 }, 2500);
             }
