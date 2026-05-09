@@ -2,13 +2,17 @@
 <html lang="en" class="scroll-smooth">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>WEBN | Short Links. Powerful Insights.</title>
+
+    @include('brand-meta')
+    @include('brand-meta', [
+        'title' => 'WEBN — Modern URL Shortener',
+        'description' => 'Shorten, track, and manage links instantly with WEBN.',
+    ])
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -109,12 +113,15 @@
     <nav class="fixed top-0 w-full z-50 nav-blur border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-10">
-                <a href="{{ route('index') }}" class="flex items-center gap-2 group">
-                    <div
-                        class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12">
-                        <i data-lucide="link-2" class="text-white w-5 h-5"></i>
-                    </div>
-                    <span class="text-xl font-bold font-heading tracking-tight">WEBN</span>
+                <a href="{{ route('index') }}" class="flex items-center gap-3 group">
+
+                    <img src="{{ asset('assets/images/logo1.png') }}" alt="WEBN Logo"
+                        class="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-105">
+
+                    <span class="text-xl font-bold font-heading tracking-tight">
+                        WEBN
+                    </span>
+
                 </a>
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
                     <a href="#features" class="hover:text-white transition-colors">Features</a>
@@ -158,9 +165,9 @@
             {{-- <a href="#" onclick="toggleMenu()">Docs</a> --}}
             <hr class="border-white/10">
             @auth
-            <a href="{{ route('dashboard') }}" class="text-indigo-400">Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="text-indigo-400">Dashboard</a>
             @else
-            <a href="{{ route('login') }}" class="text-indigo-400">Log In</a>
+                <a href="{{ route('login') }}" class="text-indigo-400">Log In</a>
             @endauth
         </div>
     </div>
@@ -219,7 +226,8 @@
                             </button>
                         </div> <!-- TRUST INDICATORS -->
                         <div class="flex flex-wrap items-center justify-center gap-6 mt-8 text-xs text-zinc-500">
-                            <div class="flex items-center gap-2"> <i data-lucide="zap" class="w-4 h-4 text-indigo-400">
+                            <div class="flex items-center gap-2"> <i data-lucide="zap"
+                                    class="w-4 h-4 text-indigo-400">
                                 </i> Lightning fast redirects </div>
                             <div class="flex items-center gap-2"> <i data-lucide="bar-chart-3"
                                     class="w-4 h-4 text-indigo-400"> </i> Real-time analytics </div>
@@ -1090,42 +1098,39 @@
 
                     <p class="text-zinc-400 text-sm md:text-base leading-relaxed max-w-md mb-8">
 
-                        Create short links, generate QR codes,
-                        and track every click with beautiful
-                        real-time analytics.
-
+                        Create short links and track every click with Privacy-focused analytics and modern
+                        infrastructure.
                     </p>
 
                     <!-- SOCIALS -->
 
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-4 mt-6">
 
-                        <a href="#"
-                            class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+                        <!-- GitHub -->
+                        <a href="https://github.com/anirbancodes69" target="_blank"
+                            class="text-zinc-500 hover:text-white transition-colors duration-300">
 
-                            <i data-lucide="twitter" class="w-5 h-5">
-                            </i>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor"
+                                viewBox="0 0 24 24">
 
+                                <path
+                                    d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.2 11.4c.6.1.8-.3.8-.6v-2.3c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.8-.7 2.2-1 .1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.4-5.5-6A4.7 4.7 0 014 5.7a4.3 4.3 0 01.1-3.2s1-.3 3.3 1.2a11.3 11.3 0 016 0C15.9 2.2 17 2.5 17 2.5a4.3 4.3 0 01.1 3.2 4.7 4.7 0 011.2 3.3c0 4.6-2.8 5.6-5.5 6 .4.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
                         </a>
 
-                        <a href="#"
-                            class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
+                        <!-- LinkedIn -->
+                        <a href="https://linkedin.com/in/anirban-bhowmick/" target="_blank"
+                            class="text-zinc-500 hover:text-white transition-colors duration-300">
 
-                            <i data-lucide="github" class="w-5 h-5">
-                            </i>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor"
+                                viewBox="0 0 24 24">
 
-                        </a>
-
-                        <a href="#"
-                            class="w-11 h-11 rounded-2xl glass border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-indigo-500/30 hover:bg-indigo-500/10 transition-all duration-300">
-
-                            <i data-lucide="linkedin" class="w-5 h-5">
-                            </i>
-
+                                <path
+                                    d="M22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.44a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM20.45 20.45h-3.56v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.67H9.32V9h3.42v1.56h.05c.48-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.45v6.3z" />
+                            </svg>
                         </a>
 
                     </div>
-
                 </div>
 
                 <!-- PRODUCT -->
@@ -1254,28 +1259,28 @@
 
             <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
 
-                <p class="text-zinc-500 text-sm">
-
-                    © 2026 DevByAnirban. All rights reserved.
-
+                <p class="text-zinc-500 text-sm leading-relaxed max-w-sm">
+                    Built independently by
+                    <span class="text-zinc-300 font-medium">Anirban Bhowmick</span>.
+                    WebN is focused on modern, lightweight link management and analytics.
                 </p>
 
                 <div class="flex items-center gap-3 text-xs text-zinc-600 uppercase tracking-[0.2em]">
 
                     <span>
-                        Fast redirects
+                        SSL Secured
+                    </span>
+
+                    <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+
+                    <span>
+                        Hosted on AWS
                     </span>
 
                     <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
 
                     <span>
                         Real-time analytics
-                    </span>
-
-                    <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
-
-                    <span>
-                        Mobile optimized
                     </span>
 
                 </div>
