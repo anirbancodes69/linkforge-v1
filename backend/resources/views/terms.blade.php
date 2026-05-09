@@ -2,10 +2,10 @@
 <html lang="en" class="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms & Conditions | DevByAnirban (WEBN)</title>
-
+    @include('brand-meta', [
+        'title' => 'WEBN — Terms & Conditions',
+        'description' => 'Review the terms and conditions for using the DevByAnirban (WEBN) platform.',
+    ])
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 

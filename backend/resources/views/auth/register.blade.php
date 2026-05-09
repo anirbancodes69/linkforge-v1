@@ -2,10 +2,10 @@
 <html lang="en" class="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Register | WEBN</title>
+    @include('brand-meta', [
+        'title' => 'WEBN — Register for an Account',
+        'description' => 'Create your WEBN account to start managing your links and viewing analytics.',
+    ])
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link
@@ -85,11 +85,25 @@
             </div>
             <div class="relative z-10 w-full max-w-lg space-y-12 text-center">
                 <div class="space-y-4">
-                    <h2 class="text-4xl font-bold font-heading">ADB links that <span
-                            class="text-accent italic">convert.</span></h2>
-                    <p class="text-zinc-500 px-12">Join 5,000+ creators and businesses scaling their brand with
-                        advanced link management.</p>
-                </div>
+
+    <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Public MVP
+    </div>
+
+    <h2 class="text-4xl font-bold font-heading leading-tight">
+        Modern links that
+        <span class="text-accent italic">
+            perform.
+        </span>
+    </h2>
+
+    <p class="text-zinc-500 px-12 leading-relaxed">
+        Shorten, track, and manage links with a clean, lightweight platform built for modern creators and businesses.
+    </p>
+
+</div>
 
                 <div class="relative h-64">
                     <div class="glass p-6 rounded-3xl absolute top-0 left-1/4 w-64 shadow-2xl -rotate-6">
@@ -119,10 +133,16 @@
         <div class="flex-1 flex flex-col justify-center px-8 md:px-12 lg:px-24 xl:px-32 bg-surface">
             <div class="max-w-md w-full mx-auto auth-animate">
                 <div class="flex items-center gap-2 mb-8">
-                    <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-                        <i data-lucide="link-2" class="text-white w-5 h-5"></i>
-                    </div>
-                    <span class="text-xl font-bold font-heading">WEBN</span>
+                    <a href="{{ route('index') }}" class="flex items-center gap-3 group">
+
+                    <img src="{{ asset('assets/images/logo1.png') }}" alt="WEBN Logo"
+                        class="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-105">
+
+                    <span class="text-xl font-bold font-heading tracking-tight">
+                        WEBN
+                    </span>
+
+                </a>
                 </div>
 
 
@@ -240,10 +260,10 @@
         }
 
         /*
-    |--------------------------------------------------------------------------
-    | Password Toggle
-    |--------------------------------------------------------------------------
-    */
+        |--------------------------------------------------------------------------
+        | Password Toggle
+        |--------------------------------------------------------------------------
+        */
 
         const togglePasswordBtn = document.getElementById('togglePassword');
 
