@@ -2,10 +2,10 @@
 <html lang="en" class="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Login | WEBN</title>
+    @include('brand-meta', [
+        'title' => 'WEBN — Login to Your Dashboard',
+        'description' => 'Access your WEBN dashboard by logging in with your credentials. Manage your links and view analytics.',
+    ])
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link
@@ -84,11 +84,16 @@
             <div class="max-w-md w-full mx-auto auth-animate">
                 <!-- Logo -->
                 <div class="flex items-center gap-2 mb-10">
-                    <div
-                        class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center shadow-lg shadow-accent/25">
-                        <i data-lucide="link-2" class="text-white w-6 h-6"></i>
-                    </div>
-                    <span class="text-2xl font-bold font-heading tracking-tight">WEBN</span>
+                    <a href="{{ route('index') }}" class="flex items-center gap-3 group">
+
+                    <img src="{{ asset('assets/images/logo1.png') }}" alt="WEBN Logo"
+                        class="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-105">
+
+                    <span class="text-xl font-bold font-heading tracking-tight">
+                        WEBN
+                    </span>
+
+                </a>
                 </div>
 
                 <a href="{{ route('index') }}"
