@@ -5,7 +5,7 @@
 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
     <div>
         <h1 class="text-2xl md:text-3xl font-bold font-heading">
-            Welcome, {{ Auth::user()->name }} 👋
+            Welcome, {{ Auth::user()->name }}
         </h1>
     </div>
 </div>
