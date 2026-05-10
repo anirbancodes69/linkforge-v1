@@ -33,22 +33,28 @@ class LinkController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validate(
+            [
 
-            'original_url' => [
-                'required',
-                'max:2048',
-                'regex:/^(https?:\/\/)[^\s$.?#].[^\s]*$/i'
-            ],
+                'original_url' => [
+                    'required',
+                    'max:2048',
+                    'regex:/^(https?:\/\/)[^\s$.?#].[^\s]*$/i'
+                ],
 
-            'custom_alias' => [
-                'nullable',
-                'alpha_dash',
-                'min:3',
-                'max:50',
-                'unique:links,custom_alias',
+                'custom_alias' => [
+                    'nullable',
+                    'regex:/^[A-Za-z0-9_-]+$/',
+                    'min:3',
+                    'max:50',
+                    'unique:links,custom_alias',
+                ],
             ],
-        ]);
+            [
+                'custom_alias.regex' =>
+                'Alias may only contain letters, numbers, hyphens (-), and underscores (_).',
+            ]
+        );
 
         /*
     |--------------------------------------------------------------------------
@@ -150,21 +156,28 @@ class LinkController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $validated = $request->validate([
-            'original_url' => [
-                'required',
-                'max:2048',
-                'regex:/^(https?:\/\/)[^\s$.?#].[^\s]*$/i'
-            ],
+        $validated = $request->validate(
+            [
+                'original_url' => [
+                    'required',
+                    'max:2048',
+                    'regex:/^(https?:\/\/)[^\s$.?#].[^\s]*$/i'
+                ],
 
-            'custom_alias' => [
-                'nullable',
-                'alpha_dash',
-                'min:3',
-                'max:50',
-                'unique:links,custom_alias,' . $link->id,
+                'custom_alias' => [
+                    'nullable',
+                    'regex:/^[A-Za-z0-9_-]+$/',
+                    'min:3',
+                    'max:50',
+                    'unique:links,custom_alias,' . $link->id,
+                ],
+
             ],
-        ]);
+            [
+                'custom_alias.regex' =>
+                'Alias may only contain letters, numbers, hyphens (-), and underscores (_).',
+            ]
+        );
 
         /*
         |--------------------------------------------------------------------------

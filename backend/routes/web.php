@@ -162,7 +162,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/{code}', RedirectController::class)
-    ->where('code', '[A-Za-z0-9]+');
+    ->where('code', '[A-Za-z0-9_-]+');
 
 /*
 |--------------------------------------------------------------------------
