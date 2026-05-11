@@ -118,6 +118,20 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        $cities = LinkVisit::selectRaw("
+                city,
+                COUNT(*) as total
+            ")
+            ->whereHas('link', function ($q) use ($user) {
+
+                $q->where('user_id', $user->id);
+            })
+            ->whereNotNull('city')
+            ->groupBy('city')
+            ->orderByDesc('total')
+            ->take(5)
+            ->get();
+
         return response()->json([
 
             'stats' => [
@@ -138,6 +152,8 @@ class DashboardController extends Controller
             'devices' => $devices,
 
             'countries' => $countries,
+
+            'cities' => $cities,
         ]);
     }
 }

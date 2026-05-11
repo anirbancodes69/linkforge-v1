@@ -88,6 +88,8 @@ async function loadDashboard() {
 
         renderCountries(response.countries);
 
+        renderCities(response.cities);
+
     } catch (error) {
 
         console.error(error);
@@ -513,6 +515,54 @@ function renderCountries(countries) {
 
                     <span class="text-sm font-medium">
                         ${country.country}
+                    </span>
+
+                </div>
+
+                <span class="text-sm font-bold">
+                    ${percent}%
+                </span>
+
+            </div>
+        `;
+    });
+}
+
+function renderCities(cities) {
+
+    const container =
+        document.getElementById('topCities');
+
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (!cities.length) {
+
+        container.innerHTML = `
+            <p class="text-sm text-zinc-500">
+                No city data yet
+            </p>
+        `;
+
+        return;
+    }
+
+    const total =
+        cities.reduce((sum, item) => sum + item.total, 0);
+
+    cities.forEach(city => {
+
+        const percent =
+            Math.round((city.total / total) * 100);
+
+        container.innerHTML += `
+            <div class="flex items-center justify-between">
+
+                <div class="flex items-center gap-3">
+
+                    <span class="text-sm font-medium">
+                        ${city.city}
                     </span>
 
                 </div>
