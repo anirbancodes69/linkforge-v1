@@ -251,7 +251,7 @@
         </div>
 
         <!-- Top Locations -->
-        {{-- <div class="glass p-6 rounded-2xl">
+        <div class="glass p-6 rounded-2xl">
 
             <h3 class="font-bold mb-6">
                 Top Locations
@@ -260,7 +260,7 @@
             <div id="topCountries" class="space-y-5">
             </div>
 
-        </div> --}}
+        </div>
 
     </div>
 
