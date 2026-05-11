@@ -7,6 +7,7 @@ use App\Models\Link;
 use Illuminate\Http\Request;
 use App\Models\LinkVisit;
 use Jenssegers\Agent\Agent;
+use Stevebauman\Location\Facades\Location;
 
 class RedirectController extends Controller
 {
@@ -59,6 +60,8 @@ class RedirectController extends Controller
 
         $agent = new Agent();
 
+        $position = Location::get($request->ip());
+
         /*
         |--------------------------------------------------------------------------
         | Store Visit
@@ -82,6 +85,10 @@ class RedirectController extends Controller
             'referrer' => $request->headers->get('referer'),
 
             'visited_at' => now(),
+
+            'country' => $position ? $position->countryName : null,
+            
+            'city' => $position ? $position->cityName : null,
         ]);
 
         /*
