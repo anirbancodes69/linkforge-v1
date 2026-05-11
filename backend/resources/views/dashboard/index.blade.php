@@ -254,10 +254,21 @@
         <div class="glass p-6 rounded-2xl">
 
             <h3 class="font-bold mb-6">
-                Top Locations
+                Top Countries
             </h3>
 
             <div id="topCountries" class="space-y-5">
+            </div>
+
+        </div>
+
+        <div class="glass p-6 rounded-2xl">
+
+            <h3 class="font-bold mb-6">
+                Top Cities
+            </h3>
+
+            <div id="topCities" class="space-y-5">
             </div>
 
         </div>
