@@ -41,12 +41,15 @@ Route::middleware('guest')->group(function () {
             ->name('register');
     });
 
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::middleware('throttle:auth')->group(function () {
 
-    Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/register', [AuthController::class, 'register']);
+
+        Route::post('/login', [AuthController::class, 'login']);
+    });
 });
 
-Route::prefix('api')->group(function () {
+Route::middleware('throttle:short-links')->prefix('api')->group(function () {
     Route::post('/links', [LinkController::class, 'store']);
 });
 /*
