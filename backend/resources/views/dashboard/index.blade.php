@@ -263,15 +263,15 @@
                 <!-- Tabs -->
                 <div class="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
 
-                    <button class="analytics-tab active" data-tab="platforms">
+                    {{-- <button class="analytics-tab active" data-tab="platforms">
                         Platforms
                     </button>
 
                     <button class="analytics-tab" data-tab="browsers">
                         Browsers
-                    </button>
+                    </button> --}}
 
-                    <button class="analytics-tab" data-tab="countries">
+                    <button class="analytics-tab active" data-tab="countries">
                         Countries
                     </button>
 

@@ -201,9 +201,9 @@ class DashboardController extends Controller
 
             'devices' => $devices,
 
-            'os' => $os,
+            // 'os' => $os,
 
-            'browsers' => $browsers,
+            // 'browsers' => $browsers,
 
             'countries' => $countries,
 
