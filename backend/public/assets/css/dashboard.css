@@ -1,0 +1,42 @@
+        .analytics-tab {
+
+            padding: 0.65rem 1rem;
+
+            border-radius: 0.9rem;
+
+            background: rgba(255, 255, 255, 0.05);
+
+            color: rgb(161 161 170);
+
+            font-size: 0.875rem;
+
+            white-space: nowrap;
+
+            transition: all 0.2s ease;
+        }
+
+        .analytics-tab:hover {
+
+            background: rgba(255, 255, 255, 0.08);
+
+            color: white;
+        }
+
+        .analytics-tab.active {
+
+            background: #6d5dfc;
+
+            color: white;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+
+            display: none;
+        }
+
+        .scrollbar-hide {
+
+            -ms-overflow-style: none;
+
+            scrollbar-width: none;
+        }

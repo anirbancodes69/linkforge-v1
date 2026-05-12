@@ -86,9 +86,7 @@ async function loadDashboard() {
 
         renderDeviceChart(response.devices);
 
-        renderCountries(response.countries);
-
-        renderCities(response.cities);
+        renderAnalyticsInsights(response);
 
     } catch (error) {
 
@@ -476,103 +474,132 @@ function renderDeviceChart(devices) {
 
 /*
 |--------------------------------------------------------------------------
-| Render Countries
+| Analytics Insights
 |--------------------------------------------------------------------------
 */
 
-function renderCountries(countries) {
+function renderAnalyticsInsights(data) {
 
-    const container =
-        document.getElementById('topCountries');
+    const analyticsData = {
 
-    if (!container) return;
+        platforms: data.os || [],
 
-    container.innerHTML = '';
+        browsers: data.browsers || [],
 
-    if (!countries.length) {
+        countries: data.countries || [],
 
-        container.innerHTML = `
-            <p class="text-sm text-zinc-500">
-                No country data yet
-            </p>
-        `;
+        cities: data.cities || []
+    };
 
-        return;
-    }
+    function renderAnalyticsList(items, type) {
 
-    const total =
-        countries.reduce((sum, item) => sum + item.total, 0);
+        const container =
+            document.getElementById('analyticsContent');
 
-    countries.forEach(country => {
+        if (!container) {
+            return;
+        }
 
-        const percent =
-            Math.round((country.total / total) * 100);
+        if (!items.length) {
 
-        container.innerHTML += `
-            <div class="flex items-center justify-between">
+            container.innerHTML = `
+                <div class="flex items-center justify-center h-[250px]">
 
-                <div class="flex items-center gap-3">
-
-                    <span class="text-sm font-medium">
-                        ${country.country}
-                    </span>
+                    <p class="text-sm text-zinc-500">
+                        No data available yet
+                    </p>
 
                 </div>
+            `;
 
-                <span class="text-sm font-bold">
-                    ${percent}%
-                </span>
+            return;
+        }
 
-            </div>
-        `;
-    });
-}
+        const total =
+            items.reduce((sum, item) => sum + item.total, 0);
 
-function renderCities(cities) {
+        container.innerHTML = '';
 
-    const container =
-        document.getElementById('topCities');
+        items.slice(0, 6).forEach(item => {
 
-    if (!container) return;
+            const percent =
+                total > 0
+                    ? Math.round((item.total / total) * 100)
+                    : 0;
 
-    container.innerHTML = '';
+            let label = '';
 
-    if (!cities.length) {
+            if (type === 'platforms') {
+                label = item.platform;
+            }
 
-        container.innerHTML = `
-            <p class="text-sm text-zinc-500">
-                No city data yet
-            </p>
-        `;
+            if (type === 'browsers') {
+                label = item.browser;
+            }
 
-        return;
-    }
+            if (type === 'countries') {
+                label = item.country;
+            }
 
-    const total =
-        cities.reduce((sum, item) => sum + item.total, 0);
+            if (type === 'cities') {
+                label = item.city;
+            }
 
-    cities.forEach(city => {
+            container.innerHTML += `
 
-        const percent =
-            Math.round((city.total / total) * 100);
+                <div class="mb-5">
 
-        container.innerHTML += `
-            <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between mb-2">
 
-                <div class="flex items-center gap-3">
+                        <span class="text-sm text-zinc-300 truncate pr-4">
+                            ${label || 'Unknown'}
+                        </span>
 
-                    <span class="text-sm font-medium">
-                        ${city.city}
-                    </span>
+                        <span class="text-sm font-bold text-white">
+                            ${percent}%
+                        </span>
+
+                    </div>
+
+                    <div class="h-2 rounded-full bg-white/5 overflow-hidden">
+
+                        <div
+                            class="h-full bg-accent rounded-full transition-all duration-500"
+                            style="width:${percent}%"
+                        ></div>
+
+                    </div>
 
                 </div>
+            `;
+        });
+    }
 
-                <span class="text-sm font-bold">
-                    ${percent}%
-                </span>
+    renderAnalyticsList(
+        analyticsData.countries,
+        'countries'
+    );
 
-            </div>
-        `;
+    document.querySelectorAll('.analytics-tab').forEach(tab => {
+
+        tab.addEventListener('click', () => {
+
+            document
+                .querySelectorAll('.analytics-tab')
+                .forEach(btn => {
+
+                    btn.classList.remove('active');
+                });
+
+            tab.classList.add('active');
+
+            const key = tab.dataset.tab;
+
+            renderAnalyticsList(
+                analyticsData[key],
+                key
+            );
+        });
     });
 }
 

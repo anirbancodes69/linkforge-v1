@@ -100,6 +100,44 @@ class DashboardController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | OS
+        |--------------------------------------------------------------------------
+        */
+
+        $os = LinkVisit::selectRaw("
+                platform,
+                COUNT(*) as total
+            ")
+            ->whereHas('link', function ($q) use ($user) {
+
+                $q->where('user_id', $user->id);
+            })
+            ->groupBy('platform')
+            ->orderByDesc('total')
+            ->get();
+
+        
+        /*
+        |--------------------------------------------------------------------------
+        | Browsers
+        |--------------------------------------------------------------------------
+        */
+
+        $browsers = LinkVisit::selectRaw("
+                browser,
+                COUNT(*) as total
+            ")
+            ->whereHas('link', function ($q) use ($user) {
+
+                $q->where('user_id', $user->id);
+            })
+            ->groupBy('browser')
+            ->orderByDesc('total')
+            ->get();
+
+
+        /*
+        |--------------------------------------------------------------------------
         | Countries
         |--------------------------------------------------------------------------
         */
@@ -118,6 +156,12 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Cities
+        |--------------------------------------------------------------------------
+        */
+
         $cities = LinkVisit::selectRaw("
                 city,
                 COUNT(*) as total
@@ -131,6 +175,12 @@ class DashboardController extends Controller
             ->orderByDesc('total')
             ->take(5)
             ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Response
+        |--------------------------------------------------------------------------
+        */
 
         return response()->json([
 
@@ -150,6 +200,10 @@ class DashboardController extends Controller
             'click_chart' => $chart,
 
             'devices' => $devices,
+
+            // 'os' => $os,
+
+            // 'browsers' => $browsers,
 
             'countries' => $countries,
 
