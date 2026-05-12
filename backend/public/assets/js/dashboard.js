@@ -576,8 +576,8 @@ function renderAnalyticsInsights(data) {
     }
 
     renderAnalyticsList(
-        analyticsData.platforms,
-        'platforms'
+        analyticsData.countries,
+        'countries'
     );
 
     document.querySelectorAll('.analytics-tab').forEach(tab => {
