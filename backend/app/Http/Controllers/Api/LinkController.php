@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ScanUrlJob;
 use App\Models\Link;
+use App\Services\UrlSafetyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -31,7 +33,7 @@ class LinkController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function store(Request $request)
+    public function store(Request $request, UrlSafetyService $urlSafetyService)
     {
         $validated = $request->validate(
             [
@@ -39,7 +41,7 @@ class LinkController extends Controller
                 'original_url' => [
                     'required',
                     'max:2048',
-                    'regex:/^(https?:\/\/)[^\s$.?#].[^\s]*$/i'
+                    'url:http,https'
                 ],
 
                 'custom_alias' => [
@@ -55,6 +57,18 @@ class LinkController extends Controller
                 'Alias may only contain letters, numbers, hyphens (-), and underscores (_).',
             ]
         );
+
+        if (
+            $urlSafetyService->failsLightweightChecks(
+                $validated['original_url']
+            )
+        ) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Unsafe URL detected.',
+            ], 422);
+        }
 
         /*
     |--------------------------------------------------------------------------
@@ -111,6 +125,8 @@ class LinkController extends Controller
             'custom_alias' => $validated['custom_alias'] ?? null,
         ]);
 
+        ScanUrlJob::dispatch($link);
+
         /*
     |--------------------------------------------------------------------------
     | Response
@@ -137,7 +153,7 @@ class LinkController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function update(Request $request, Link $link)
+    public function update(Request $request, Link $link, UrlSafetyService $urlSafetyService)
     {
         /*
         |--------------------------------------------------------------------------
@@ -161,7 +177,7 @@ class LinkController extends Controller
                 'original_url' => [
                     'required',
                     'max:2048',
-                    'regex:/^(https?:\/\/)[^\s$.?#].[^\s]*$/i'
+                    'url:http,https'
                 ],
 
                 'custom_alias' => [
@@ -178,6 +194,19 @@ class LinkController extends Controller
                 'Alias may only contain letters, numbers, hyphens (-), and underscores (_).',
             ]
         );
+
+        if (
+            $urlSafetyService->failsLightweightChecks(
+                $validated['original_url']
+            )
+        ) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Unsafe URL detected.',
+            ], 422);
+        }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -210,6 +239,8 @@ class LinkController extends Controller
 
             'custom_alias' => $validated['custom_alias'] ?? null,
         ]);
+
+        ScanUrlJob::dispatch($link);
 
         return response()->json([
             'success' => true,

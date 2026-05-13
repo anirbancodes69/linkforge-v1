@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\StoreLinkVisitJob;
 use App\Models\Link;
 use Illuminate\Http\Request;
-use App\Models\LinkVisit;
 use Jenssegers\Agent\Agent;
 use Stevebauman\Location\Facades\Location;
 
@@ -54,42 +54,24 @@ class RedirectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Agent Detection
+        | Safety Check
         |--------------------------------------------------------------------------
         */
 
-        $agent = new Agent();
+        if ($link->safety_status === 'malicious') {
 
-        $position = Location::get($request->ip());
+            abort(403, 'Unsafe destination blocked');
+        }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Store Visit
-        |--------------------------------------------------------------------------
-        */
+        if ($link->safety_status === 'pending') {
 
-        LinkVisit::create([
-
-            'link_id' => $link->id,
-
-            'ip_address' => $request->ip(),
-
-            'browser' => $agent->browser(),
-
-            'device' => $this->detectDeviceType($agent),
-
-            'platform' => $agent->platform(),
-
-            'user_agent' => $request->userAgent(),
-
-            'referrer' => $request->headers->get('referer'),
-
-            'visited_at' => now(),
-
-            'country' => $position ? $position->countryName : null,
-            
-            'city' => $position ? $position->cityName : null,
-        ]);
+            return response()->view(
+                'links.pending-scan',
+                [
+                    'link' => $link,
+                ]
+            );
+        }
 
         /*
         |--------------------------------------------------------------------------
@@ -101,30 +83,26 @@ class RedirectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Redirect
+        | Store Visit (Async)
         |--------------------------------------------------------------------------
         */
 
+        StoreLinkVisitJob::dispatch(
+            $link,
+            $request->ip(),
+            $request->userAgent(),
+            $request->headers->get('referer')
+        );
+
+        /*
+         |--------------------------------------------------------------------------
+         | Check for Password Protection
+         |--------------------------------------------------------------------------
+         */
+
+        /* |-------------------------------------------------------------------------- 
+        | Safe Redirect |
+        -------------------------------------------------------------------------- */
         return redirect()->away($link->original_url);
-    }
-
-    private function detectDeviceType(Agent $agent): string
-    {
-        if ($agent->isTablet()) {
-
-            return 'Tablet';
-        }
-
-        if ($agent->isMobile()) {
-
-            return 'Mobile';
-        }
-
-        if ($agent->isDesktop()) {
-
-            return 'Desktop';
-        }
-
-        return 'Other';
     }
 }
