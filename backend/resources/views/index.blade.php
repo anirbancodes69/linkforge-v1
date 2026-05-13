@@ -193,12 +193,12 @@
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span> </span> Real-time
                     link analytics
                 </div> <!-- Heading -->
-                <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[0.95] mb-6 max-w-5xl"> Shorten and
-                    <span class="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent"> track
-                    </span> every link instantly.
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[0.95] mb-6 max-w-5xl"> Create short
+                    <span class="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent"> links
+                    </span> with real-time insights.
                 </h1> <!-- Subtext -->
-                <p class="text-zinc-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-14"> Built for creators,
-                    marketers, and businesses sharing links on WhatsApp, Instagram, and beyond. </p>
+                <p class="text-zinc-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-14"> Track clicks, devices,
+                    locations, and traffic sources instantly — all from one modern link platform. </p>
                 <!-- ===================================================== --> <!-- MAIN INTERACTIVE CONTAINER -->
                 <!-- ===================================================== -->
                 <div id="mainCard"
@@ -209,12 +209,12 @@
                         <div class="flex flex-col gap-4"> <!-- URL INPUT -->
                             <div class="relative"> <i data-lucide="link-2"
                                     class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500"> </i> <input
-                                    id="urlInput" type="text" placeholder="Paste your long URL here..."
+                                    id="urlInput" type="text" placeholder="Paste a long URL to shorten and track..."
                                     class="w-full h-16 bg-white/5 border border-white/10 rounded-2xl pl-14 pr-5 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all text-lg">
                             </div> <!-- ALIAS -->
                             <div class="relative"> <i data-lucide="sparkles"
                                     class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500"> </i> <input
-                                    id="aliasInput" type="text" placeholder="custom-alias (optional)"
+                                    id="aliasInput" type="text" placeholder="Custom short link (optional)"
                                     class="w-full h-14 bg-white/5 border border-white/10 rounded-2xl pl-14 pr-5 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all">
                             </div> <!-- CTA --> <button id="createBtn"
                                 class="group relative overflow-hidden h-16 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold text-lg shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
@@ -227,9 +227,9 @@
                         </div> <!-- TRUST INDICATORS -->
                         <div class="flex flex-wrap items-center justify-center gap-6 mt-8 text-xs text-zinc-500">
                             <div class="flex items-center gap-2"> <i data-lucide="zap" class="w-4 h-4 text-indigo-400">
-                                </i> Lightning fast redirects </div>
-                            <div class="flex items-center gap-2"> <i data-lucide="bar-chart-3"
-                                    class="w-4 h-4 text-indigo-400"> </i> Real-time analytics </div>
+                                </i> Fast redirects </div>
+                            <div class="flex items-center gap-2"> <i data-lucide="shield-check"
+                                    class="w-4 h-4 text-indigo-400"> </i> No Signup required </div>
                             <div class="flex items-center gap-2"> <i data-lucide="smartphone"
                                     class="w-4 h-4 text-indigo-400"> </i> Mobile friendly </div>
                         </div>
@@ -280,7 +280,7 @@
 
                                     <div class="text-left">
 
-                                        <h3 class="text-xl font-bold mb-4"> Your analytics are already being collected
+                                        <h3 class="text-xl font-bold mb-4"> Your analytics are already active.
                                         </h3>
 
                                         <p class="text-zinc-400 leading-relaxed">
@@ -407,9 +407,9 @@
     <!-- Features Section -->
     <section id="features" class="py-32 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-20">
-            <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Enterprise links for everyone</h2>
-            <p class="text-zinc-500 max-w-xl mx-auto">Powerful features to help you grow your brand and understand your
-                audience.</p>
+            <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Smarter links with built-in analytics.</h2>
+            <p class="text-zinc-500 max-w-xl mx-auto">Create short links, track clicks in real time, and understand
+                where your traffic comes from.</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
@@ -419,20 +419,20 @@
                     class="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 text-indigo-400 group-hover:scale-110 transition-transform">
                     <i data-lucide="zap"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Smart Shortening</h3>
-                <p class="text-zinc-500 leading-relaxed">Instantly shorten links and add custom back-halves to boost
-                    click-through rates by up to 34%.</p>
+                <h3 class="text-xl font-bold mb-3">Smart Link Shortening</h3>
+                <p class="text-zinc-500 leading-relaxed">Create clean, memorable short links with optional custom
+                    aliases and fast redirects.</p>
             </div>
 
             <!-- Feature Card 2 -->
             <div class="reveal group glass p-8 rounded-[2rem] hover:border-purple-500/40 transition-all duration-500">
                 <div
                     class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition-transform">
-                    <i data-lucide="qr-code"></i>
+                    <i data-lucide="shield"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">QR Code Studio</h3>
-                <p class="text-zinc-500 leading-relaxed">Generate beautiful, trackable QR codes for print and digital
-                    with custom colors and branding.</p>
+                <h3 class="text-xl font-bold mb-3">Privacy-Focused Tracking</h3>
+                <p class="text-zinc-500 leading-relaxed">Get useful analytics without invasive tracking or bloated
+                    dashboards.</p>
             </div>
 
             <!-- Feature Card 3 -->
@@ -442,8 +442,8 @@
                     <i data-lucide="bar-chart-3"></i>
                 </div>
                 <h3 class="text-xl font-bold mb-3">Real-time Analytics</h3>
-                <p class="text-zinc-500 leading-relaxed">Dive deep into click data. Track geography, devices, and
-                    referral sources in milliseconds.</p>
+                <p class="text-zinc-500 leading-relaxed">Track clicks by device, country, browser, and referral source
+                    in real time.</p>
             </div>
 
             <!-- Feature Card 4 -->
@@ -483,31 +483,35 @@
                     <i data-lucide="pie-chart" class="w-5 h-5"></i>
                     <span>ANALYTICS ENGINE</span>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight">Data that tells <br>a story.
+                <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight">See where every click
+                    <br>comes from.
                 </h2>
-                <p class="text-zinc-400 text-lg mb-8">Stop guessing. WEBN provides industry-leading attribution
-                    data so you know exactly where your traffic is coming from.</p>
+                <p class="text-zinc-400 text-lg mb-8">Track devices, locations, browsers, and referral sources in real
+                    time with clean, modern analytics.</p>
 
-                {{-- <div class="space-y-6">
+                <div class="space-y-6">
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center mt-1">
+                            <div class="w-2 h-2 rounded-full bg-indigo-500"></div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Real-Time Insights</h4>
+                            <p class="text-zinc-500 text-sm">Monitor clicks instantly with live analytics across
+                                devices and traffic sources.</p>
+                        </div>
+                    </div>
                     <div class="flex items-start gap-4">
                         <div class="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center mt-1">
                             <div class="w-2 h-2 rounded-full bg-indigo-500"></div>
                         </div>
                         <div>
                             <h4 class="font-bold">Privacy-First Tracking</h4>
-                            <p class="text-zinc-500 text-sm">GDPR & CCPA compliant tracking without compromising on depth.</p>
+                            <p class="text-zinc-500 text-sm">Understand your audience with lightweight analytics
+                                designed for clarity and simplicity.</p>
                         </div>
                     </div>
-                    <div class="flex items-start gap-4">
-                        <div class="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center mt-1">
-                            <div class="w-2 h-2 rounded-full bg-indigo-500"></div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Dynamic Routing</h4>
-                            <p class="text-zinc-500 text-sm">Send users to different URLs based on their device or location.</p>
-                        </div>
-                    </div>
-                </div> --}}
+                </div>
             </div>
             <div class="lg:w-1/2 w-full">
                 <div class="glass p-8 rounded-3xl relative">
@@ -729,8 +733,7 @@
 
                 <p class="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
 
-                    Everything you need to know about shortening links,
-                    analytics, QR codes, and getting started.
+                    Everything you need to know about creating short links and tracking clicks with WEBN.
 
                 </p>
 
@@ -757,7 +760,7 @@
 
                             <p class="text-sm text-zinc-500">
 
-                                Start shortening instantly without signup
+                                Start shortening instantly
 
                             </p>
 
@@ -774,9 +777,8 @@
 
                     <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
 
-                        No. You can create and share short links instantly.
-                        Create a free account later to save links and unlock
-                        detailed analytics.
+                        No. You can create and share short links instantly without signing up. Create an account later
+                        to save links and access analytics.
 
                     </div>
 
@@ -793,7 +795,7 @@
 
                             <h3 class="text-lg md:text-xl font-bold text-white mb-1">
 
-                                What analytics do you track?
+                                What analytics does WEBN provide?
 
                             </h3>
 
@@ -816,8 +818,7 @@
 
                     <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
 
-                        Track clicks, devices, browsers, referrers, and visitor
-                        locations in real time from your analytics dashboard.
+                        WEBN tracks clicks, devices, browsers, locations, and referral sources in real time.
 
                     </div>
 
@@ -857,110 +858,125 @@
 
                     <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
 
-                        Yes. You can create your own memorable aliases like
-                        webn.in/summer-sale instead of random characters.
+                        Yes. Customize your short links with memorable aliases instead of random characters.
 
                     </div>
 
                 </div>
-
-                <!-- FAQ -->
-
-                {{-- <div
-                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
-
-                <button
-                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
-
-                    <div>
-
-                        <h3
-                            class="text-lg md:text-xl font-bold text-white mb-1">
-
-                            Are QR codes included?
-
-                        </h3>
-
-                        <p
-                            class="text-sm text-zinc-500">
-
-                            Generate shareable QR codes instantly
-
-                        </p>
-
-                    </div>
-
-                    <div
-                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-
-                        <i
-                            data-lucide="plus"
-                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
-                        </i>
-
-                    </div>
-
-                </button>
 
                 <div
-                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+                    class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
 
-                    Yes. Every short link can also generate a QR code
-                    for social media, print materials, restaurants,
-                    packaging, and more.
+                    <button class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                        <div>
+
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1">
+
+                                Are short links permanent?
+
+                            </h3>
+
+                            <p class="text-sm text-zinc-500">
+
+                                Reliable link management
+
+                            </p>
+
+                        </div>
+
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                            <i data-lucide="plus" class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                            </i>
+
+                        </div>
+
+                    </button>
+
+                    <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                        Yes. Your short links remain active unless deleted or expired manually.
+
+                    </div>
 
                 </div>
-
-            </div> --}}
-
-                <!-- FAQ -->
-
-                {{-- <div
-                class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
-
-                <button
-                    class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
-
-                    <div>
-
-                        <h3
-                            class="text-lg md:text-xl font-bold text-white mb-1">
-
-                            Is WEBN mobile friendly?
-
-                        </h3>
-
-                        <p
-                            class="text-sm text-zinc-500">
-
-                            Built for sharing across modern platforms
-
-                        </p>
-
-                    </div>
-
-                    <div
-                        class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-
-                        <i
-                            data-lucide="plus"
-                            class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
-                        </i>
-
-                    </div>
-
-                </button>
 
                 <div
-                    class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+                    class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
 
-                    Absolutely. WEBN is optimized for WhatsApp,
-                    Instagram, mobile browsers, and fast redirects
-                    across all devices.
+                    <button class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                        <div>
+
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1">
+
+                                Is WEBN mobile friendly?
+
+                            </h3>
+
+                            <p class="text-sm text-zinc-500">
+
+                                Built for modern sharing
+
+                            </p>
+
+                        </div>
+
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                            <i data-lucide="plus" class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                            </i>
+
+                        </div>
+
+                    </button>
+
+                    <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                        Yes. WEBN is optimized for mobile devices, making it easy to create and share links anywhere.
+
+                    </div>
 
                 </div>
 
-            </div> --}}
+                <div
+                    class="faq-item glass rounded-[1.75rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-indigo-500/20 hover:bg-white/[0.04]">
+
+                    <button class="faq-btn w-full px-7 py-6 text-left flex items-center justify-between gap-6">
+
+                        <div>
+
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-1">
+
+                                Is WEBN free to use?
+
+                            </h3>
+
+                            <p class="text-sm text-zinc-500">
+
+                                Get started for free
+
+                            </p>
+
+                        </div>
+
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+
+                            <i data-lucide="plus" class="faq-icon w-5 h-5 text-zinc-400 transition-all duration-300">
+                            </i>
+
+                        </div>
+
+                    </button>
+
+                    <div class="faq-content hidden px-7 pb-7 text-zinc-400 text-sm md:text-base leading-relaxed">
+
+                        Yes. You can start shortening and tracking links for free without any setup cost.
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -1021,8 +1037,8 @@
 
                 <p class="text-indigo-100/90 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
 
-                    Create short links, track clicks in real time,
-                    and share beautifully across every platform.
+                    Create short links, track clicks in real time, and understand your traffic with modern lightweight
+                    analytics.
 
                 </p>
 
@@ -1040,7 +1056,7 @@
                     <a href="{{ route('register') }}"
                         class="h-14 px-10 inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/10 backdrop-blur text-white font-semibold text-lg hover:bg-white/15 transition-all">
 
-                        Create Account
+                        Explore Dashboard
 
                     </a>
 
@@ -1098,8 +1114,7 @@
 
                     <p class="text-zinc-400 text-sm md:text-base leading-relaxed max-w-md mb-8">
 
-                        Create short links and track every click with Privacy-focused analytics and modern
-                        infrastructure.
+                        Create short links and understand your traffic with lightweight real-time analytics.
                     </p>
 
                     <!-- SOCIALS -->
@@ -1182,7 +1197,7 @@
                             <a href="{{ route('register') }}"
                                 class="text-zinc-500 hover:text-white transition-colors text-sm">
 
-                                Create Account
+                                Dashboard
 
                             </a>
 
@@ -1260,12 +1275,13 @@
             <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
 
                 <p class="text-zinc-500 text-sm leading-relaxed max-w-sm">
-                    Built independently by
-                    <span class="text-zinc-300 font-medium">Anirban Bhowmick</span>.
-                    WebN is focused on modern, lightweight link management and analytics.
+                    <span class="text-zinc-300 font-medium">
+                        Built independently by
+                        Anirban Bhowmick</span>.
+                    WEBN is a modern platform for short links and lightweight analytics.
                 </p>
 
-                <div class="flex items-center gap-3 text-xs text-zinc-600 uppercase tracking-[0.2em]">
+                <div class="flex items-center gap-3 text-xs text-zinc-600 tracking-[0.2em]">
 
                     <span>
                         SSL Secured
@@ -1280,7 +1296,7 @@
                     <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
 
                     <span>
-                        Real-time analytics
+                        Real-time Analytics
                     </span>
 
                 </div>
@@ -1321,10 +1337,10 @@
             const mobileMenu = document.getElementById('mobile-menu');
 
             /*
-    |--------------------------------------------------------------------------
-    | Force Close Mobile Menu
-    |--------------------------------------------------------------------------
-    */
+            |--------------------------------------------------------------------------
+            | Force Close Mobile Menu
+            |--------------------------------------------------------------------------
+            */
 
             function closeMenu() {
 
@@ -1506,10 +1522,10 @@
 
 
             /*
-        |--------------------------------------------------------------------------
-        | Open Button
-        |--------------------------------------------------------------------------
-        */
+            |--------------------------------------------------------------------------
+            | Open Button
+            |--------------------------------------------------------------------------
+            */
 
             if (openBtn) {
 
