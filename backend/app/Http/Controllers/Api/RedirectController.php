@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\StoreLinkVisitJob;
 use App\Models\Link;
 use Illuminate\Http\Request;
-use App\Models\LinkVisit;
 use Jenssegers\Agent\Agent;
 use Stevebauman\Location\Facades\Location;
 
@@ -54,54 +54,7 @@ class RedirectController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Agent Detection
-        |--------------------------------------------------------------------------
-        */
-
-        $agent = new Agent();
-
-        $position = Location::get($request->ip());
-
-        /*
-        |--------------------------------------------------------------------------
-        | Store Visit
-        |--------------------------------------------------------------------------
-        */
-
-        LinkVisit::create([
-
-            'link_id' => $link->id,
-
-            'ip_address' => $request->ip(),
-
-            'browser' => $agent->browser(),
-
-            'device' => $this->detectDeviceType($agent),
-
-            'platform' => $agent->platform(),
-
-            'user_agent' => $request->userAgent(),
-
-            'referrer' => $request->headers->get('referer'),
-
-            'visited_at' => now(),
-
-            'country' => $position ? $position->countryName : null,
-
-            'city' => $position ? $position->cityName : null,
-        ]);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Increment Counter
-        |--------------------------------------------------------------------------
-        */
-
-        $link->increment('clicks_count');
-
-        /*
-        |--------------------------------------------------------------------------
-        | Redirect
+        | Safety Check
         |--------------------------------------------------------------------------
         */
 
@@ -119,25 +72,37 @@ class RedirectController extends Controller
                 ]
             );
         }
-    }
 
-    private function detectDeviceType(Agent $agent): string
-    {
-        if ($agent->isTablet()) {
+        /*
+        |--------------------------------------------------------------------------
+        | Increment Counter
+        |--------------------------------------------------------------------------
+        */
 
-            return 'Tablet';
-        }
+        $link->increment('clicks_count');
 
-        if ($agent->isMobile()) {
+        /*
+        |--------------------------------------------------------------------------
+        | Store Visit (Async)
+        |--------------------------------------------------------------------------
+        */
 
-            return 'Mobile';
-        }
+        StoreLinkVisitJob::dispatch(
+            $link,
+            $request->ip(),
+            $request->userAgent(),
+            $request->headers->get('referer')
+        );
 
-        if ($agent->isDesktop()) {
+        /*
+         |--------------------------------------------------------------------------
+         | Check for Password Protection
+         |--------------------------------------------------------------------------
+         */
 
-            return 'Desktop';
-        }
-
-        return 'Other';
+        /* |-------------------------------------------------------------------------- 
+        | Safe Redirect |
+        -------------------------------------------------------------------------- */
+        return redirect()->away($link->original_url);
     }
 }

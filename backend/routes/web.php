@@ -164,8 +164,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('docs.index');
 });
 
-Route::get('/{code}', RedirectController::class)
-    ->where('code', '[A-Za-z0-9_-]+');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -178,3 +177,6 @@ Route::view('/404-preview', 'errors.404');
 Route::view('/500-preview', 'errors.500');
 
 Route::view('/maintenance-preview', 'errors.maintenance');
+
+Route::get('/{code}', RedirectController::class)
+    ->where('code', '[A-Za-z0-9_-]+');

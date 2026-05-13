@@ -96,12 +96,9 @@ class UrlSafetyService
         */
 
         if (
-            filter_var(
-                $host,
-                FILTER_VALIDATE_IP
-            )
+            filter_var($host, FILTER_VALIDATE_IP)
+            && !filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)
         ) {
-
             return true;
         }
 
@@ -111,15 +108,7 @@ class UrlSafetyService
         |--------------------------------------------------------------------------
         */
 
-        if (
-            in_array(
-                $host,
-                $this->blockedHosts
-            )
-        ) {
-
-            return true;
-        }
+        if ( preg_match( '/(^|\.)localhost(\.|$)/i', $host ) ) { return true; }
 
         /*
         |--------------------------------------------------------------------------
@@ -138,14 +127,15 @@ class UrlSafetyService
         |--------------------------------------------------------------------------
         */
 
-        if (
-            in_array(
-                $host,
-                $this->blockedDomains
-            )
-        ) {
+        foreach ($this->blockedDomains as $blockedDomain) {
 
-            return true;
+            if (
+                $host === $blockedDomain ||
+                str_ends_with($host, '.' . $blockedDomain)
+            ) {
+
+                return true;
+            }
         }
 
         /*
@@ -188,7 +178,7 @@ class UrlSafetyService
             $response = Http::timeout(10)
                 ->post(
                     'https://safebrowsing.googleapis.com/v4/threatMatches:find?key=' .
-                    config('services.google.safe_browsing_key'),
+                        config('services.google.safe_browsing_key'),
                     [
                         'client' => [
                             'clientId' => 'webn',
@@ -220,10 +210,9 @@ class UrlSafetyService
                     ]
                 );
 
-            return !empty(
-                $response->json()['matches']
-            );
+                // dd( $response->status(), $response->json() );
 
+            return !empty($response->json()['matches']);
         } catch (\Throwable $e) {
 
             /*
