@@ -87,7 +87,7 @@ class RedirectController extends Controller
             'visited_at' => now(),
 
             'country' => $position ? $position->countryName : null,
-            
+
             'city' => $position ? $position->cityName : null,
         ]);
 
@@ -105,7 +105,20 @@ class RedirectController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        return redirect()->away($link->original_url);
+        if ($link->safety_status === 'malicious') {
+
+            abort(403, 'Unsafe destination blocked');
+        }
+
+        if ($link->safety_status === 'pending') {
+
+            return response()->view(
+                'links.pending-scan',
+                [
+                    'link' => $link,
+                ]
+            );
+        }
     }
 
     private function detectDeviceType(Agent $agent): string
