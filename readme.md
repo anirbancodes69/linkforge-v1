@@ -1,266 +1,143 @@
-# WEBN
+<h1 align="center">Hi 👋, I'm Anirban Bhowmick</h1>
 
-Modern URL Shortener & Real-Time Analytics Platform
+<h3 align="center">
+Full Stack Developer | Laravel • React • Docker • Cloud-Native Applications
+</h3>
 
-WEBN is a modern SaaS platform for shortening, tracking, and managing links with real-time analytics, custom aliases, and scalable infrastructure.
-
-Built with Laravel, PostgreSQL, Docker, Redis, and Nginx.
-
----
-
-# Features
-
-## URL Shortening
-
-* Instant short link creation
-* Custom aliases
-* Expiring links
-* Active/inactive link management
-* Fast redirect engine
-
-## Analytics
-
-* Real-time click tracking
-* Device analytics
-* Browser analytics
-* Platform insights
-* Referrer tracking
-* Country support
-* Dashboard charts
-
-## Guest Link Support
-
-* Anonymous users can create links
-* Guest links stored via guest token
-* Automatic migration after signup/login
-
-## Authentication
-
-* Registration
-* Login/logout
-* Session-based authentication
-* Protected dashboard routes
-
-## Admin Dashboard
-
-* Total users
-* Total links
-* Total clicks
-* Guest usage tracking
-* Platform overview
-* Activity monitoring
-
-## UI/UX
-
-* Modern dark SaaS interface
-* Responsive design
-* Mobile-first experience
-* Smooth onboarding flow
-* Glassmorphism-inspired UI
+<p align="center">
+Passionate about building scalable backend systems, SaaS products, AI-powered applications, and production-grade architectures.
+</p>
 
 ---
 
-# Tech Stack
+# 🚀 About Me
+
+- 💻 Full Stack Developer with strong backend focus
+- 🧠 Experienced in Laravel, PHP, React, Docker, PostgreSQL, Redis, and AWS
+- 🏗 Building scalable SaaS products and cloud-native applications
+- 🤖 Exploring AI Engineering, RAG systems, and intelligent automation
+- 📦 Interested in system design, clean architecture, DevOps, and performance optimization
+- 🎯 Goal: Become a world-class Software Architect / Engineering Leader
+
+---
+
+# 🚀 Current Projects
+
+## 🔗 <a href="https://github.com/anirbancodes69/linkforge-v1">WEBN — URL Shortener + Analytics Platform</a>
+ 
+
+A modern SaaS platform for creating and tracking short links with production-grade architecture.
+
+### Features
+- Custom short links
+- Analytics dashboard
+- Real-time tracking
+- Guest link creation
+- Admin monitoring
+- Rate limiting & security hardening
+- Mobile-first responsive UI
+
+### Tech Stack
+Laravel • PostgreSQL • Redis • Docker • Nginx • AWS EC2
+
+---
+
+## 🤖 Laravel RAG Chatbot
+
+AI-powered Retrieval-Augmented Generation chatbot built with Laravel.
+
+### Features
+- Vector embeddings
+- Semantic search
+- Hybrid architecture
+- Natural language querying
+- AI-powered responses
+- MySQL + MongoDB integration
+
+### Tech Stack
+Laravel • OpenAI • MySQL • MongoDB • REST APIs
+
+---
+
+## 🏢 Resource Management System
+
+Enterprise-style resource management application with modular architecture.
+
+### Features
+- Role-based access control
+- Master management modules
+- API-driven backend
+- Authentication & authorization
+- Scalable module structure
+
+### Tech Stack
+Laravel • React • MySQL • Docker
+
+---
+
+# 🛠 Tech Stack
 
 ## Backend
-
-* Laravel 13
-* PHP 8.2+
-
-## Database
-
-* PostgreSQL
-
-## Infrastructure
-
-* Docker
-* Docker Compose
-* Nginx
-* Redis
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![REST API](https://img.shields.io/badge/REST_API-000000?style=for-the-badge)
 
 ## Frontend
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-* Blade
-* Tailwind CSS
-* Vanilla JavaScript
-* Lucide Icons
-* Chart.js
+## Database
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
-## Deployment
-
-* AWS EC2
-* Let's Encrypt SSL
-
----
-
-# Architecture
-
-## Stateless Application Design
-
-WEBN is designed using a stateless architecture for future horizontal scalability.
-
-## Analytics Engine
-
-Analytics are separated into dedicated tracking tables for scalability and cleaner reporting.
-
-## Queue-Ready Infrastructure
-
-Redis is integrated for future:
-
-* queues
-* analytics aggregation
-* background jobs
-* scheduled processing
-
-## Guest-to-User Migration
-
-Anonymous links automatically migrate to registered accounts after authentication.
-
-## Dockerized Environment
-
-Entire infrastructure runs inside containers:
-
-* app
-* nginx
-* postgres
-* redis
+## DevOps & Cloud
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
+![CI/CD](https://img.shields.io/badge/CI/CD-000000?style=for-the-badge)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
 
 ---
 
-# Core Modules
+# 📈 Currently Learning
 
-## Authentication Module
-
-Handles:
-
-* registration
-* login
-* logout
-* session management
-
-## Link Management Module
-
-Handles:
-
-* short link creation
-* alias management
-* updates
-* deletion
-
-## Redirect Engine
-
-Handles:
-
-* public redirects
-* analytics capture
-* click tracking
-* device detection
-
-## Analytics Module
-
-Handles:
-
-* dashboard metrics
-* charts
-* devices
-* countries
-* recent activity
-
-## Admin Module
-
-Handles:
-
-* global platform statistics
-* user growth monitoring
-* system-wide insights
+- Kubernetes
+- Advanced System Design
+- AI Agents & Automation
+- Cloud Infrastructure
+- High-Scale Architecture
 
 ---
 
-# Security
+# 📌 Featured Repositories
 
-* CSRF protection
-* Input validation
-* Secure password hashing
-* Protected routes
-* Session authentication
-* Eloquent ORM protection
+- 🔗 WEBN Platform
+- 🤖 Laravel RAG Chatbot
+- 🏢 Resource Management Tool
+- ⚙️ Scalable Laravel REST API
 
 ---
 
-# Production Stack
+# 📊 GitHub Stats
 
-* AWS EC2
-* Dockerized services
-* Nginx reverse proxy
-* PostgreSQL container
-* Redis container
-* SSL with Let's Encrypt
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=anirbancodes69&show_icons=true&theme=tokyonight" />
+</p>
 
----
-
-# Local Development
-
-## Start Containers
-
-```bash
-docker compose up -d
-```
-
-## Run Migrations
-
-```bash
-php artisan migrate
-```
-
-## Clear Cache
-
-```bash
-php artisan optimize:clear
-```
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=anirbancodes69&theme=tokyonight" />
+</p>
 
 ---
 
-# Roadmap
+# 🌐 Connect With Me
 
-## Current MVP
-
-* URL shortening
-* Analytics
-* Admin dashboard
-* Guest links
-* Authentication
-* Responsive UI
-* Docker deployment
-* SSL setup
-
-## Planned Features
-
-* QR code generation
-* Geo analytics
-* API access
-* Custom domains
-* Team collaboration
-* Export reports
-* Advanced analytics
+- 💼 LinkedIn: https://linkedin.com/in/anirban-bhowmick
+- 🖥 GitHub: https://github.com/anirbancodes69
 
 ---
 
-# Vision
+# ⚡ Fun Fact
 
-WEBN aims to become a modern lightweight platform for:
-
-* link management
-* analytics
-* creator growth
-* branded short links
-* developer-friendly APIs
-
-with strong focus on simplicity, speed, and scalable infrastructure.
-
----
-
-# About
-
-Built independently by Anirban Bhowmick.
-
-WEBN is currently in active public MVP development.
+I enjoy building production-grade backend systems, exploring scalable architectures, and turning ideas into real-world products 🚀
