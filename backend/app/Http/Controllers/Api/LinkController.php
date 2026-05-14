@@ -20,9 +20,11 @@ class LinkController extends Controller
 
     public function index(Request $request)
     {
+        $perPage = $request->integer('per_page', 10);
+
         $links = Link::where('user_id', $request->user()->id)
             ->latest()
-            ->get();
+            ->paginate($perPage);
 
         return response()->json($links);
     }
