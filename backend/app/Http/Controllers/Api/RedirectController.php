@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Jobs\StoreLinkVisitJob;
 use App\Models\Link;
 use Illuminate\Http\Request;
-use Jenssegers\Agent\Agent;
-use Stevebauman\Location\Facades\Location;
 
 class RedirectController extends Controller
 {
