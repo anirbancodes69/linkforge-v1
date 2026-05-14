@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     closeModal('createModal');
 
-                    fetchLinks();
+                    fetchLinks(currentPage);
 
                 } else {
 
@@ -173,13 +173,31 @@ document.addEventListener('DOMContentLoaded', () => {
     |--------------------------------------------------------------------------
     */
 
-    async function fetchLinks() {
+    let currentPage = 1;
+    let lastPage = 1;
 
+    async function fetchLinks(page = 1) {
         try {
 
-            const response = await api('/api/links');
+            page = parseInt(page);
 
-            renderLinks(response);
+            currentPage = page;
+
+            window.history.pushState(
+                {},
+                '',
+                `?page=${page}`
+            );
+
+            const response = await api(
+                `/api/links?page=${page}&per_page=10`
+            );
+
+            lastPage = response.last_page;
+
+            renderLinks(response.data);
+
+            renderPagination(response);
 
         } catch (error) {
 
@@ -290,8 +308,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             px-2 py-0.5 rounded-md uppercase
                             text-[10px] font-bold
                             ${link.is_active
-                                ? 'bg-emerald-400/10 text-emerald-400'
-                                : 'bg-rose-400/10 text-rose-400'}
+                    ? 'bg-emerald-400/10 text-emerald-400'
+                    : 'bg-rose-400/10 text-rose-400'}
                         ">
                             ${link.is_active ? 'Active' : 'Inactive'}
                         </span>
@@ -357,12 +375,132 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /*
+ |--------------------------------------------------------------------------
+ | Render Pagination
+ |--------------------------------------------------------------------------
+ */
+
+    function renderPagination(data) {
+        const container =
+            document.getElementById('paginationContainer');
+
+        if (!container) return;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Hide If No Data
+        |--------------------------------------------------------------------------
+        */
+
+        if (!data.data.length) {
+
+            container.classList.add('hidden');
+
+            return;
+        }
+
+        container.classList.remove('hidden');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Meta Info
+        |--------------------------------------------------------------------------
+        */
+
+        document.getElementById('paginationFrom').innerText =
+            data.from ?? 0;
+
+        document.getElementById('paginationTo').innerText =
+            data.to ?? 0;
+
+        document.getElementById('paginationTotal').innerText =
+            data.total ?? 0;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Prev / Next Buttons
+        |--------------------------------------------------------------------------
+        */
+
+        const prevBtn =
+            document.getElementById('prevPageBtn');
+
+        const nextBtn =
+            document.getElementById('nextPageBtn');
+
+        prevBtn.disabled = !data.prev_page_url;
+
+        nextBtn.disabled = !data.next_page_url;
+
+        prevBtn.onclick = () => {
+
+            if (data.prev_page_url) {
+
+                fetchLinks(currentPage - 1);
+            }
+        };
+
+        nextBtn.onclick = () => {
+
+            if (data.next_page_url) {
+
+                fetchLinks(currentPage + 1);
+            }
+        };
+
+        /*
+        |--------------------------------------------------------------------------
+        | Page Numbers
+        |--------------------------------------------------------------------------
+        */
+
+        const numbersContainer =
+            document.getElementById('paginationNumbers');
+
+        numbersContainer.innerHTML = '';
+
+        for (
+            let page = 1;
+            page <= data.last_page;
+            page++
+        ) {
+
+            const button =
+                document.createElement('button');
+
+            button.innerText = page;
+
+            button.className = `
+            w-9
+            h-9
+            rounded-xl
+            text-sm
+            font-bold
+            transition-all
+            ${page === currentPage
+                    ? 'bg-accent text-white'
+                    : 'glass text-zinc-400 hover:text-white'}
+        `;
+
+            button.onclick = () => {
+
+                currentPage = page;
+
+                fetchLinks(page);
+            };
+
+            numbersContainer.appendChild(button);
+        }
+    }
+
+
+    /*
     |--------------------------------------------------------------------------
     | Copy Link
     |--------------------------------------------------------------------------
     */
 
-    window.copyLink = async function(url) {
+    window.copyLink = async function (url) {
 
         try {
 
@@ -468,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Link deleted successfully'
                 );
 
-                fetchLinks();
+                fetchLinks(currentPage);
             }
 
         } catch (error) {
@@ -594,7 +732,13 @@ document.addEventListener('DOMContentLoaded', () => {
     |--------------------------------------------------------------------------
     */
 
-    fetchLinks();
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const page =
+        params.get('page') || 1;
+
+    fetchLinks(page);
 
 });
 
