@@ -33,15 +33,24 @@ class LinkController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function store(Request $request, UrlSafetyService $urlSafetyService)
-    {
+    public function store(
+        Request $request,
+        UrlSafetyService $urlSafetyService
+    ) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Validation
+        |--------------------------------------------------------------------------
+        */
+
         $validated = $request->validate(
             [
 
                 'original_url' => [
                     'required',
                     'max:2048',
-                    'url:http,https'
+                    'url:http,https',
                 ],
 
                 'custom_alias' => [
@@ -58,6 +67,22 @@ class LinkController extends Controller
             ]
         );
 
+        /*
+        |--------------------------------------------------------------------------
+        | Normalize URL
+        |--------------------------------------------------------------------------
+        */
+
+        $validated['original_url'] = $this->normalizeUrl(
+            $validated['original_url']
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Lightweight Security Checks
+        |--------------------------------------------------------------------------
+        */
+
         if (
             $urlSafetyService->failsLightweightChecks(
                 $validated['original_url']
@@ -66,15 +91,15 @@ class LinkController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Unsafe URL detected.',
+                'message' => 'Unsafe destination URL detected.',
             ], 422);
         }
 
         /*
-    |--------------------------------------------------------------------------
-    | Reserved Alias Protection
-    |--------------------------------------------------------------------------
-    */
+        |--------------------------------------------------------------------------
+        | Reserved Alias Protection
+        |--------------------------------------------------------------------------
+        */
 
         if (
             isset($validated['custom_alias']) &&
@@ -86,15 +111,15 @@ class LinkController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Alias is reserved',
+                'message' => 'Alias is reserved.',
             ], 422);
         }
 
         /*
-    |--------------------------------------------------------------------------
-    | Generate Guest Token
-    |--------------------------------------------------------------------------
-    */
+        |--------------------------------------------------------------------------
+        | Generate Guest Token
+        |--------------------------------------------------------------------------
+        */
 
         $guestToken = $request->cookie('guest_token');
 
@@ -104,14 +129,100 @@ class LinkController extends Controller
         }
 
         /*
-    |--------------------------------------------------------------------------
-    | Create Link
-    |--------------------------------------------------------------------------
-    */
+        |--------------------------------------------------------------------------
+        | Existing Link Deduplication
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            empty($validated['custom_alias'])
+        ) {
+
+            $existingLink = Link::query()
+
+                ->where(
+                    'original_url',
+                    $validated['original_url']
+                )
+
+                ->where(
+                    'is_active',
+                    true
+                )
+
+                ->where(function ($query) use ($guestToken) {
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Logged In User
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if (Auth::check()) {
+
+                        $query->where(
+                            'user_id',
+                            Auth::id()
+                        );
+
+                        return;
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Guest User
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $query->where(
+                        'guest_token',
+                        $guestToken
+                    );
+                })
+
+                ->latest()
+
+                ->first();
+
+            /*
+            |--------------------------------------------------------------------------
+            | Return Existing Link
+            |--------------------------------------------------------------------------
+            */
+
+            if ($existingLink) {
+
+                return response()
+                    ->json([
+
+                        'success' => true,
+
+                        'message' => 'Existing short link returned.',
+
+                        'link' => $existingLink,
+
+                        'short_url' => url(
+                            $existingLink->custom_alias
+                                ??
+                                $existingLink->short_code
+                        ),
+                    ])
+                    ->cookie(
+                        'guest_token',
+                        $guestToken,
+                        60 * 24 * 30
+                    );
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Create Link
+        |--------------------------------------------------------------------------
+        */
 
         $link = Link::create([
 
-            // 'user_id' => auth()->id(),
             'user_id' => Auth::id(),
 
             'guest_token' => Auth::check()
@@ -123,22 +234,34 @@ class LinkController extends Controller
             'short_code' => $this->generateUniqueCode(),
 
             'custom_alias' => $validated['custom_alias'] ?? null,
+
+            'safety_status' => 'pending',
         ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Dispatch Async URL Scan
+        |--------------------------------------------------------------------------
+        */
 
         ScanUrlJob::dispatch($link);
 
         /*
-    |--------------------------------------------------------------------------
-    | Response
-    |--------------------------------------------------------------------------
-    */
+        |--------------------------------------------------------------------------
+        | Response
+        |--------------------------------------------------------------------------
+        */
 
         return response()
             ->json([
                 'success' => true,
-                'message' => 'Link created successfully',
+                'message' => 'Link created successfully.',
                 'link' => $link,
-                'short_url' => url($link->custom_alias ?? $link->short_code),
+                'short_url' => url(
+                    $link->custom_alias
+                        ??
+                        $link->short_code
+                ),
             ])
             ->cookie(
                 'guest_token',
@@ -153,8 +276,12 @@ class LinkController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function update(Request $request, Link $link, UrlSafetyService $urlSafetyService)
-    {
+    public function update(
+        Request $request,
+        Link $link,
+        UrlSafetyService $urlSafetyService
+    ) {
+
         /*
         |--------------------------------------------------------------------------
         | Ownership Check
@@ -174,10 +301,11 @@ class LinkController extends Controller
 
         $validated = $request->validate(
             [
+
                 'original_url' => [
                     'required',
                     'max:2048',
-                    'url:http,https'
+                    'url:http,https',
                 ],
 
                 'custom_alias' => [
@@ -187,13 +315,39 @@ class LinkController extends Controller
                     'max:50',
                     'unique:links,custom_alias,' . $link->id,
                 ],
-
             ],
             [
                 'custom_alias.regex' =>
                 'Alias may only contain letters, numbers, hyphens (-), and underscores (_).',
             ]
         );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Normalize URL
+        |--------------------------------------------------------------------------
+        */
+
+        $validated['original_url'] = $this->normalizeUrl(
+            $validated['original_url']
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Detect URL Change
+        |--------------------------------------------------------------------------
+        */
+
+        $urlChanged = (
+            $link->original_url !==
+            $validated['original_url']
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Lightweight Security Checks
+        |--------------------------------------------------------------------------
+        */
 
         if (
             $urlSafetyService->failsLightweightChecks(
@@ -203,10 +357,9 @@ class LinkController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Unsafe URL detected.',
+                'message' => 'Unsafe destination URL detected.',
             ], 422);
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -224,7 +377,7 @@ class LinkController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Alias is reserved',
+                'message' => 'Alias is reserved.',
             ], 422);
         }
 
@@ -235,18 +388,42 @@ class LinkController extends Controller
         */
 
         $link->update([
+
             'original_url' => $validated['original_url'],
 
             'custom_alias' => $validated['custom_alias'] ?? null,
+
+            'safety_status' => $urlChanged
+                ? 'pending'
+                : $link->safety_status,
         ]);
 
-        ScanUrlJob::dispatch($link);
+        /*
+        |--------------------------------------------------------------------------
+        | Dispatch Async URL Scan
+        |--------------------------------------------------------------------------
+        */
+
+        if ($urlChanged) {
+
+            ScanUrlJob::dispatch($link);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Response
+        |--------------------------------------------------------------------------
+        */
 
         return response()->json([
             'success' => true,
-            'message' => 'Link updated successfully',
+            'message' => 'Link updated successfully.',
             'link' => $link,
-            'short_url' => url($link->custom_alias ?? $link->short_code),
+            'short_url' => url(
+                $link->custom_alias
+                    ??
+                    $link->short_code
+            ),
         ]);
     }
 
@@ -256,8 +433,11 @@ class LinkController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function destroy(Request $request, Link $link)
-    {
+    public function destroy(
+        Request $request,
+        Link $link
+    ) {
+
         /*
         |--------------------------------------------------------------------------
         | Ownership Check
@@ -273,7 +453,7 @@ class LinkController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Link deleted successfully',
+            'message' => 'Link deleted successfully.',
         ]);
     }
 
@@ -289,10 +469,51 @@ class LinkController extends Controller
 
             $code = Str::random(6);
         } while (
-            Link::where('short_code', $code)->exists()
+
+            Link::where(
+                'short_code',
+                $code
+            )->exists()
         );
 
         return $code;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Normalize URL
+    |--------------------------------------------------------------------------
+    */
+
+    private function normalizeUrl(string $url): string
+    {
+        $url = trim($url);
+
+        $parts = parse_url($url);
+
+        $scheme = strtolower(
+            $parts['scheme'] ?? 'https'
+        );
+
+        $host = strtolower(
+            $parts['host'] ?? ''
+        );
+
+        $path = $parts['path'] ?? '';
+
+        $query = isset($parts['query'])
+            ? '?' . $parts['query']
+            : '';
+
+        /*
+        |--------------------------------------------------------------------------
+        | Remove Trailing Slash
+        |--------------------------------------------------------------------------
+        */
+
+        $path = rtrim($path, '/');
+
+        return "{$scheme}://{$host}{$path}{$query}";
     }
 
     /*
