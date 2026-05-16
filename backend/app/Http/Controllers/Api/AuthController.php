@@ -2,70 +2,38 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DTOs\Auth\LoginUserDTO;
+use App\DTOs\Auth\RegisterUserDTO;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function __construct(
+        protected AuthService $authService,
+    ) {}
+
     /*
     |--------------------------------------------------------------------------
     | Register
     |--------------------------------------------------------------------------
     */
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:8'],
-        ]);
+        $response = $this->authService->register(
 
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ]);
+            RegisterUserDTO::fromRequest($request),
 
-        Auth::login($user);
+            $request->cookie('guest_token'),
+        );
 
-        /*
-|--------------------------------------------------------------------------
-| Migrate Guest Links
-|--------------------------------------------------------------------------
-*/
-
-        $guestToken = $request->cookie('guest_token');
-
-        if ($guestToken) {
-
-            \App\Models\Link::where('guest_token', $guestToken)
-                ->whereNull('user_id')
-                ->update([
-                    'user_id' => Auth::id(),
-                    'guest_token' => null,
-                ]);
-        }
-
-        // IMPORTANT
         $request->session()->regenerate();
 
-        return response()->json([
-
-            'success' => true,
-
-            'message' => 'Account created successfully',
-
-            'user' => $user,
-
-            'redirect' => $user->is_admin
-                ? route('admin.dashboard')
-                : route('dashboard'),
-        ]);
+        return response()->json($response);
     }
 
     /*
@@ -74,52 +42,18 @@ class AuthController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $validated = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $response = $this->authService->login(
 
-        if (!Auth::attempt($validated)) {
+            LoginUserDTO::fromRequest($request),
 
-            throw ValidationException::withMessages([
-                'email' => ['Invalid credentials'],
-            ]);
-        }
+            $request->cookie('guest_token'),
+        );
 
         $request->session()->regenerate();
 
-        /*
-|--------------------------------------------------------------------------
-| Migrate Guest Links
-|--------------------------------------------------------------------------
-*/
-
-        $guestToken = $request->cookie('guest_token');
-
-        if ($guestToken) {
-
-            \App\Models\Link::where('guest_token', $guestToken)
-                ->whereNull('user_id')
-                ->update([
-                    'user_id' => Auth::id(),
-                    'guest_token' => null,
-                ]);
-        }
-
-        return response()->json([
-
-            'success' => true,
-
-            'message' => 'Login successful',
-
-            'user' => Auth::user(),
-
-            'redirect' => Auth::user()->is_admin
-                ? route('admin.dashboard')
-                : route('dashboard'),
-        ]);
+        return response()->json($response);
     }
 
     /*
@@ -130,16 +64,13 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        $response = $this->authService->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Logged out successfully',
-        ]);
+        return response()->json($response);
     }
 
     /*

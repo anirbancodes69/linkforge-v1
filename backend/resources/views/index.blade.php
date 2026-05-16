@@ -1883,32 +1883,16 @@
                     try {
 
                         await navigator.clipboard.writeText(
-                            generatedLink.innerText
+                            generatedLink.innerText.trim()
                         );
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | Button Feedback
-                        |--------------------------------------------------------------------------
-                        */
-
-                        const originalText = copyBtn.innerHTML;
-
-                        copyBtn.innerHTML = 'Copied ✓';
-
-                        showToast('Link copied');
-
-                        setTimeout(() => {
-
-                            copyBtn.innerHTML = originalText;
-
-                        }, 2000);
+                        showToast('Link copied successfully');
 
                     } catch (error) {
 
                         console.error(error);
 
-                        showToast('Unable to copy');
+                        showToast('Unable to copy link');
                     }
                 });
             }

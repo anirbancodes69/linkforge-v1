@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 | Lost in the Void - LinkForge</title>
+    @include('brand-meta', ['title' => '404 Not Found', 'description' => 'The page you are looking for cannot be found.'])
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
@@ -54,18 +52,10 @@
 
         <!-- Search & Actions -->
         <div class="space-y-6 max-w-sm mx-auto">
-            <div class="glass flex items-center px-4 py-2 rounded-2xl border border-border focus-within:border-accent/50 transition-all">
-                <i data-lucide="search" class="w-4 h-4 text-zinc-500 mr-3"></i>
-                <input type="text" placeholder="Search LinkForge..." class="bg-transparent border-none outline-none text-sm w-full py-1">
-            </div>
-            
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="/" class="w-full sm:w-auto px-8 py-3 bg-white text-zinc-900 font-bold rounded-xl hover:bg-zinc-200 transition-all flex items-center justify-center gap-2">
                     <i data-lucide="home" class="w-4 h-4"></i> Go Home
                 </a>
-                <button onclick="history.back()" class="w-full sm:w-auto px-8 py-3 glass font-bold rounded-xl hover:bg-white/5 transition-all text-zinc-300">
-                    Back
-                </button>
             </div>
         </div>
     </main>
